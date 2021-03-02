@@ -1,11 +1,6 @@
 #include "GameWindows.h"
 #include "resource.h"
 
-//Constant Variable
-#define APP_NAME "Tower Defense"
-#define WINDOWS_HIGH 720
-#define WINDOWS_WIDTH 1280
-
 //Singleton
 GameWindows* GameWindows::sInstance = NULL;
 
@@ -30,6 +25,8 @@ GameWindows::GameWindows()
 	g_hWnd = NULL;
 	hInstance = GetModuleHandle(NULL);
 	ZeroMemory(&wndClass, sizeof(wndClass));
+
+	keyIn = 0;
 }
 
 GameWindows::~GameWindows()
@@ -45,6 +42,9 @@ LRESULT CALLBACK WindowProcedure(HWND hWnd, UINT message, WPARAM wParam, LPARAM 
 	case WM_DESTROY:
 		PostQuitMessage(0);
 		break;
+
+	case WM_KEYDOWN:
+		GameWindows::getInstance()->keyIn = wParam;
 
 	default:
 		return DefWindowProc(hWnd, message, wParam, lParam);

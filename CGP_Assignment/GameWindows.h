@@ -3,6 +3,11 @@
 #include <Windows.h>
 #include <stdio.h>
 
+//Constant Variable
+#define APP_NAME "Tower Defense"
+#define WINDOWS_HIGH 720
+#define WINDOWS_WIDTH 1280
+
 class GameWindows
 {
 private:
@@ -20,6 +25,8 @@ public:
 	HWND g_hWnd;
 	WNDCLASS wndClass;
 	HINSTANCE hInstance;
+
+	int keyIn;
 
 	//windows function
 	void createWindows();
