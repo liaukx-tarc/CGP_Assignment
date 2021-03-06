@@ -58,13 +58,15 @@ void Tile::createTile()
 	D3DXMatrixTransformation2D(&mat, NULL, 0.0, &scaling, NULL, NULL, NULL);
 }
 
-void Tile::loadMap(char * name) {
+void Tile::loadMap(char * name) 
+{
 
 	FILE *fp;
 	fp = fopen(name, "rb");
 
 	/* If we can't open the map then exit */
-	if (fp == NULL) {
+	if (fp == NULL) 
+	{
 
 		printf("Failed to open map %s\n", name);
 		system("Pause");
@@ -73,9 +75,11 @@ void Tile::loadMap(char * name) {
 
 	/* Read the data from the file into the map */
 
-	for (int y = 0; y < MAX_MAP_Y; y++) {
+	for (int y = 0; y < MAX_MAP_Y; y++) 
+	{
 
-		for (int x = 0; x < MAX_MAP_X; x++) {
+		for (int x = 0; x < MAX_MAP_X; x++) 
+		{
 
 			fscanf(fp, "%d", &map[y][x]); //map[][] is a 2D array
 		}
@@ -91,26 +95,31 @@ void Tile::drawMap()
 	sprite->Begin(D3DXSPRITE_ALPHABLEND);
 	sprite->SetTransform(&Tile::getInstance()->mat);
 
-	/* Draw the map */
-	for (int y = 0; y < MAX_MAP_Y; y++) {
+	//Draw the map 
+	for (int y = 0; y < MAX_MAP_Y; y++) 
+	{
+		for (int x = 0; x < MAX_MAP_X; x++) 
+		{
+			if (map[y][x] != 0) 
+			{
+				//calculate the tile is at what row and col in the sprite
+				tileRow = map[y][x] / 12;
+				tileCol = map[y][x] % 12;
 
-		for (int x = 0; x < MAX_MAP_X; x++) {
+				clipWindow.top = tileRow * TILE_HIGHT;
 
-			if (map[y][x] != 0) {
+				//-1 because sprite start from 0
+				clipWindow.left = (tileCol - 1) * TILE_WIDTH;
 
-				clipWindow.top = (map[y][x] - 1)*(tileRect.bottom);
+				clipWindow.bottom = clipWindow.top + TILE_HIGHT;
 
-				clipWindow.left = 0;
-
-				clipWindow.bottom = clipWindow.top + tileRect.bottom;
-
-				clipWindow.right = clipWindow.left + tileRect.right;
+				clipWindow.right = clipWindow.left + TILE_WIDTH;
 
 				//render the tile at correct position
 
-				pos.x = x * tileRect.right;
+				pos.x = x * TILE_WIDTH;
 
-				pos.y = y * tileRect.bottom;
+				pos.y = y * TILE_HIGHT;
 
 				pos.z = 0.0f;
 
