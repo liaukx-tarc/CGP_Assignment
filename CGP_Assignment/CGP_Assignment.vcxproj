@@ -151,6 +151,7 @@
     <ResourceCompile Include="CGP_Assignment.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="resource\TileSet.png" />
     <Image Include="resource\tower.ico" />
   </ItemGroup>
   <ItemGroup>
