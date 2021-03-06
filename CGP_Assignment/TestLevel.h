@@ -9,6 +9,7 @@ class TestLevel: public GameState
 		~TestLevel();
 
 		void init();
+		void fixUpdate();
 		void update();
 		void draw();
 		void release();

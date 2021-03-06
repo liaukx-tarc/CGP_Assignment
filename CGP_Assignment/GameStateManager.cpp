@@ -25,6 +25,9 @@ GameStateManager::GameStateManager()
 	currentState = 0;
 	preState = 0;
 
+	g_Timer = new G_Timer();
+	g_Timer->init(GAME_FPS);
+
 	TestLevel* testLevel = new TestLevel();
 	testLevel->init();
 	stateList.push_back(testLevel);
@@ -38,11 +41,20 @@ GameStateManager::~GameStateManager()
 		delete stateList[i];
 		stateList[i] = NULL;
 	}
+
+	delete g_Timer;
 }
 
 void GameStateManager::update()
 {
 	stateList[currentState]->update();
+
+	framesToUpdate = g_Timer->framesToUpdate();
+
+	for (int i = 0; i < framesToUpdate; i++)
+	{
+		stateList[currentState]->fixUpdate();
+	}
 }
 
 void GameStateManager::draw()

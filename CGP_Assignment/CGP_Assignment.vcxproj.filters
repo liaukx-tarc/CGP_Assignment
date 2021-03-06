@@ -48,6 +48,9 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="G_Timer.cpp">
+      <Filter>Source Files\Device</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TestLevel.h">
@@ -69,6 +72,9 @@
       <Filter>Header Files\Resource</Filter>
     </ClInclude>
     <ClInclude Include="DirectInput.h">
+      <Filter>Header Files\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="G_Timer.h">
       <Filter>Header Files\Device</Filter>
     </ClInclude>
   </ItemGroup>
