@@ -1,18 +1,26 @@
 #ifndef TEST_LEVEL
 #include <d3dx9.h>
+#include <string>
+
 #include "GameState.h"
 
-class TestLevel: public GameState
-{
-	public:
-		TestLevel();
-		~TestLevel();
+#define MAX_MAP_Y 21
+#define MAX_MAP_X 38
 
-		void init();
-		void fixUpdate();
-		void update();
-		void draw();
-		void release();
+class TestLevel : public GameState
+{
+public:
+	TestLevel();
+	~TestLevel();
+
+	HRESULT hr;
+	char * levelFile;
+
+	void init();
+	void fixUpdate();
+	void update();
+	void draw();
+	void release();
 };
 
 #endif

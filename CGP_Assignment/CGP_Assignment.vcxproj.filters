@@ -51,6 +51,9 @@
     <ClCompile Include="G_Timer.cpp">
       <Filter>Source Files\Device</Filter>
     </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Source Files\Device</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TestLevel.h">
@@ -77,6 +80,9 @@
     <ClInclude Include="G_Timer.h">
       <Filter>Header Files\Device</Filter>
     </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Header Files\Device</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="CGP_Assignment.rc">
@@ -87,5 +93,10 @@
     <Image Include="resource\tower.ico">
       <Filter>Resource Files</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="level\Test_Level.txt">
+      <Filter>Header Files\Level</Filter>
+    </Text>
   </ItemGroup>
 </Project>

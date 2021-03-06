@@ -134,6 +134,7 @@
     <ClCompile Include="G_Timer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="TestLevel.cpp" />
+    <ClCompile Include="Tile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DirectInput.h" />
@@ -144,12 +145,16 @@
     <ClInclude Include="G_Timer.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="TestLevel.h" />
+    <ClInclude Include="Tile.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="CGP_Assignment.rc" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resource\tower.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="level\Test_Level.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
