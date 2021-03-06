@@ -43,8 +43,8 @@ void Graphic::createGraphic()
 	d3dPP.SwapEffect = D3DSWAPEFFECT_DISCARD;
 	d3dPP.BackBufferFormat = D3DFMT_X8R8G8B8;
 	d3dPP.BackBufferCount = 1;
-	d3dPP.BackBufferWidth = WINDOWS_HIGH;
-	d3dPP.BackBufferHeight = WINDOWS_WIDTH;
+	d3dPP.BackBufferWidth = WINDOWS_WIDTH;
+	d3dPP.BackBufferHeight = WINDOWS_HIGH;
 	d3dPP.hDeviceWindow = GameWindows::getInstance()->g_hWnd;
 
 	hr = direct3D9->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, GameWindows::getInstance()->g_hWnd, D3DCREATE_SOFTWARE_VERTEXPROCESSING, &d3dPP, &d3dDevice);

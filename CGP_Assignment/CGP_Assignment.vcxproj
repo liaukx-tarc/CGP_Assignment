@@ -131,6 +131,7 @@
     <ClCompile Include="GameStateManager.cpp" />
     <ClCompile Include="GameWindows.cpp" />
     <ClCompile Include="Graphic.cpp" />
+    <ClCompile Include="G_Timer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="TestLevel.cpp" />
   </ItemGroup>
@@ -140,6 +141,7 @@
     <ClInclude Include="GameStateManager.h" />
     <ClInclude Include="GameWindows.h" />
     <ClInclude Include="Graphic.h" />
+    <ClInclude Include="G_Timer.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="TestLevel.h" />
   </ItemGroup>
