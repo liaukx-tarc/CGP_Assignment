@@ -1,7 +1,7 @@
 #ifndef TILE
 #include <d3dx9.h>
 
-#define MAX_MAP_Y 15
+#define MAX_MAP_Y 18
 #define MAX_MAP_X 32
 #define TILE_HIGHT 60
 #define TILE_WIDTH 60
