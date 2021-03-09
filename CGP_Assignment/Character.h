@@ -28,12 +28,12 @@ public:
 
 	float charSpeed;	//The movement speed of the character in 1 time
 	
-	void virtual init();
-	void virtual draw();
-	void virtual fixUpdate();
-	void virtual update();
-	void virtual release();
-	void move(D3DXVECTOR2 direction);
+	virtual void init();
+	virtual void draw();
+	virtual void fixUpdate();
+	virtual void update();
+	virtual void release();
+	virtual void move(D3DXVECTOR2 direction);
 };
 
 #endif // !CHARACTER
