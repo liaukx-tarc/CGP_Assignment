@@ -24,6 +24,8 @@ public:
 	D3DXVECTOR3 charPosition;	//character's position
 	D3DXVECTOR2 charVelocity;	//character's velocity
 
+	int charState;		//Character State. 0 = idle, 1 = move
+
 	float charSpeed;	//The movement speed of the character in 1 time
 	
 	void virtual init();
@@ -31,6 +33,7 @@ public:
 	void virtual fixUpdate();
 	void virtual update();
 	void virtual release();
+	void move(D3DXVECTOR2 direction);
 };
 
 #endif // !CHARACTER

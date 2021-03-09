@@ -1,4 +1,5 @@
 #include "Character.h"
+#include "DirectInput.h"
 #include "Graphic.h"
 #include "Sprite.h"
 
@@ -14,6 +15,7 @@ Character::Character()
 	charFrame = 0;
 	charNo = 0;
 	charSpeed = 0;
+	charState = 0;
 	frameNum = 0;
 	frameRate = 0;
 	frameTimer = 0;
@@ -37,6 +39,9 @@ void Character::init()
 	animationSpeed = 8;
 	frameRate = 1.0f / animationSpeed;
 	frameNum = 4;
+
+	charSpeed = 10;
+	charState = 1; //0 = idle, 1 = move
 }
 
 void Character::draw()
@@ -57,16 +62,40 @@ void Character::fixUpdate()
 
 	charRect.top = charSize.y * charNo;
 	charRect.bottom = charRect.top + charSize.y;
-	charRect.left = charSize.x * charFrame;
+	charRect.left = charSize.x * (charFrame + (charState * 4));
 	charRect.right = charRect.left + charSize.x;
 }
 
 void Character::update()
 {
+	if (DirectInput::getInstance()->diKeys[DIK_UP])
+	{
+		charDirection.x = 0;
+		charDirection.y = -1;
+	}
 
+	else if (DirectInput::getInstance()->diKeys[DIK_DOWN])
+	{
+		charDirection.x = 0;
+		charDirection.y = 1;
+	}
+
+	else
+	{
+		charDirection.x = 0;
+		charDirection.y = 0;
+	}
+
+	move(charDirection);
 }
 
 void Character::release()
 {
 
+}
+
+void Character::move(D3DXVECTOR2 direction)
+{
+	charPosition.x += direction.x * (0.01f * charSpeed);
+	charPosition.y += direction.y * (0.01f * charSpeed);
 }
