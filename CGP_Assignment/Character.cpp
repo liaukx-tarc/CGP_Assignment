@@ -36,11 +36,11 @@ void Character::init()
 	charRect.bottom = charSize.y;
 	charRect.right = charSize.x;
 
-	animationSpeed = 8;
+	animationSpeed = 12;
 	frameRate = 1.0f / animationSpeed;
 	frameNum = 4;
 
-	charSpeed = 10;
+	charSpeed = 15;
 	charState = 1; //0 = idle, 1 = move
 }
 
@@ -72,18 +72,21 @@ void Character::update()
 	{
 		charDirection.x = 0;
 		charDirection.y = -1;
+		charState = 1;
 	}
 
 	else if (DirectInput::getInstance()->diKeys[DIK_DOWN])
 	{
 		charDirection.x = 0;
 		charDirection.y = 1;
+		charState = 1;
 	}
 
 	else
 	{
 		charDirection.x = 0;
 		charDirection.y = 0;
+		charState = 0;
 	}
 
 	move(charDirection);
