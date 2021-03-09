@@ -52,10 +52,10 @@ void Tile::createTile()
 	tileRect.right = 60;
 	tileRect.bottom = 60;
 
-	tileScaling.x = 9.0f / 16;
-	tileScaling.y = 9.0f / 16;
+	//tileScaling.x = 9.0f / 16;
+	//tileScaling.y = 9.0f / 16;
 
-	D3DXMatrixTransformation2D(&mat, NULL, 0.0, &tileScaling, NULL, NULL, NULL);
+	D3DXMatrixTransformation2D(&mat, NULL, 0.0, NULL/*&tileScaling*/, NULL, NULL, NULL);
 }
 
 void Tile::loadMap(char * name) 

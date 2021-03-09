@@ -92,8 +92,8 @@ void Spawner::enemySpawn()
 	for (int i = 0; i < enemyList.size(); i++)
 	{
 		enemyList[i]->init();
-		enemyList[i]->charPosition.x += (30 + (60 * i/*Starter point.x*/)) * Tile::getInstance()->tileScaling.x / charScaling.x;
-		enemyList[i]->charPosition.y += (30 /*+ (60 * i /*Starter point.y)*/) * Tile::getInstance()->tileScaling.x / charScaling.x; ;
+		enemyList[i]->charPosition.x += (30 + (60 * i/*Starter point.x*/)) / charScaling.x;
+		enemyList[i]->charPosition.y += (30 /*+ (60 * i /*Starter point.y)*/) / charScaling.x; ;
 	}
 }
 
