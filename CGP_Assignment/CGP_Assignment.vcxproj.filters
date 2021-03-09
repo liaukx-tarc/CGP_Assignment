@@ -19,14 +19,8 @@
     <Filter Include="Header Files\Level">
       <UniqueIdentifier>{1bba26ff-d571-4a70-87be-79e36c9e762d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Device">
-      <UniqueIdentifier>{c9e133c0-672e-4699-9be7-ddc8b29cc505}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Resource">
       <UniqueIdentifier>{a2d979f6-4afe-4eba-b70b-44b44fead525}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Device">
-      <UniqueIdentifier>{72701e59-eb6d-4b3e-8a84-af2b17dd5cfb}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Resource\Level">
       <UniqueIdentifier>{6ecb0a46-0a90-41d3-9e16-b9fcafd19b5a}</UniqueIdentifier>
@@ -34,40 +28,55 @@
     <Filter Include="Header Files\Resource\Resource">
       <UniqueIdentifier>{4936cbc4-6277-4b01-a489-2776b775583a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Component">
+      <UniqueIdentifier>{c9e133c0-672e-4699-9be7-ddc8b29cc505}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Component">
+      <UniqueIdentifier>{72701e59-eb6d-4b3e-8a84-af2b17dd5cfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Character">
+      <UniqueIdentifier>{f68cab73-c053-4577-9c9a-ef0bec9f89ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Character">
+      <UniqueIdentifier>{7cbb5eab-b761-43de-8bb2-694555d2fb63}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TestLevel.cpp">
       <Filter>Source Files\Level</Filter>
     </ClCompile>
     <ClCompile Include="GameStateManager.cpp">
-      <Filter>Source Files\Device</Filter>
+      <Filter>Source Files\Component</Filter>
     </ClCompile>
     <ClCompile Include="GameWindows.cpp">
-      <Filter>Source Files\Device</Filter>
+      <Filter>Source Files\Component</Filter>
     </ClCompile>
     <ClCompile Include="Graphic.cpp">
-      <Filter>Source Files\Device</Filter>
+      <Filter>Source Files\Component</Filter>
     </ClCompile>
     <ClCompile Include="DirectInput.cpp">
-      <Filter>Source Files\Device</Filter>
+      <Filter>Source Files\Component</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="G_Timer.cpp">
-      <Filter>Source Files\Device</Filter>
+      <Filter>Source Files\Component</Filter>
     </ClCompile>
     <ClCompile Include="Tile.cpp">
-      <Filter>Source Files\Device</Filter>
-    </ClCompile>
-    <ClCompile Include="Character.cpp">
-      <Filter>Source Files\Device</Filter>
+      <Filter>Source Files\Component</Filter>
     </ClCompile>
     <ClCompile Include="Spawner.cpp">
-      <Filter>Source Files\Device</Filter>
+      <Filter>Source Files\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>Source Files\Character</Filter>
     </ClCompile>
     <ClCompile Include="Sprite.cpp">
-      <Filter>Source Files\Device</Filter>
+      <Filter>Source Files\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Demon_S.cpp">
+      <Filter>Source Files\Character</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -75,37 +84,40 @@
       <Filter>Header Files\Level</Filter>
     </ClInclude>
     <ClInclude Include="GameState.h">
-      <Filter>Header Files\Device</Filter>
+      <Filter>Header Files\Component</Filter>
     </ClInclude>
     <ClInclude Include="GameStateManager.h">
-      <Filter>Header Files\Device</Filter>
+      <Filter>Header Files\Component</Filter>
     </ClInclude>
     <ClInclude Include="GameWindows.h">
-      <Filter>Header Files\Device</Filter>
+      <Filter>Header Files\Component</Filter>
     </ClInclude>
     <ClInclude Include="Graphic.h">
-      <Filter>Header Files\Device</Filter>
+      <Filter>Header Files\Component</Filter>
     </ClInclude>
     <ClInclude Include="DirectInput.h">
-      <Filter>Header Files\Device</Filter>
+      <Filter>Header Files\Component</Filter>
     </ClInclude>
     <ClInclude Include="G_Timer.h">
-      <Filter>Header Files\Device</Filter>
+      <Filter>Header Files\Component</Filter>
     </ClInclude>
     <ClInclude Include="Tile.h">
-      <Filter>Header Files\Device</Filter>
-    </ClInclude>
-    <ClInclude Include="Character.h">
-      <Filter>Header Files\Device</Filter>
+      <Filter>Header Files\Component</Filter>
     </ClInclude>
     <ClInclude Include="Spawner.h">
-      <Filter>Header Files\Device</Filter>
+      <Filter>Header Files\Component</Filter>
     </ClInclude>
     <ClInclude Include="Sprite.h">
-      <Filter>Header Files\Device</Filter>
+      <Filter>Header Files\Component</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Header Files\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>Header Files\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Demon_S.h">
+      <Filter>Header Files\Character</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

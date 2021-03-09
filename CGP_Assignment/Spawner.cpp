@@ -82,17 +82,17 @@ void Spawner::draw()
 void Spawner::enemySpawn()
 {
 	//push back each enemy
-	for (int i = 0; i < 20; i++)
+	for (int i = 0; i < 2; i++)
 	{
-		Character * enemy = new Character;
-		enemyList.push_back(enemy);
+		Character * demon = new Demon_S;
+		enemyList.push_back(demon);
 	}
 
 	for (int i = 0; i < enemyList.size(); i++)
 	{
 		enemyList[i]->init();
-		enemyList[i]->charPosition.x += (30 + (60 * i/*Starter point.x*/)) *Tile::getInstance()->tileScaling.x / charScaling.x;
-		enemyList[i]->charPosition.y += (30 /*+ (60 * i /*Starter point.y)*/) *Tile::getInstance()->tileScaling.y / charScaling.x;
+		enemyList[i]->charPosition.x += (30 + (60 * i/*Starter point.x*/)) * Tile::getInstance()->tileScaling.x / charScaling.x;
+		enemyList[i]->charPosition.y += (30 /*+ (60 * i /*Starter point.y)*/) * Tile::getInstance()->tileScaling.y / charScaling.y;
 	}
 }
 

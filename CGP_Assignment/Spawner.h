@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <vector>
 
-#include "Character.h"
+#include "Demon_S.h"
 
 class Spawner
 {

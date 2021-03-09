@@ -3,6 +3,8 @@
 #include "Graphic.h"
 #include "Sprite.h"
 
+#include <stdio.h>
+
 Character::Character()
 {
 	ZeroMemory(&charRect, sizeof(charRect));			
@@ -28,19 +30,17 @@ Character::~Character()
 
 void Character::init()
 {
-	charSize.x = 16;
-	charSize.y = 16;
+	charSize.x = 20;
+	charSize.y = 30;
 
-	charRect.top = 0;
+	charRect.top = 30 * charNo;
 	charRect.left = 0;
-	charRect.bottom = charSize.y;
-	charRect.right = charSize.x;
+	charRect.bottom = charRect.top + charSize.y;
+	charRect.right = charRect.right + charSize.x;
 
-	animationSpeed = 12;
 	frameRate = 1.0f / animationSpeed;
 	frameNum = 4;
 
-	charSpeed = 15;
 	charState = 1; //0 = idle, 1 = move
 }
 
@@ -60,9 +60,9 @@ void Character::fixUpdate()
 		charFrame %= frameNum;
 	}
 
-	charRect.top = charSize.y * charNo;
+	charRect.top = 30 * charNo;
 	charRect.bottom = charRect.top + charSize.y;
-	charRect.left = charSize.x * (charFrame + (charState * 4));
+	charRect.left = 20 * (charFrame + (charState * 4));
 	charRect.right = charRect.left + charSize.x;
 }
 
@@ -90,6 +90,7 @@ void Character::update()
 	}
 
 	move(charDirection);
+
 }
 
 void Character::release()
