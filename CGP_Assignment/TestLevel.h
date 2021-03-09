@@ -12,8 +12,7 @@ class TestLevel : public GameState
 public:
 	TestLevel();
 	~TestLevel();
-
-	HRESULT hr;
+	
 	char * levelFile;
 
 	void init();

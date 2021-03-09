@@ -52,22 +52,20 @@ void Tile::createTile()
 	tileRect.right = 60;
 	tileRect.bottom = 60;
 
-	scaling.x = 9.0f / 16;
-	scaling.y = 9.0f / 16;
+	tileScaling.x = 9.0f / 16;
+	tileScaling.y = 9.0f / 16;
 
-	D3DXMatrixTransformation2D(&mat, NULL, 0.0, &scaling, NULL, NULL, NULL);
+	D3DXMatrixTransformation2D(&mat, NULL, 0.0, &tileScaling, NULL, NULL, NULL);
 }
 
 void Tile::loadMap(char * name) 
 {
-
 	FILE *fp;
 	fp = fopen(name, "rb");
 
 	/* If we can't open the map then exit */
 	if (fp == NULL) 
 	{
-
 		printf("Failed to open map %s\n", name);
 		system("Pause");
 		exit(1);
@@ -77,13 +75,10 @@ void Tile::loadMap(char * name)
 
 	for (int y = 0; y < MAX_MAP_Y; y++) 
 	{
-
 		for (int x = 0; x < MAX_MAP_X; x++) 
 		{
-
-			fscanf(fp, "%d", &map[y][x]); //map[][] is a 2D array
+			fscanf(fp, "%d,", &map[y][x]); //map[][] is a 2D array
 		}
-
 	}
 
 	/* Close the file afterwards */
@@ -108,7 +103,6 @@ void Tile::drawMap()
 
 				clipWindow.top = tileRow * TILE_HIGHT;
 
-				//-1 because sprite start from 0
 				clipWindow.left = (tileCol - 1) * TILE_WIDTH;
 
 				clipWindow.bottom = clipWindow.top + TILE_HIGHT;
@@ -125,9 +119,7 @@ void Tile::drawMap()
 
 				sprite->Draw(tile, &clipWindow, NULL, &pos, D3DCOLOR_XRGB(255, 255, 255));
 			}
-
 		}
-
 	}
 
 	sprite->End();

@@ -28,6 +28,12 @@
     <Filter Include="Source Files\Device">
       <UniqueIdentifier>{72701e59-eb6d-4b3e-8a84-af2b17dd5cfb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Resource\Level">
+      <UniqueIdentifier>{6ecb0a46-0a90-41d3-9e16-b9fcafd19b5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Resource\Resource">
+      <UniqueIdentifier>{4936cbc4-6277-4b01-a489-2776b775583a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TestLevel.cpp">
@@ -54,6 +60,15 @@
     <ClCompile Include="Tile.cpp">
       <Filter>Source Files\Device</Filter>
     </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>Source Files\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Spawner.cpp">
+      <Filter>Source Files\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Source Files\Device</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TestLevel.h">
@@ -71,9 +86,6 @@
     <ClInclude Include="Graphic.h">
       <Filter>Header Files\Device</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Header Files\Resource</Filter>
-    </ClInclude>
     <ClInclude Include="DirectInput.h">
       <Filter>Header Files\Device</Filter>
     </ClInclude>
@@ -82,6 +94,18 @@
     </ClInclude>
     <ClInclude Include="Tile.h">
       <Filter>Header Files\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>Header Files\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Spawner.h">
+      <Filter>Header Files\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Header Files\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files\Resource</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -94,12 +118,26 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="resource\TileSet.png">
-      <Filter>Header Files\Resource</Filter>
+      <Filter>Header Files\Resource\Resource</Filter>
+    </Image>
+    <Image Include="resource\Boss_Sheet.png">
+      <Filter>Header Files\Resource\Resource</Filter>
+    </Image>
+    <Image Include="resource\Minion_Sheet.png">
+      <Filter>Header Files\Resource\Resource</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
     <Text Include="level\Test_Level.txt">
-      <Filter>Header Files\Level</Filter>
+      <Filter>Header Files\Resource\Level</Filter>
     </Text>
+    <Text Include="level\Test_Level_Path.txt">
+      <Filter>Header Files\Resource\Level</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resource\Arrow.ani">
+      <Filter>Header Files\Resource\Resource</Filter>
+    </None>
   </ItemGroup>
 </Project>

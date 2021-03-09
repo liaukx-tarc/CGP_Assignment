@@ -1,8 +1,8 @@
 #ifndef TILE
 #include <d3dx9.h>
 
-#define MAX_MAP_Y 21
-#define MAX_MAP_X 38
+#define MAX_MAP_Y 15
+#define MAX_MAP_X 32
 #define TILE_HIGHT 60
 #define TILE_WIDTH 60
 
@@ -23,7 +23,7 @@ public:
 	LPDIRECT3DTEXTURE9 tile;
 	LPD3DXSPRITE sprite;
 	D3DXMATRIX mat;
-	D3DXVECTOR2 scaling;
+	D3DXVECTOR2 tileScaling;
 
 	int map[MAX_MAP_Y][MAX_MAP_X], tileCol, tileRow;
 	RECT clipWindow;
