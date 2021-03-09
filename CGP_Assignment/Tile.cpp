@@ -55,6 +55,8 @@ void Tile::createTile()
 	//tileScaling.x = 9.0f / 16;
 	//tileScaling.y = 9.0f / 16;
 
+	tileScaling.x = tileScaling.y = 1;
+
 	D3DXMatrixTransformation2D(&mat, NULL, 0.0, NULL/*&tileScaling*/, NULL, NULL, NULL);
 }
 

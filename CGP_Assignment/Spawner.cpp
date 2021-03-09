@@ -41,8 +41,7 @@ void Spawner::init()
 		PostQuitMessage(0);
 	}
 
-	charScaling.x = 2.0f;
-	charScaling.y = 2.0f;
+	charScaling.x = charScaling.y = 3.0f;
 
 	D3DXMatrixTransformation2D(&mat, NULL, 0.0, &charScaling, NULL, NULL, NULL);
 }
@@ -92,8 +91,8 @@ void Spawner::enemySpawn()
 	for (int i = 0; i < enemyList.size(); i++)
 	{
 		enemyList[i]->init();
-		enemyList[i]->charPosition.x += (30 + (60 * i/*Starter point.x*/)) / charScaling.x;
-		enemyList[i]->charPosition.y += (30 /*+ (60 * i /*Starter point.y)*/) / charScaling.x; ;
+		enemyList[i]->charPosition.x += (30 + (60 * i/*Starter point.x*/)) *Tile::getInstance()->tileScaling.x / charScaling.x;
+		enemyList[i]->charPosition.y += (30 /*+ (60 * i /*Starter point.y)*/) *Tile::getInstance()->tileScaling.y / charScaling.x;
 	}
 }
 
