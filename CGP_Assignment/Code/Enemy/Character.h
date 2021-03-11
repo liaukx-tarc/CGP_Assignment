@@ -12,6 +12,7 @@ public:
 
 	//Animation
 	RECT charRect;			//the rect of the character sprite
+	D3DXVECTOR2 spriteSize;
 
 	int charFrame;			//The character's animation at what frame in the sheet
 	int charNo;				//The No. of character in the sheet

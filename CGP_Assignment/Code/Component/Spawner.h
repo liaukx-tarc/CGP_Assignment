@@ -25,6 +25,7 @@ public:
 	LPD3DXSPRITE sprite;
 	D3DXMATRIX mat;
 	D3DXVECTOR2 charScaling;
+	D3DXVECTOR3 drawPosition;
 
 	int enemyWave[MAX_WAVE][ENEMY_TYPE_NUM];
 	int waveNum, enemyNum, currentWave;

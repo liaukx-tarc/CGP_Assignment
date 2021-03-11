@@ -13,7 +13,10 @@ Demon::~Demon()
 
 void Demon::init()
 {
-	charNo = 12;
+	objSize.x = 14;
+	objSize.y = 21;
+
+	charNo = 10;
 
 	animationSpeed = 12;
 

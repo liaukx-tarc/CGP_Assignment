@@ -9,6 +9,7 @@ Character::Character()
 {
 	ZeroMemory(&charRect, sizeof(charRect));			
 	ZeroMemory(&objSize, sizeof(objSize));
+	ZeroMemory(&spriteSize, sizeof(spriteSize));
 	ZeroMemory(&charDirection, sizeof(charDirection));	
 	ZeroMemory(&objPosition, sizeof(objPosition));	
 	ZeroMemory(&charVelocity, sizeof(charVelocity));	
@@ -30,13 +31,13 @@ Character::~Character()
 
 void Character::init()
 {
-	objSize.x = 20;
-	objSize.y = 30;
+	spriteSize.x = 20;
+	spriteSize.y = 30;
 
 	charRect.top = 30 * charNo;
 	charRect.left = 0;
-	charRect.bottom = charRect.top + objSize.y;
-	charRect.right = charRect.right + objSize.x;
+	charRect.bottom = charRect.top + spriteSize.y;
+	charRect.right = charRect.right + spriteSize.x;
 
 	frameRate = 1.0f / animationSpeed;
 	frameNum = 4;
@@ -61,9 +62,9 @@ void Character::fixUpdate()
 	}
 
 	charRect.top = 30 * charNo;
-	charRect.bottom = charRect.top + objSize.y;
+	charRect.bottom = charRect.top + spriteSize.y;
 	charRect.left = 20 * (charFrame + (charState * 4));
-	charRect.right = charRect.left + objSize.x;
+	charRect.right = charRect.left + spriteSize.x;
 }
 
 void Character::update()
