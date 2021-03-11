@@ -142,6 +142,7 @@
     <None Include="resource\Arrow.ani" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Code\Component\Collision.h" />
     <ClInclude Include="Code\Component\DirectInput.h" />
     <ClInclude Include="Code\Component\GameStateManager.h" />
     <ClInclude Include="Code\Component\GameWindows.h" />
@@ -160,6 +161,7 @@
     <ClInclude Include="Code\resource.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Code\Component\Collision.cpp" />
     <ClCompile Include="Code\Component\DirectInput.cpp" />
     <ClCompile Include="Code\Component\GameStateManager.cpp" />
     <ClCompile Include="Code\Component\GameWindows.cpp" />

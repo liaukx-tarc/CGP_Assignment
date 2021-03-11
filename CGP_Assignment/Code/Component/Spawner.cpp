@@ -38,8 +38,6 @@ Spawner::Spawner()
 	isSpawn = false;
 	isNextWave = false;
 	
-	
-
 	ZeroMemory(&enemyWave, sizeof(enemyWave));
 	ZeroMemory(&enemyList, sizeof(enemyList.size()));
 }
@@ -76,6 +74,13 @@ void Spawner::init()
 				{
 					switch (b)
 					{
+					case 10:
+					{
+						Character * demon = new Demon;
+						spawnList.push_back(demon);
+						break;
+					}
+
 					case 11:
 					{
 						Character * demon = new Demon_S;
@@ -127,9 +132,13 @@ void Spawner::draw()
 	//draw enemy
 	for (int i = 0; i < Spawner::getInstance()->enemyList.size(); i++)
 	{
+		drawPosition.x = enemyList[i]->objPosition.x * Map::getInstance()->tileScaling.x / charScaling.x;
+		drawPosition.y = enemyList[i]->objPosition.y * Map::getInstance()->tileScaling.y / charScaling.y;
+		drawPosition.z = enemyList[i]->objPosition.z;
+
 		sprite->Draw(Sprite::getInstance()->minionTexture, &enemyList[i]->charRect, 
-			&D3DXVECTOR3(enemyList[i]->objSize.x/2, enemyList[i]->objSize.y/2, 0), //set the charecter with center point
-			&enemyList[i]->objPosition, D3DCOLOR_XRGB(255, 255, 255));
+			&D3DXVECTOR3(enemyList[i]->spriteSize.x/2, enemyList[i]->spriteSize.y/2, 0), //set the charecter with center point
+			&drawPosition,D3DCOLOR_XRGB(255, 255, 255));
 	}
 
 	sprite->End();
@@ -163,8 +172,10 @@ void Spawner::enemySpawn()
 		if (isSpawn)
 		{
 			enemyList.push_back(spawnList[enemyNum]);
-			enemyList[enemyNum]->objPosition.x += (30 + (60 * Map::getInstance()->startPoint[Map::getInstance()->spawnPoint[currentWave]].x)) * Map::getInstance()->tileScaling.x / charScaling.x;
-			enemyList[enemyNum]->objPosition.y += (30 + (60 * Map::getInstance()->startPoint[Map::getInstance()->spawnPoint[currentWave]].y)) * Map::getInstance()->tileScaling.y / charScaling.y;
+
+			//tile's middle point
+			enemyList[enemyNum]->objPosition.x = (30 + (60 * Map::getInstance()->startPoint[Map::getInstance()->spawnPoint[currentWave]].x));
+			enemyList[enemyNum]->objPosition.y = (30 + (60 * Map::getInstance()->startPoint[Map::getInstance()->spawnPoint[currentWave]].y));
 			enemyList[enemyNum]->init();
 			enemyNum++;
 			spawnNum++;

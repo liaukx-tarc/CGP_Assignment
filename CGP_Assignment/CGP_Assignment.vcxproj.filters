@@ -116,6 +116,9 @@
     <ClInclude Include="Code\GameObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Code\Component\Collision.h">
+      <Filter>Header Files\Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Component\DirectInput.cpp">
@@ -156,6 +159,9 @@
     </ClCompile>
     <ClCompile Include="Code\Enemy\Demon_W.cpp">
       <Filter>Source Files\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Component\Collision.cpp">
+      <Filter>Source Files\Component</Filter>
     </ClCompile>
     <ClCompile Include="Code\Enemy\Demon.cpp">
       <Filter>Source Files\Enemy</Filter>

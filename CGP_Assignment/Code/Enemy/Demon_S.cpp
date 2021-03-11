@@ -13,6 +13,9 @@ Demon_S::~Demon_S()
 
 void Demon_S::init()
 {
+	objSize.x = 11;
+	objSize.y = 13;
+
 	charNo = 11;
 
 	animationSpeed = 12;
