@@ -1,4 +1,4 @@
-#ifndef CHARACTER
+#pragma once
 #include <d3dx9.h>
 
 class Character
@@ -35,5 +35,3 @@ public:
 	virtual void release();
 	virtual void move(D3DXVECTOR2 direction);
 };
-
-#endif // !CHARACTER

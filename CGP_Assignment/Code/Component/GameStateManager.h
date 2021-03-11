@@ -3,7 +3,7 @@
 #include <vector>
 
 #include "G_Timer.h"
-#include "GameState.h"
+#include "../Level/GameState.h"
 
 #define GAME_FPS 60
 

@@ -1,8 +1,12 @@
-#ifndef SPAWNER
+#pragma once
 #include <stdio.h>
 #include <vector>
 
-#include "Demon_S.h"
+#include "../Enemy/Character.h"
+#include "G_Timer.h"
+
+#define ENEMY_TYPE_NUM	20
+#define MAX_WAVE		10
 
 class Spawner
 {
@@ -20,7 +24,15 @@ public:
 	D3DXMATRIX mat;
 	D3DXVECTOR2 charScaling;
 
+	int enemyWave[MAX_WAVE][ENEMY_TYPE_NUM];
+	int waveNum, enemyNum, currentWave;
+	std::vector<Character*> spawnList;
 	std::vector<Character*> enemyList;
+
+	G_Timer * spawn_Timer;
+	int spawnNum, totalSpawn[MAX_WAVE], spawnSpeed;
+	float spawnTime;
+	bool isSpawn, isNextWave;
 
 	void init();
 	void fixUpdate();
@@ -30,8 +42,3 @@ public:
 
 	void enemySpawn();
 };
-
-#endif // !SPAWNER
-
-
-

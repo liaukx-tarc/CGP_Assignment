@@ -1,4 +1,4 @@
-#ifndef G_TimerR
+#pragma once
 #include <Windows.h>
 
 class G_Timer {
@@ -17,4 +17,3 @@ private:
 	float intervalsPerFrame, intervalsSinceLastUpdate;
 
 };
-#endif // !G_TimerR

@@ -19,106 +19,24 @@
     <Filter Include="Header Files\Level">
       <UniqueIdentifier>{1bba26ff-d571-4a70-87be-79e36c9e762d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Resource">
-      <UniqueIdentifier>{a2d979f6-4afe-4eba-b70b-44b44fead525}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Resource\Level">
-      <UniqueIdentifier>{6ecb0a46-0a90-41d3-9e16-b9fcafd19b5a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Resource\Resource">
-      <UniqueIdentifier>{4936cbc4-6277-4b01-a489-2776b775583a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Component">
       <UniqueIdentifier>{c9e133c0-672e-4699-9be7-ddc8b29cc505}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Component">
       <UniqueIdentifier>{72701e59-eb6d-4b3e-8a84-af2b17dd5cfb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Character">
-      <UniqueIdentifier>{f68cab73-c053-4577-9c9a-ef0bec9f89ee}</UniqueIdentifier>
+    <Filter Include="Header Files\Enemy">
+      <UniqueIdentifier>{4fc14b1a-c53d-4742-8be2-1ef0a353a894}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Character">
-      <UniqueIdentifier>{7cbb5eab-b761-43de-8bb2-694555d2fb63}</UniqueIdentifier>
+    <Filter Include="Source Files\Enemy">
+      <UniqueIdentifier>{c4b7e6b9-a83b-49fe-8564-82c93139f618}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="TestLevel.cpp">
-      <Filter>Source Files\Level</Filter>
-    </ClCompile>
-    <ClCompile Include="GameStateManager.cpp">
-      <Filter>Source Files\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="GameWindows.cpp">
-      <Filter>Source Files\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphic.cpp">
-      <Filter>Source Files\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="DirectInput.cpp">
-      <Filter>Source Files\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="G_Timer.cpp">
-      <Filter>Source Files\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Tile.cpp">
-      <Filter>Source Files\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Spawner.cpp">
-      <Filter>Source Files\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Character.cpp">
-      <Filter>Source Files\Character</Filter>
-    </ClCompile>
-    <ClCompile Include="Sprite.cpp">
-      <Filter>Source Files\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Demon_S.cpp">
-      <Filter>Source Files\Character</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="TestLevel.h">
-      <Filter>Header Files\Level</Filter>
-    </ClInclude>
-    <ClInclude Include="GameState.h">
-      <Filter>Header Files\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="GameStateManager.h">
-      <Filter>Header Files\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="GameWindows.h">
-      <Filter>Header Files\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphic.h">
-      <Filter>Header Files\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="DirectInput.h">
-      <Filter>Header Files\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="G_Timer.h">
-      <Filter>Header Files\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Tile.h">
-      <Filter>Header Files\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Spawner.h">
-      <Filter>Header Files\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Sprite.h">
-      <Filter>Header Files\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Header Files\Resource</Filter>
-    </ClInclude>
-    <ClInclude Include="Character.h">
-      <Filter>Header Files\Character</Filter>
-    </ClInclude>
-    <ClInclude Include="Demon_S.h">
-      <Filter>Header Files\Character</Filter>
-    </ClInclude>
+    <Filter Include="Resource Files\Picture">
+      <UniqueIdentifier>{4936cbc4-6277-4b01-a489-2776b775583a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Level">
+      <UniqueIdentifier>{6ecb0a46-0a90-41d3-9e16-b9fcafd19b5a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="CGP_Assignment.rc">
@@ -126,30 +44,118 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="resource\tower.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="resource\TileSet.png">
-      <Filter>Header Files\Resource\Resource</Filter>
+      <Filter>Resource Files\Picture</Filter>
     </Image>
     <Image Include="resource\Boss_Sheet.png">
-      <Filter>Header Files\Resource\Resource</Filter>
+      <Filter>Resource Files\Picture</Filter>
     </Image>
     <Image Include="resource\Minion_Sheet.png">
-      <Filter>Header Files\Resource\Resource</Filter>
+      <Filter>Resource Files\Picture</Filter>
+    </Image>
+    <Image Include="resource\tower.ico">
+      <Filter>Resource Files\Picture</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
     <Text Include="level\Test_Level.txt">
-      <Filter>Header Files\Resource\Level</Filter>
-    </Text>
-    <Text Include="level\Test_Level_Path.txt">
-      <Filter>Header Files\Resource\Level</Filter>
+      <Filter>Resource Files\Level</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>
     <None Include="resource\Arrow.ani">
-      <Filter>Header Files\Resource\Resource</Filter>
+      <Filter>Resource Files\Picture</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Code\Component\DirectInput.h">
+      <Filter>Header Files\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Component\G_Timer.h">
+      <Filter>Header Files\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Component\GameStateManager.h">
+      <Filter>Header Files\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Component\GameWindows.h">
+      <Filter>Header Files\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Component\Graphic.h">
+      <Filter>Header Files\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Component\Map.h">
+      <Filter>Header Files\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Component\Spawner.h">
+      <Filter>Header Files\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Component\Sprite.h">
+      <Filter>Header Files\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Level\TestLevel.h">
+      <Filter>Header Files\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Enemy\Character.h">
+      <Filter>Header Files\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Enemy\Demon_S.h">
+      <Filter>Header Files\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Level\GameState.h">
+      <Filter>Header Files\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Enemy\Demon_W.h">
+      <Filter>Header Files\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Enemy\Demon.h">
+      <Filter>Header Files\Enemy</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Code\Component\DirectInput.cpp">
+      <Filter>Source Files\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Component\G_Timer.cpp">
+      <Filter>Source Files\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Component\GameStateManager.cpp">
+      <Filter>Source Files\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Component\GameWindows.cpp">
+      <Filter>Source Files\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Component\Graphic.cpp">
+      <Filter>Source Files\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Component\Map.cpp">
+      <Filter>Source Files\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Component\Spawner.cpp">
+      <Filter>Source Files\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Component\Sprite.cpp">
+      <Filter>Source Files\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Level\TestLevel.cpp">
+      <Filter>Source Files\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Enemy\Character.cpp">
+      <Filter>Source Files\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Enemy\Demon_S.cpp">
+      <Filter>Source Files\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Enemy\Demon_W.cpp">
+      <Filter>Source Files\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Enemy\Demon.cpp">
+      <Filter>Source Files\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

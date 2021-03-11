@@ -1,11 +1,11 @@
-#ifndef Demon_S
+#ifndef DEMON_W
 #include "Character.h"
 
-class Demon_S : public Character
+class Demon_W : public Character
 {
 public:
-	Demon_S();
-	~Demon_S();
+	Demon_W();
+	~Demon_W();
 
 	void init();
 	void draw();
@@ -14,4 +14,4 @@ public:
 	void release();
 };
 
-#endif // !Demon_S
+#endif // !Demon_W

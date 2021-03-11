@@ -127,35 +127,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Character.cpp" />
-    <ClCompile Include="Demon_S.cpp" />
-    <ClCompile Include="DirectInput.cpp" />
-    <ClCompile Include="GameStateManager.cpp" />
-    <ClCompile Include="GameWindows.cpp" />
-    <ClCompile Include="Graphic.cpp" />
-    <ClCompile Include="G_Timer.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Spawner.cpp" />
-    <ClCompile Include="Sprite.cpp" />
-    <ClCompile Include="TestLevel.cpp" />
-    <ClCompile Include="Tile.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Character.h" />
-    <ClInclude Include="Demon_S.h" />
-    <ClInclude Include="DirectInput.h" />
-    <ClInclude Include="GameState.h" />
-    <ClInclude Include="GameStateManager.h" />
-    <ClInclude Include="GameWindows.h" />
-    <ClInclude Include="Graphic.h" />
-    <ClInclude Include="G_Timer.h" />
-    <ClInclude Include="resource.h" />
-    <ClInclude Include="Spawner.h" />
-    <ClInclude Include="Sprite.h" />
-    <ClInclude Include="TestLevel.h" />
-    <ClInclude Include="Tile.h" />
-  </ItemGroup>
-  <ItemGroup>
     <ResourceCompile Include="CGP_Assignment.rc" />
   </ItemGroup>
   <ItemGroup>
@@ -166,10 +137,42 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="level\Test_Level.txt" />
-    <Text Include="level\Test_Level_Path.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resource\Arrow.ani" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Code\Component\DirectInput.h" />
+    <ClInclude Include="Code\Component\GameStateManager.h" />
+    <ClInclude Include="Code\Component\GameWindows.h" />
+    <ClInclude Include="Code\Component\Graphic.h" />
+    <ClInclude Include="Code\Component\G_Timer.h" />
+    <ClInclude Include="Code\Component\Map.h" />
+    <ClInclude Include="Code\Component\Spawner.h" />
+    <ClInclude Include="Code\Component\Sprite.h" />
+    <ClInclude Include="Code\Enemy\Character.h" />
+    <ClInclude Include="Code\Enemy\Demon.h" />
+    <ClInclude Include="Code\Enemy\Demon_S.h" />
+    <ClInclude Include="Code\Enemy\Demon_W.h" />
+    <ClInclude Include="Code\Level\GameState.h" />
+    <ClInclude Include="Code\Level\TestLevel.h" />
+    <ClInclude Include="Code\resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Code\Component\DirectInput.cpp" />
+    <ClCompile Include="Code\Component\GameStateManager.cpp" />
+    <ClCompile Include="Code\Component\GameWindows.cpp" />
+    <ClCompile Include="Code\Component\Graphic.cpp" />
+    <ClCompile Include="Code\Component\G_Timer.cpp" />
+    <ClCompile Include="Code\Component\Map.cpp" />
+    <ClCompile Include="Code\Component\Spawner.cpp" />
+    <ClCompile Include="Code\Component\Sprite.cpp" />
+    <ClCompile Include="Code\Enemy\Character.cpp" />
+    <ClCompile Include="Code\Enemy\Demon.cpp" />
+    <ClCompile Include="Code\Enemy\Demon_S.cpp" />
+    <ClCompile Include="Code\Enemy\Demon_W.cpp" />
+    <ClCompile Include="Code\Level\TestLevel.cpp" />
+    <ClCompile Include="Code\main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

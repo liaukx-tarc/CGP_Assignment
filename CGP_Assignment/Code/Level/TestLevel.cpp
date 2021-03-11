@@ -1,6 +1,6 @@
-#include "Spawner.h"
+#include "../Component/Spawner.h"
 #include "TestLevel.h"
-#include "Tile.h"
+#include "../Component/Map.h"
 
 TestLevel::TestLevel()
 {
@@ -21,11 +21,9 @@ void TestLevel::init()
 	std::copy(name.begin(), name.end(), levelFile);
 	levelFile[name.size()] = '\0';
 
-	Tile::getInstance()->loadMap(levelFile);
+	Map::getInstance()->loadMap(levelFile);
 
 	Spawner::getInstance()->init();
-
-	Spawner::getInstance()->enemySpawn();
 }
 
 void TestLevel::fixUpdate()
@@ -35,12 +33,13 @@ void TestLevel::fixUpdate()
 
 void TestLevel::update()
 {
+	Spawner::getInstance()->enemySpawn();
 	Spawner::getInstance()->update();
 }
 
 void TestLevel::draw()
 {
-	Tile::getInstance()->drawMap();
+	Map::getInstance()->drawMap();
 
 	Spawner::getInstance()->draw();
 }

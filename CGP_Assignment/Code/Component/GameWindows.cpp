@@ -1,5 +1,5 @@
 #include "GameWindows.h"
-#include "resource.h"
+#include "../resource.h"
 
 //Singleton
 GameWindows* GameWindows::sInstance = NULL;
