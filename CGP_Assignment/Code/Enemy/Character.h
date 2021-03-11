@@ -1,7 +1,10 @@
-#pragma once
-#include <d3dx9.h>
+#ifndef CHARACTER
+#define CHARACTER
 
-class Character
+#include <d3dx9.h>
+#include "../GameObject.h"
+
+class Character : public GameObject
 {
 public:
 	Character();
@@ -9,7 +12,6 @@ public:
 
 	//Animation
 	RECT charRect;			//the rect of the character sprite
-	D3DXVECTOR2 charSize;	//character's size
 
 	int charFrame;			//The character's animation at what frame in the sheet
 	int charNo;				//The No. of character in the sheet
@@ -21,13 +23,12 @@ public:
 
 	//Physics
 	D3DXVECTOR2 charDirection;	//character's direction
-	D3DXVECTOR3 charPosition;	//character's position
 	D3DXVECTOR2 charVelocity;	//character's velocity
 
 	int charState;		//Character State. 0 = idle, 1 = move
 
 	float charSpeed;	//The movement speed of the character in 1 time
-	
+
 	virtual void init();
 	virtual void draw();
 	virtual void fixUpdate();
@@ -35,3 +36,5 @@ public:
 	virtual void release();
 	virtual void move(D3DXVECTOR2 direction);
 };
+
+#endif // !CHARACTER

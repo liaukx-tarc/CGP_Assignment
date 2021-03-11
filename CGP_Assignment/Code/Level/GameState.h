@@ -1,4 +1,6 @@
-#pragma once
+#ifndef GAMESTATE
+#define GAMESTATE
+
 class GameState
 {
 public:
@@ -9,4 +11,4 @@ public:
 	virtual void release() = 0;
 };
 
-#pragma once
+#endif // !GAMESTATE

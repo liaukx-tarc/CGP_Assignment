@@ -1,4 +1,5 @@
 #ifndef DIRECT_INPUT
+#define DIRECT_INPUT
 #include <dinput.h>
 
 class DirectInput

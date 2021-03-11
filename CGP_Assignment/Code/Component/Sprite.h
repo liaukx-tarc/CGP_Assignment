@@ -1,4 +1,5 @@
 #ifndef SPRITE
+#define SPRITE
 #include <d3dx9.h>
 
 class Sprite

@@ -8,9 +8,9 @@
 Character::Character()
 {
 	ZeroMemory(&charRect, sizeof(charRect));			
-	ZeroMemory(&charSize, sizeof(charSize));			
+	ZeroMemory(&objSize, sizeof(objSize));
 	ZeroMemory(&charDirection, sizeof(charDirection));	
-	ZeroMemory(&charPosition, sizeof(charPosition));	
+	ZeroMemory(&objPosition, sizeof(objPosition));	
 	ZeroMemory(&charVelocity, sizeof(charVelocity));	
 	
 	animationSpeed = 0;
@@ -30,13 +30,13 @@ Character::~Character()
 
 void Character::init()
 {
-	charSize.x = 20;
-	charSize.y = 30;
+	objSize.x = 20;
+	objSize.y = 30;
 
 	charRect.top = 30 * charNo;
 	charRect.left = 0;
-	charRect.bottom = charRect.top + charSize.y;
-	charRect.right = charRect.right + charSize.x;
+	charRect.bottom = charRect.top + objSize.y;
+	charRect.right = charRect.right + objSize.x;
 
 	frameRate = 1.0f / animationSpeed;
 	frameNum = 4;
@@ -61,9 +61,9 @@ void Character::fixUpdate()
 	}
 
 	charRect.top = 30 * charNo;
-	charRect.bottom = charRect.top + charSize.y;
+	charRect.bottom = charRect.top + objSize.y;
 	charRect.left = 20 * (charFrame + (charState * 4));
-	charRect.right = charRect.left + charSize.x;
+	charRect.right = charRect.left + objSize.x;
 }
 
 void Character::update()
@@ -100,6 +100,6 @@ void Character::release()
 
 void Character::move(D3DXVECTOR2 direction)
 {
-	charPosition.x += direction.x * (0.01f * charSpeed);
-	charPosition.y += direction.y * (0.01f * charSpeed);
+	objPosition.x += direction.x * (0.01f * charSpeed);
+	objPosition.y += direction.y * (0.01f * charSpeed);
 }

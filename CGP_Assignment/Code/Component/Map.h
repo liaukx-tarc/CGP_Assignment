@@ -1,4 +1,5 @@
 #ifndef MAP
+#define MAP
 #include <d3dx9.h>
 
 #include "Spawner.h"

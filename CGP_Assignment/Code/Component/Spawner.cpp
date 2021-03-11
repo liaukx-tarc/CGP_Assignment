@@ -128,8 +128,8 @@ void Spawner::draw()
 	for (int i = 0; i < Spawner::getInstance()->enemyList.size(); i++)
 	{
 		sprite->Draw(Sprite::getInstance()->minionTexture, &enemyList[i]->charRect, 
-			&D3DXVECTOR3(enemyList[i]->charSize.x/2, enemyList[i]->charSize.y/2, 0), //set the charecter with center point
-			&enemyList[i]->charPosition, D3DCOLOR_XRGB(255, 255, 255));
+			&D3DXVECTOR3(enemyList[i]->objSize.x/2, enemyList[i]->objSize.y/2, 0), //set the charecter with center point
+			&enemyList[i]->objPosition, D3DCOLOR_XRGB(255, 255, 255));
 	}
 
 	sprite->End();
@@ -163,8 +163,8 @@ void Spawner::enemySpawn()
 		if (isSpawn)
 		{
 			enemyList.push_back(spawnList[enemyNum]);
-			enemyList[enemyNum]->charPosition.x += (30 + (60 * Map::getInstance()->startPoint[Map::getInstance()->spawnPoint[currentWave]].x)) * Map::getInstance()->tileScaling.x / charScaling.x;
-			enemyList[enemyNum]->charPosition.y += (30 + (60 * Map::getInstance()->startPoint[Map::getInstance()->spawnPoint[currentWave]].y)) * Map::getInstance()->tileScaling.y / charScaling.y;
+			enemyList[enemyNum]->objPosition.x += (30 + (60 * Map::getInstance()->startPoint[Map::getInstance()->spawnPoint[currentWave]].x)) * Map::getInstance()->tileScaling.x / charScaling.x;
+			enemyList[enemyNum]->objPosition.y += (30 + (60 * Map::getInstance()->startPoint[Map::getInstance()->spawnPoint[currentWave]].y)) * Map::getInstance()->tileScaling.y / charScaling.y;
 			enemyList[enemyNum]->init();
 			enemyNum++;
 			spawnNum++;
