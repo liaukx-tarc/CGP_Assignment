@@ -1,35 +1,40 @@
 #pragma warning(disable : 4996)
 
-#include "Tile.h"
+#include "Map.h"
 #include "Graphic.h"
 
 #include <stdio.h>
 
-Tile* Tile::sInstance = NULL;
+Map* Map::sInstance = NULL;
 
-Tile* Tile::getInstance()
+Map* Map::getInstance()
 {
-	if (Tile::sInstance == NULL)
+	if (Map::sInstance == NULL)
 	{
-		sInstance = new Tile;
+		sInstance = new Map;
 	}
 
 	return sInstance;
 }
 
-void Tile::releaseInsrance()
+void Map::releaseInsrance()
 {
 	delete sInstance;
 	sInstance = NULL;
 }
 
-Tile::Tile()
+Map::Map()
 {
+	ZeroMemory(&map, sizeof(map));
+	ZeroMemory(&pathMap, sizeof(pathMap));
 	sprite = NULL;
 	tile = NULL;
+
+	startPointNum = 0;
+	endPointNum = 0;
 }
 
-Tile::~Tile()
+Map::~Map()
 {
 	sprite->Release();
 	sprite = NULL;
@@ -38,7 +43,7 @@ Tile::~Tile()
 	tile = NULL;
 }
 
-void Tile::createTile()
+void Map::createMap()
 {
 	hr = D3DXCreateSprite(Graphic::getInstance()->d3dDevice, &sprite);
 	hr = D3DXCreateTextureFromFile(Graphic::getInstance()->d3dDevice, "resource/TileSet.png", &tile);
@@ -60,7 +65,7 @@ void Tile::createTile()
 	D3DXMatrixTransformation2D(&mat, NULL, 0.0, NULL/*&tileScaling*/, NULL, NULL, NULL);
 }
 
-void Tile::loadMap(char * name) 
+void Map::loadMap(char * name) 
 {
 	FILE *fp;
 	fp = fopen(name, "rb");
@@ -83,14 +88,76 @@ void Tile::loadMap(char * name)
 		}
 	}
 
+	for (int y = 0; y < MAX_MAP_Y; y++)
+	{
+		for (int x = 0; x < MAX_MAP_X; x++)
+		{
+			fscanf(fp, "%d,", &pathMap[y][x]); //map[][] is a 2D array
+		}
+	}
+
+	fscanf(fp, "%d", &Spawner::getInstance()->waveNum);
+
+	for (int i = 0; i < Spawner::getInstance()->waveNum; i++)
+	{
+		for (int j = 0; j < ENEMY_TYPE_NUM; j++)
+		{
+			fscanf(fp, "%d,", &Spawner::getInstance()->enemyWave[i][j]);
+		}
+		fscanf(fp, "%d,%d", &spawnPoint[i], &targetPoint[i]);
+	}
+
 	/* Close the file afterwards */
 	fclose(fp);
+
+	//path map test print
+	for (int y = 0; y < MAX_MAP_Y; y++)
+	{
+		for (int x = 0; x < MAX_MAP_X; x++)
+		{
+			printf("%d,", pathMap[y][x]); //map[][] is a 2D array
+		}
+		printf("\n");
+	}
+
+	printf("\n");
+
+	//enemy wave test print
+	for (int i = 0; i < Spawner::getInstance()->waveNum; i++)
+	{
+		for (int j = 0; j < ENEMY_TYPE_NUM; j++)
+		{
+			printf("%d,", Spawner::getInstance()->enemyWave[i][j]);
+		}
+		printf(" %d,%d", spawnPoint[i], targetPoint[i]);
+		printf("\n");
+	}
+
+	for (int y = 0; y < MAX_MAP_Y; y++)
+	{
+		for (int x = 0; x < MAX_MAP_X; x++)
+		{
+			if (pathMap[y][x] == 2)
+			{
+				startPoint[startPointNum].x = x;
+				startPoint[startPointNum].y = y;
+				startPointNum++;
+			}
+
+			if (pathMap[y][x] == 3)
+			{
+				endPoint[endPointNum].x = x;
+				endPoint[endPointNum].y = y;
+				endPointNum++;
+			}
+		}
+	}
 }
 
-void Tile::drawMap()
+void Map::drawMap()
 {
 	sprite->Begin(D3DXSPRITE_ALPHABLEND);
-	sprite->SetTransform(&Tile::getInstance()->mat);
+	sprite->SetTransform(&mat);
 
 	//Draw the map 
 	for (int y = 0; y < MAX_MAP_Y; y++) 
