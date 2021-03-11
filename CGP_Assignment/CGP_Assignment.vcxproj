@@ -154,6 +154,7 @@
     <ClInclude Include="Code\Enemy\Demon.h" />
     <ClInclude Include="Code\Enemy\Demon_S.h" />
     <ClInclude Include="Code\Enemy\Demon_W.h" />
+    <ClInclude Include="Code\GameObject.h" />
     <ClInclude Include="Code\Level\GameState.h" />
     <ClInclude Include="Code\Level\TestLevel.h" />
     <ClInclude Include="Code\resource.h" />

@@ -1,4 +1,5 @@
 #ifndef GAMESTATEMANAGER
+#define GAMESTATEMANAGER
 #include <stdio.h>
 #include <vector>
 

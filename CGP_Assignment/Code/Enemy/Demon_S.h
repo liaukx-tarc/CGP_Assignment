@@ -1,4 +1,5 @@
 #ifndef DEMON_S
+#define DEMON_S
 #include "Character.h"
 
 class Demon_S : public Character

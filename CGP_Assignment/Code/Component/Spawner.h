@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SPAWNER
+#define SPAWNER
+
 #include <stdio.h>
 #include <vector>
 
@@ -42,3 +44,5 @@ public:
 
 	void enemySpawn();
 };
+
+#endif // !SPAWNER
