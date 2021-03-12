@@ -20,7 +20,7 @@ void Demon_W::init()
 
 	animationSpeed = 12;
 
-	charSpeed = 15;
+	charSpeed = 10;
 
 	Character::init();
 }

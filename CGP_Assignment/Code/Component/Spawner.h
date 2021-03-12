@@ -21,26 +21,16 @@ public:
 	static Spawner* getInstance();
 	static void releaseInsrance();
 
-	HRESULT hr;
-	LPD3DXSPRITE sprite;
-	D3DXMATRIX mat;
-	D3DXVECTOR2 charScaling;
-	D3DXVECTOR3 drawPosition;
-
 	int enemyWave[MAX_WAVE][ENEMY_TYPE_NUM];
-	int waveNum, enemyNum, currentWave;
+	int waveNum, currentWave;
 	std::vector<Character*> spawnList;
-	std::vector<Character*> enemyList;
 
 	G_Timer * spawn_Timer;
 	int spawnNum, totalSpawn[MAX_WAVE], spawnSpeed;
 	float spawnTime;
-	bool isSpawn, isNextWave;
+	bool isNextWave;
 
 	void init();
-	void fixUpdate();
-	void update();
-	void draw();
 	void release();
 
 	void enemySpawn();
