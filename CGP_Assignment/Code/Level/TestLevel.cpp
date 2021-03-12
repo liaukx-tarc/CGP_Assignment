@@ -1,8 +1,9 @@
-#include "../Component/Spawner.h"
 #include "TestLevel.h"
+#include "../Component/Spawner.h"
 #include "../Component/Map.h"
 #include "../Component/Collision.h"
 #include "../Component/DirectInput.h"
+#include "../Component/EnemyController.h"
 
 TestLevel::TestLevel()
 {
@@ -26,11 +27,12 @@ void TestLevel::init()
 	Map::getInstance()->loadMap(levelFile);
 
 	Spawner::getInstance()->init();
+	EnemyController::getInstance()->init();
 }
 
 void TestLevel::fixUpdate()
 {
-	Spawner::getInstance()->fixUpdate();
+	EnemyController::getInstance()->fixUpdate();
 }
 
 bool isTrue = true;
@@ -39,38 +41,32 @@ std::vector<GameObject*> targetList;
 void TestLevel::update()
 {
 	Spawner::getInstance()->enemySpawn();
-	Spawner::getInstance()->update();
+	EnemyController::getInstance()->update();
 
 	if (DirectInput::getInstance()->diKeys[DIK_UP] && isTrue)
 	{
-		printf("isTrue\n");
-		Spawner::getInstance()->spawnList[0]->objPosition.x += 60;
-		Spawner::getInstance()->spawnList[1]->objPosition.x += 60;
-		Spawner::getInstance()->spawnList[1]->objPosition.x += 25;
-		targetList.push_back(Spawner::getInstance()->spawnList[1]);
-
-		if (Collision::getInstance()->colliDetect(Spawner::getInstance()->spawnList[0], targetList))
-		{
-			printf("collision\n");
-		}
-
-		else
-		{
-			printf("Nope\n");
-		}
+		Spawner::getInstance()->isNextWave = true;
 
 		isTrue = false;
 	}
+
+	for (int i = 0; i < EnemyController::getInstance()->enemyList.size(); i++)
+	{
+		EnemyController::getInstance()->enemyList[i]->charDirection.x = 1;
+	}
+
+	EnemyController::getInstance()->update();
 }
 
 void TestLevel::draw()
 {
 	Map::getInstance()->drawMap();
 
-	Spawner::getInstance()->draw();
+	EnemyController::getInstance()->draw();
 }
 
 void TestLevel::release()
 {
 	Spawner::getInstance()->release();
+	EnemyController::getInstance()->release();
 }

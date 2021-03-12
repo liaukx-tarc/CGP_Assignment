@@ -69,29 +69,7 @@ void Character::fixUpdate()
 
 void Character::update()
 {
-	if (DirectInput::getInstance()->diKeys[DIK_UP])
-	{
-		charDirection.x = 0;
-		charDirection.y = -1;
-		charState = 1;
-	}
-
-	else if (DirectInput::getInstance()->diKeys[DIK_DOWN])
-	{
-		charDirection.x = 0;
-		charDirection.y = 1;
-		charState = 1;
-	}
-
-	else
-	{
-		charDirection.x = 0;
-		charDirection.y = 0;
-		charState = 0;
-	}
-
 	move(charDirection);
-
 }
 
 void Character::release()
@@ -101,6 +79,6 @@ void Character::release()
 
 void Character::move(D3DXVECTOR2 direction)
 {
-	objPosition.x += direction.x * (0.01f * charSpeed);
-	objPosition.y += direction.y * (0.01f * charSpeed);
+	objPosition.x += direction.x * (0.05f * charSpeed);
+	objPosition.y += direction.y * (0.05f * charSpeed);
 }

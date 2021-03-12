@@ -144,6 +144,7 @@
   <ItemGroup>
     <ClInclude Include="Code\Component\Collision.h" />
     <ClInclude Include="Code\Component\DirectInput.h" />
+    <ClInclude Include="Code\Component\EnemyController.h" />
     <ClInclude Include="Code\Component\GameStateManager.h" />
     <ClInclude Include="Code\Component\GameWindows.h" />
     <ClInclude Include="Code\Component\Graphic.h" />
@@ -163,6 +164,7 @@
   <ItemGroup>
     <ClCompile Include="Code\Component\Collision.cpp" />
     <ClCompile Include="Code\Component\DirectInput.cpp" />
+    <ClCompile Include="Code\Component\EnemyController.cpp" />
     <ClCompile Include="Code\Component\GameStateManager.cpp" />
     <ClCompile Include="Code\Component\GameWindows.cpp" />
     <ClCompile Include="Code\Component\Graphic.cpp" />
