@@ -25,6 +25,8 @@ public:
 	float framesToUpdate;
 	std::vector<GameState*> stateList;
 
+	bool isPause;
+
 	void update();
 	void draw();
 
