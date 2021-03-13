@@ -45,9 +45,6 @@ Spawner::~Spawner()
 
 void Spawner::init()
 {
-	spawn_Timer = new G_Timer();
-	spawn_Timer->init(1);
-
 	//save the enemy in this level
 	for (int a = 0; a < waveNum; a++)
 	{
@@ -55,23 +52,23 @@ void Spawner::init()
 		{
 			if (enemyWave[a][b] != 0)
 			{
-				switch (enemyWave[a][b]-1)
+				switch (enemyWave[a][b])
 				{
-				case 10:
+				case 11:
 				{
 					Character * demon = new Demon;
 					spawnList.push_back(demon);
 					break;
 				}
 
-				case 11:
+				case 12:
 				{
 					Character * demon = new Demon_S;
 					spawnList.push_back(demon);
 					break;
 				}
 
-				case 12:
+				case 13:
 				{
 					Character * demon = new Demon_W;
 					spawnList.push_back(demon);
@@ -102,26 +99,23 @@ void Spawner::enemySpawn()
 	//spawner delay
 	if (spawnNum < totalSpawn[currentWave])
 	{
-		for (int i = 0; i < spawn_Timer->framesToUpdate(); i++)
+		spawnTime += (0.001f) * spawnSpeed;
+		if (spawnTime > 1)
 		{
-			spawnTime += (1.0f / 10) * spawnSpeed;
-			if (spawnTime > 1)
-			{
-				EnemyController::getInstance()->enemyList.push_back(spawnList[EnemyController::getInstance()->enemyNum]);
+			EnemyController::getInstance()->enemyList.push_back(spawnList[EnemyController::getInstance()->enemyNum]);
 
-				//tile's middle point
-				EnemyController::getInstance()->enemyList[EnemyController::getInstance()->enemyNum]->objPosition.x = (30 + (60 * Map::getInstance()->startPoint[Map::getInstance()->spawnPoint[currentWave]].x));
-				EnemyController::getInstance()->enemyList[EnemyController::getInstance()->enemyNum]->objPosition.y = (30 + (60 * Map::getInstance()->startPoint[Map::getInstance()->spawnPoint[currentWave]].y));
-				EnemyController::getInstance()->enemyList[EnemyController::getInstance()->enemyNum]->init();
-				EnemyController::getInstance()->enemyNum++;
-				spawnNum++;
-				spawnTime = 0;
-			}
+			//tile's middle point
+			EnemyController::getInstance()->enemyList[EnemyController::getInstance()->enemyNum]->objPosition.x = (30 + (60 * Map::getInstance()->startPoint[Map::getInstance()->spawnPoint[currentWave]].x));
+			EnemyController::getInstance()->enemyList[EnemyController::getInstance()->enemyNum]->objPosition.y = (30 + (60 * Map::getInstance()->startPoint[Map::getInstance()->spawnPoint[currentWave]].y));
+			EnemyController::getInstance()->enemyList[EnemyController::getInstance()->enemyNum]->init();
+			EnemyController::getInstance()->enemyNum++;
+			spawnNum++;
+			spawnTime = 0;
 		}
 	}
 }
 
 void Spawner::release()
 {
-	delete spawn_Timer;
+
 }
