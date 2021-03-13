@@ -51,41 +51,38 @@ void Spawner::init()
 	//save the enemy in this level
 	for (int a = 0; a < waveNum; a++)
 	{
-		for (int b = 0; b < ENEMY_TYPE_NUM; b++)
+		for (int b = 0; b < MAX_ENEMY_ONEWAVE; b++)
 		{
-			for (int c = 0; c < enemyWave[a][b]; c++)
+			if (enemyWave[a][b] != 0)
 			{
-				if (enemyWave[a][b] != 0)
+				switch (enemyWave[a][b]-1)
 				{
-					switch (b)
-					{
-					case 10:
-					{
-						Character * demon = new Demon;
-						spawnList.push_back(demon);
-						break;
-					}
-
-					case 11:
-					{
-						Character * demon = new Demon_S;
-						spawnList.push_back(demon);
-						break;
-					}
-
-					case 12:
-					{
-						Character * demon = new Demon_W;
-						spawnList.push_back(demon);
-						break;
-					}
-
-					default:
-						break;
-					}
+				case 10:
+				{
+					Character * demon = new Demon;
+					spawnList.push_back(demon);
+					break;
 				}
+
+				case 11:
+				{
+					Character * demon = new Demon_S;
+					spawnList.push_back(demon);
+					break;
+				}
+
+				case 12:
+				{
+					Character * demon = new Demon_W;
+					spawnList.push_back(demon);
+					break;
+				}
+
+				default:
+					break;
+				}
+				totalSpawn[a]++;
 			}
-			totalSpawn[a] += enemyWave[a][b];
 		}
 	}
 

@@ -7,8 +7,8 @@
 #include "../Enemy/Character.h"
 #include "G_Timer.h"
 
-#define ENEMY_TYPE_NUM	20
-#define MAX_WAVE		10
+#define MAX_ENEMY_ONEWAVE	50
+#define MAX_WAVE			10
 
 class Spawner
 {
@@ -21,7 +21,7 @@ public:
 	static Spawner* getInstance();
 	static void releaseInsrance();
 
-	int enemyWave[MAX_WAVE][ENEMY_TYPE_NUM];
+	int enemyWave[MAX_WAVE][MAX_ENEMY_ONEWAVE];
 	int waveNum, currentWave;
 	std::vector<Character*> spawnList;
 
