@@ -1,5 +1,6 @@
 #include "GameStateManager.h"
 #include "../Level/TestLevel.h"
+#include "../Component/GameWindows.h"
 
 //singleton
 GameStateManager* GameStateManager::sInstance = NULL;
@@ -25,6 +26,8 @@ GameStateManager::GameStateManager()
 	currentState = 0;
 	preState = 0;
 
+	isPause = false;
+
 	g_Timer = new G_Timer();
 	g_Timer->init(GAME_FPS);
 
@@ -47,13 +50,21 @@ GameStateManager::~GameStateManager()
 
 void GameStateManager::update()
 {
-	stateList[currentState]->update();
-
-	framesToUpdate = g_Timer->framesToUpdate();
-
-	for (int i = 0; i < framesToUpdate; i++)
+	if (GameWindows::getInstance()->keyIn == VK_ESCAPE)
 	{
-		stateList[currentState]->fixUpdate();
+		isPause = !isPause;
+	}
+
+	if (!isPause)
+	{
+		stateList[currentState]->update();
+
+		framesToUpdate = g_Timer->framesToUpdate();
+
+		for (int i = 0; i < framesToUpdate; i++)
+		{
+			stateList[currentState]->fixUpdate();
+		}
 	}
 }
 

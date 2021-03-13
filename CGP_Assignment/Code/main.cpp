@@ -21,6 +21,8 @@ int main()	//App and Console
 		DirectInput::getInstance()->InputLoop();
 		GameStateManager::getInstance()->update();
 		Graphic::getInstance()->graphicLoop();
+
+		GameWindows::getInstance()->keyIn = 0;
 	}
 
 	//delete the class and clear
