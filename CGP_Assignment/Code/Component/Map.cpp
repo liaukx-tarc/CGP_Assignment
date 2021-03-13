@@ -88,6 +88,7 @@ void Map::loadMap(char * name)
 		}
 	}
 
+	//load path
 	for (int y = 0; y < MAX_MAP_Y; y++)
 	{
 		for (int x = 0; x < MAX_MAP_X; x++)
@@ -96,11 +97,13 @@ void Map::loadMap(char * name)
 		}
 	}
 
+	//load wave number
 	fscanf(fp, "%d", &Spawner::getInstance()->waveNum);
 
+	//load enemy list
 	for (int i = 0; i < Spawner::getInstance()->waveNum; i++)
 	{
-		for (int j = 0; j < ENEMY_TYPE_NUM; j++)
+		for (int j = 0; j < MAX_ENEMY_ONEWAVE; j++)
 		{
 			fscanf(fp, "%d,", &Spawner::getInstance()->enemyWave[i][j]);
 		}
@@ -125,7 +128,7 @@ void Map::loadMap(char * name)
 	//enemy wave test print
 	for (int i = 0; i < Spawner::getInstance()->waveNum; i++)
 	{
-		for (int j = 0; j < ENEMY_TYPE_NUM; j++)
+		for (int j = 0; j < MAX_ENEMY_ONEWAVE; j++)
 		{
 			printf("%d,", Spawner::getInstance()->enemyWave[i][j]);
 		}
