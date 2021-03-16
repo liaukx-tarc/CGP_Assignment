@@ -98,14 +98,14 @@ void Map::loadMap(char * name)
 	}
 
 	//load wave number
-	fscanf(fp, "%d", &Spawner::getInstance()->waveNum);
+	fscanf(fp, "%d", &EnemyController::getInstance()->waveNum);
 
 	//load enemy list
-	for (int i = 0; i < Spawner::getInstance()->waveNum; i++)
+	for (int i = 0; i < EnemyController::getInstance()->waveNum; i++)
 	{
 		for (int j = 0; j < MAX_ENEMY_ONEWAVE; j++)
 		{
-			fscanf(fp, "%d,", &Spawner::getInstance()->enemyWave[i][j]);
+			fscanf(fp, "%d,", &EnemyController::getInstance()->enemyWave[i][j]);
 		}
 		fscanf(fp, "%d,%d", &spawnPoint[i], &targetPoint[i]);
 	}
@@ -113,6 +113,7 @@ void Map::loadMap(char * name)
 	/* Close the file afterwards */
 	fclose(fp);
 
+	//Testing
 	//path map test print
 	for (int y = 0; y < MAX_MAP_Y; y++)
 	{
@@ -126,11 +127,11 @@ void Map::loadMap(char * name)
 	printf("\n");
 
 	//enemy wave test print
-	for (int i = 0; i < Spawner::getInstance()->waveNum; i++)
+	for (int i = 0; i < EnemyController::getInstance()->waveNum; i++)
 	{
 		for (int j = 0; j < MAX_ENEMY_ONEWAVE; j++)
 		{
-			printf("%d,", Spawner::getInstance()->enemyWave[i][j]);
+			printf("%d,", EnemyController::getInstance()->enemyWave[i][j]);
 		}
 		printf(" %d,%d", spawnPoint[i], targetPoint[i]);
 		printf("\n");

@@ -5,6 +5,9 @@
 
 #include "../Enemy/Character.h"
 
+#define MAX_ENEMY_ONEWAVE	50
+#define MAX_WAVE			10
+
 class EnemyController
 {
 private:
@@ -16,13 +19,17 @@ public:
 	static EnemyController* getInstance();
 	static void releaseInsrance();
 
-	HRESULT hr;
+	HRESULT hr[3];
 
 	void init();
 	void fixUpdate();
 	void update();
 	void draw();
 	void release();
+
+	//enemy control
+	LPDIRECT3DTEXTURE9 minionTexture;
+	LPDIRECT3DTEXTURE9 bossTexture;
 
 	LPD3DXSPRITE sprite;
 	D3DXMATRIX mat;
@@ -31,6 +38,17 @@ public:
 
 	int enemyNum;
 	std::vector<Character*> enemyList;
+
+	//Spawn
+	int enemyWave[MAX_WAVE][MAX_ENEMY_ONEWAVE];
+	int waveNum, currentWave;
+	std::vector<Character*> spawnList;
+
+	int spawnNum, totalSpawn[MAX_WAVE], spawnSpeed;
+	float spawnTime;
+	bool isNextWave;
+
+	void enemySpawn();
 };
 
 

@@ -1,5 +1,4 @@
 #include "TestLevel.h"
-#include "../Component/Spawner.h"
 #include "../Component/Map.h"
 #include "../Component/Collision.h"
 #include "../Component/DirectInput.h"
@@ -25,8 +24,6 @@ void TestLevel::init()
 	levelFile[name.size()] = '\0';
 
 	Map::getInstance()->loadMap(levelFile);
-
-	Spawner::getInstance()->init();
 	EnemyController::getInstance()->init();
 }
 
@@ -40,12 +37,11 @@ std::vector<GameObject*> targetList;
 
 void TestLevel::update()
 {
-	Spawner::getInstance()->enemySpawn();
 	EnemyController::getInstance()->update();
 
 	if (DirectInput::getInstance()->diKeys[DIK_UP] && isTrue)
 	{
-		Spawner::getInstance()->isNextWave = true;
+		EnemyController::getInstance()->isNextWave = true;
 
 		isTrue = false;
 	}
@@ -67,6 +63,6 @@ void TestLevel::draw()
 
 void TestLevel::release()
 {
-	Spawner::getInstance()->release();
 	EnemyController::getInstance()->release();
+	EnemyController::getInstance()->releaseInsrance();
 }
