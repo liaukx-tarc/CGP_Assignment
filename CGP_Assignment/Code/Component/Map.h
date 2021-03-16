@@ -2,7 +2,7 @@
 #define MAP
 #include <d3dx9.h>
 
-#include "Spawner.h"
+#include "EnemyController.h"
 
 #define MAX_MAP_Y 18
 #define MAX_MAP_X 32

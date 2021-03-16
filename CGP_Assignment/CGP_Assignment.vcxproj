@@ -150,8 +150,6 @@
     <ClInclude Include="Code\Component\Graphic.h" />
     <ClInclude Include="Code\Component\G_Timer.h" />
     <ClInclude Include="Code\Component\Map.h" />
-    <ClInclude Include="Code\Component\Spawner.h" />
-    <ClInclude Include="Code\Component\Sprite.h" />
     <ClInclude Include="Code\Enemy\Character.h" />
     <ClInclude Include="Code\Enemy\Demon.h" />
     <ClInclude Include="Code\Enemy\Demon_S.h" />
@@ -170,8 +168,6 @@
     <ClCompile Include="Code\Component\Graphic.cpp" />
     <ClCompile Include="Code\Component\G_Timer.cpp" />
     <ClCompile Include="Code\Component\Map.cpp" />
-    <ClCompile Include="Code\Component\Spawner.cpp" />
-    <ClCompile Include="Code\Component\Sprite.cpp" />
     <ClCompile Include="Code\Enemy\Character.cpp" />
     <ClCompile Include="Code\Enemy\Demon.cpp" />
     <ClCompile Include="Code\Enemy\Demon_S.cpp" />

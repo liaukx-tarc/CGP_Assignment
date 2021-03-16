@@ -1,7 +1,6 @@
 #include "Character.h"
 #include "../Component/DirectInput.h"
 #include "../Component/Graphic.h"
-#include "../Component/Sprite.h"
 
 #include <stdio.h>
 

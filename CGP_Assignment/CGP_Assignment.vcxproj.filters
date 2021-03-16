@@ -86,12 +86,6 @@
     <ClInclude Include="Code\Component\Map.h">
       <Filter>Header Files\Component</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Component\Spawner.h">
-      <Filter>Header Files\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Component\Sprite.h">
-      <Filter>Header Files\Component</Filter>
-    </ClInclude>
     <ClInclude Include="Code\Level\TestLevel.h">
       <Filter>Header Files\Level</Filter>
     </ClInclude>
@@ -140,12 +134,6 @@
       <Filter>Source Files\Component</Filter>
     </ClCompile>
     <ClCompile Include="Code\Component\Map.cpp">
-      <Filter>Source Files\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Component\Spawner.cpp">
-      <Filter>Source Files\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Component\Sprite.cpp">
       <Filter>Source Files\Component</Filter>
     </ClCompile>
     <ClCompile Include="Code\Level\TestLevel.cpp">
