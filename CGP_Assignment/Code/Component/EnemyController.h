@@ -5,6 +5,7 @@
 
 #include "../Enemy/Character.h"
 
+#define MAX_ENEMY_TYPE 17
 #define MAX_ENEMY_ONEWAVE	50
 #define MAX_WAVE			10
 
@@ -38,6 +39,9 @@ public:
 
 	int enemyNum;
 	std::vector<Character*> enemyList;
+
+	//Enemy Data
+	std::vector<Character*> enemyData;
 
 	//Spawn
 	int enemyWave[MAX_WAVE][MAX_ENEMY_ONEWAVE];

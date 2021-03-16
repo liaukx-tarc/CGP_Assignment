@@ -37,6 +37,9 @@
     <Filter Include="Resource Files\Level">
       <UniqueIdentifier>{6ecb0a46-0a90-41d3-9e16-b9fcafd19b5a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Data">
+      <UniqueIdentifier>{3610bfb9-8b56-46d3-bed2-f0971e0ffda1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="CGP_Assignment.rc">
@@ -56,11 +59,6 @@
     <Image Include="resource\tower.ico">
       <Filter>Resource Files\Picture</Filter>
     </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="level\Test_Level.txt">
-      <Filter>Resource Files\Level</Filter>
-    </Text>
   </ItemGroup>
   <ItemGroup>
     <None Include="resource\Arrow.ani">
@@ -92,20 +90,11 @@
     <ClInclude Include="Code\Enemy\Character.h">
       <Filter>Header Files\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Enemy\Demon_S.h">
-      <Filter>Header Files\Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="Code\resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Level\GameState.h">
       <Filter>Header Files\Level</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Enemy\Demon_W.h">
-      <Filter>Header Files\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Enemy\Demon.h">
-      <Filter>Header Files\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="Code\GameObject.h">
       <Filter>Header Files</Filter>
@@ -142,23 +131,22 @@
     <ClCompile Include="Code\Enemy\Character.cpp">
       <Filter>Source Files\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Enemy\Demon_S.cpp">
-      <Filter>Source Files\Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="Code\main.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Enemy\Demon_W.cpp">
-      <Filter>Source Files\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="Code\Component\Collision.cpp">
       <Filter>Source Files\Component</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Enemy\Demon.cpp">
-      <Filter>Source Files\Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Component\EnemyController.cpp">
       <Filter>Source Files\Component</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="data\Test_Level.txt">
+      <Filter>Resource Files\Level</Filter>
+    </Text>
+    <Text Include="data\EnemyData.txt">
+      <Filter>Resource Files\Data</Filter>
+    </Text>
   </ItemGroup>
 </Project>

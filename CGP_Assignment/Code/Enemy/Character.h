@@ -2,6 +2,8 @@
 #define CHARACTER
 
 #include <d3dx9.h>
+#include <vector>
+
 #include "../GameObject.h"
 
 class Character : public GameObject
