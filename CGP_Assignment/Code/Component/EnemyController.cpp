@@ -1,9 +1,9 @@
+#pragma warning(disable : 4996)
+
 #include "EnemyController.h"
 #include "Graphic.h"
 #include "Map.h"
-#include "../Enemy/Demon.h"
-#include "../Enemy/Demon_W.h"
-#include "../Enemy/Demon_S.h"
+#include "../Enemy/Character.h"
 
 #include <stdio.h>
 
@@ -30,6 +30,7 @@ EnemyController::EnemyController()
 {
 	enemyNum = 0;
 	ZeroMemory(&enemyList, sizeof(enemyList));
+	ZeroMemory(&enemyData, sizeof(enemyData));
 
 	currentWave = 0;
 	spawnNum = 0;
@@ -66,6 +67,43 @@ void EnemyController::init()
 
 	D3DXMatrixTransformation2D(&mat, NULL, 0.0, &charScaling, NULL, NULL, NULL);
 
+	FILE *fp;
+	fp = fopen("data/enemyData.txt", "rb");
+
+	//Read Enemy Data
+	/* If we can't open the map then exit */
+	if (fp == NULL)
+	{
+		printf("Failed to open map data enemyData.txt\n");
+		system("Pause");
+		exit(1);
+	}
+
+	for (int i = 0; i < MAX_ENEMY_TYPE; i++)
+	{
+		Character * enemy = new Character;
+		int sizeX, sizeY, aniSpeed, charSpeed;
+
+		fscanf(fp, "%d,%d", &sizeX,&sizeY);
+		fscanf(fp, "|%d", &aniSpeed);
+		fscanf(fp, "|%d\n",& charSpeed);
+
+		enemy->objSize.x = sizeX;
+		enemy->objSize.y = sizeY;
+		enemy->animationSpeed = aniSpeed;
+		enemy->charSpeed = charSpeed;
+		enemy->charNo = i;
+		
+		enemyData.push_back(enemy);
+
+		printf("%.2f,%.2f", enemyData[i]->objSize.x, enemyData[i]->objSize.y);
+		printf("|%.2f", enemyData[i]->animationSpeed);
+		printf("|%.2f\n", enemyData[i]->charSpeed);
+	}
+	
+	/* Close the file afterwards */
+	fclose(fp);
+
 	//save the enemy in this level
 	for (int a = 0; a < waveNum; a++)
 	{
@@ -73,32 +111,14 @@ void EnemyController::init()
 		{
 			if (enemyWave[a][b] != 0)
 			{
-				switch (enemyWave[a][b])
-				{
-				case 11:
-				{
-					Character * demon = new Demon;
-					spawnList.push_back(demon);
-					break;
-				}
+				Character * enemy = new Character;
 
-				case 12:
-				{
-					Character * demon = new Demon_S;
-					spawnList.push_back(demon);
-					break;
-				}
+				enemy->objSize = enemyData[enemyWave[a][b] - 1]->objSize;
+				enemy->animationSpeed = enemyData[enemyWave[a][b] - 1]->animationSpeed;
+				enemy->charSpeed = enemyData[enemyWave[a][b] - 1]->charSpeed;
+				enemy->charNo = enemyData[enemyWave[a][b] - 1]->charNo;
+				spawnList.push_back(enemy);
 
-				case 13:
-				{
-					Character * demon = new Demon_W;
-					spawnList.push_back(demon);
-					break;
-				}
-
-				default:
-					break;
-				}
 				totalSpawn[a]++;
 			}
 		}
@@ -148,6 +168,14 @@ void EnemyController::draw()
 
 void EnemyController::release()
 {
+	//release enemy Data
+	for (int i = 0; i < enemyData.size(); i++)
+	{
+		enemyData[i]->release();
+		delete enemyData[i];
+		enemyData[i] = NULL;
+	}
+
 	//release enemy
 	for (int i = 0; i < enemyList.size(); i++)
 	{
@@ -182,12 +210,12 @@ void EnemyController::enemySpawn()
 		spawnTime += (0.001f) * spawnSpeed;
 		if (spawnTime > 1)
 		{
-			EnemyController::getInstance()->enemyList.push_back(spawnList[EnemyController::getInstance()->enemyNum]);
+			enemyList.push_back(spawnList[enemyNum]);
 
 			//tile's middle point
-			enemyList[EnemyController::getInstance()->enemyNum]->objPosition.x = (30 + (60 * Map::getInstance()->startPoint[Map::getInstance()->spawnPoint[currentWave]].x));
-			enemyList[EnemyController::getInstance()->enemyNum]->objPosition.y = (30 + (60 * Map::getInstance()->startPoint[Map::getInstance()->spawnPoint[currentWave]].y));
-			enemyList[EnemyController::getInstance()->enemyNum]->init();
+			enemyList[enemyNum]->objPosition.x = (30 + (60 * Map::getInstance()->startPoint[Map::getInstance()->spawnPoint[currentWave]].x));
+			enemyList[enemyNum]->objPosition.y = (30 + (60 * Map::getInstance()->startPoint[Map::getInstance()->spawnPoint[currentWave]].y));
+			enemyList[enemyNum]->init();
 			enemyNum++;
 			spawnNum++;
 			spawnTime = 0;

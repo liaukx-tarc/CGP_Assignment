@@ -17,7 +17,7 @@ TestLevel::~TestLevel()
 void TestLevel::init()
 {
 	//load map
-	std::string name = "level/Test_Level.txt";
+	std::string name = "data/Test_Level.txt";
 
 	levelFile = new char[name.size() + 1];
 	std::copy(name.begin(), name.end(), levelFile);

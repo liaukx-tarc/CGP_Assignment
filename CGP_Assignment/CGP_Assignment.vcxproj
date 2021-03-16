@@ -136,9 +136,6 @@
     <Image Include="resource\tower.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="level\Test_Level.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="resource\Arrow.ani" />
   </ItemGroup>
   <ItemGroup>
@@ -151,9 +148,6 @@
     <ClInclude Include="Code\Component\G_Timer.h" />
     <ClInclude Include="Code\Component\Map.h" />
     <ClInclude Include="Code\Enemy\Character.h" />
-    <ClInclude Include="Code\Enemy\Demon.h" />
-    <ClInclude Include="Code\Enemy\Demon_S.h" />
-    <ClInclude Include="Code\Enemy\Demon_W.h" />
     <ClInclude Include="Code\GameObject.h" />
     <ClInclude Include="Code\Level\GameState.h" />
     <ClInclude Include="Code\Level\TestLevel.h" />
@@ -169,11 +163,12 @@
     <ClCompile Include="Code\Component\G_Timer.cpp" />
     <ClCompile Include="Code\Component\Map.cpp" />
     <ClCompile Include="Code\Enemy\Character.cpp" />
-    <ClCompile Include="Code\Enemy\Demon.cpp" />
-    <ClCompile Include="Code\Enemy\Demon_S.cpp" />
-    <ClCompile Include="Code\Enemy\Demon_W.cpp" />
     <ClCompile Include="Code\Level\TestLevel.cpp" />
     <ClCompile Include="Code\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="data\EnemyData.txt" />
+    <Text Include="data\Test_Level.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
