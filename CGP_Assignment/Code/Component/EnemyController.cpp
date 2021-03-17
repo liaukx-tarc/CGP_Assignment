@@ -96,6 +96,7 @@ void EnemyController::init()
 		
 		enemyData.push_back(enemy);
 
+		//Testing
 		printf("%.2f,%.2f", enemyData[i]->objSize.x, enemyData[i]->objSize.y);
 		printf("|%.2f", enemyData[i]->animationSpeed);
 		printf("|%.2f\n", enemyData[i]->charSpeed);

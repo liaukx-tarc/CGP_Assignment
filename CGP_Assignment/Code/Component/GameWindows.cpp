@@ -1,4 +1,5 @@
 #include "GameWindows.h"
+#include "Graphic.h"
 #include "../resource.h"
 
 //Singleton
@@ -27,6 +28,7 @@ GameWindows::GameWindows()
 	ZeroMemory(&wndClass, sizeof(wndClass));
 
 	keyIn = 0;
+	ZeroMemory(&mousePos, sizeof(mousePos));
 }
 
 GameWindows::~GameWindows()
@@ -45,6 +47,13 @@ LRESULT CALLBACK WindowProcedure(HWND hWnd, UINT message, WPARAM wParam, LPARAM 
 
 	case WM_KEYDOWN:
 		GameWindows::getInstance()->keyIn = wParam;
+		break;
+
+	case WM_MOUSEMOVE:
+		GameWindows::getInstance()->mousePos.x = LOWORD(lParam) * BUFFER_WIDTH / WINDOWS_WIDTH;
+		GameWindows::getInstance()->mousePos.y = HIWORD(lParam) * BUFFER_HEIGHT / WINDOWS_HEIGHT;
+		printf("%.2f , %.2f\n", GameWindows::getInstance()->mousePos.x, GameWindows::getInstance()->mousePos.y);
+		break;
 
 	default:
 		return DefWindowProc(hWnd, message, wParam, lParam);
@@ -70,7 +79,7 @@ void GameWindows::createWindows()
 
 	RegisterClass(&wndClass);
 
-	g_hWnd = CreateWindowEx(0, wndClass.lpszClassName, APP_NAME, WS_OVERLAPPEDWINDOW, 100, 50, WINDOWS_WIDTH, WINDOWS_HIGH, NULL, NULL, hInstance, NULL);
+	g_hWnd = CreateWindowEx(0, wndClass.lpszClassName, APP_NAME, WS_OVERLAPPEDWINDOW, 100, 50, WINDOWS_WIDTH + 17, WINDOWS_HEIGHT + 40, NULL, NULL, hInstance, NULL);
 	ShowWindow(g_hWnd, 1);
 }
 
