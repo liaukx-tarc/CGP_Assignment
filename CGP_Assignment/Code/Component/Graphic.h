@@ -3,6 +3,9 @@
 #include <d3d9.h>
 #include <d3dx9.h>
 
+#define BUFFER_WIDTH 1920
+#define BUFFER_HEIGHT 1080
+
 class Graphic
 {
 private:
@@ -10,7 +13,7 @@ private:
 	Graphic();
 	~Graphic();
 
-	HRESULT hr;
+	HRESULT hr[3];
 
 public:
 	static Graphic* getInstance();
@@ -22,6 +25,16 @@ public:
 
 	void createGraphic();
 	void graphicLoop();
+
+	//Cursor
+	LPD3DXSPRITE sprite;
+	LPDIRECT3DTEXTURE9 cursorTexture;
+	RECT cursorRect;
+
+	D3DXVECTOR2 scaling;
+	D3DXMATRIX mat;
+
+	void drawCursor();
 };
 
 #endif // !GRAPHIC

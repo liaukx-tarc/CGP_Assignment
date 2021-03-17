@@ -3,6 +3,7 @@
 #include "../Component/Collision.h"
 #include "../Component/DirectInput.h"
 #include "../Component/EnemyController.h"
+#include "../Component/TowerBuilding.h"
 
 TestLevel::TestLevel()
 {
@@ -13,6 +14,8 @@ TestLevel::~TestLevel()
 {
 	delete levelFile;
 }
+
+TowerBuilding * towerBuilding;
 
 void TestLevel::init()
 {
@@ -25,11 +28,15 @@ void TestLevel::init()
 
 	Map::getInstance()->loadMap(levelFile);
 	EnemyController::getInstance()->init();
+
+	towerBuilding = new TowerBuilding;
+	towerBuilding->init();
 }
 
 void TestLevel::fixUpdate()
 {
 	EnemyController::getInstance()->fixUpdate();
+	towerBuilding->fixUpdate();
 }
 
 bool isTrue = true;
@@ -52,6 +59,7 @@ void TestLevel::update()
 	}
 
 	EnemyController::getInstance()->update();
+	towerBuilding->update();
 }
 
 void TestLevel::draw()
@@ -59,10 +67,12 @@ void TestLevel::draw()
 	Map::getInstance()->drawMap();
 
 	EnemyController::getInstance()->draw();
+	towerBuilding->draw();
 }
 
 void TestLevel::release()
 {
 	EnemyController::getInstance()->release();
 	EnemyController::getInstance()->releaseInsrance();
+	towerBuilding->release();
 }
