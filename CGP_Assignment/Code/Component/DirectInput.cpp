@@ -87,27 +87,6 @@ void DirectInput::InputLoop()
 
 	else
 	{
-		//keyboard
-		if (diKeys[DIK_UP] & 0x80)
-		{
-			printf("Up\n");
-		}
-
-		if (diKeys[DIK_DOWN] & 0x80)
-		{
-			printf("Down\n");
-		}
-
-		if (diKeys[DIK_LEFT] & 0x80)
-		{
-			printf("Left\n");
-		}
-
-		if (diKeys[DIK_RIGHT] & 0x80)
-		{
-			printf("Right\n");
-		}
-
 		//mouse
 		if (mouseState.rgbButtons[0] & 0x80 && mouseButton[0] == 0)
 		{

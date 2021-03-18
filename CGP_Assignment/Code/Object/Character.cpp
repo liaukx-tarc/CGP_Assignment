@@ -21,6 +21,7 @@ Character::Character()
 	frameNum = 0;
 	frameRate = 0;
 	frameTimer = 0;
+	health = 0;
 }
 
 Character::~Character()

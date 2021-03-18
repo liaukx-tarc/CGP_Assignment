@@ -25,20 +25,17 @@
     <Filter Include="Source Files\Component">
       <UniqueIdentifier>{72701e59-eb6d-4b3e-8a84-af2b17dd5cfb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Enemy">
-      <UniqueIdentifier>{4fc14b1a-c53d-4742-8be2-1ef0a353a894}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Enemy">
-      <UniqueIdentifier>{c4b7e6b9-a83b-49fe-8564-82c93139f618}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resource Files\Picture">
       <UniqueIdentifier>{4936cbc4-6277-4b01-a489-2776b775583a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files\Level">
-      <UniqueIdentifier>{6ecb0a46-0a90-41d3-9e16-b9fcafd19b5a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resource Files\Data">
       <UniqueIdentifier>{3610bfb9-8b56-46d3-bed2-f0971e0ffda1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Object">
+      <UniqueIdentifier>{4fc14b1a-c53d-4742-8be2-1ef0a353a894}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Object">
+      <UniqueIdentifier>{c4b7e6b9-a83b-49fe-8564-82c93139f618}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -60,6 +57,9 @@
       <Filter>Resource Files\Picture</Filter>
     </Image>
     <Image Include="resource\tower.png">
+      <Filter>Resource Files\Picture</Filter>
+    </Image>
+    <Image Include="resource\selectBox.png">
       <Filter>Resource Files\Picture</Filter>
     </Image>
   </ItemGroup>
@@ -90,17 +90,11 @@
     <ClInclude Include="Code\Level\TestLevel.h">
       <Filter>Header Files\Level</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Enemy\Character.h">
-      <Filter>Header Files\Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="Code\resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Level\GameState.h">
       <Filter>Header Files\Level</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\GameObject.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Component\Collision.h">
       <Filter>Header Files\Component</Filter>
@@ -110,6 +104,15 @@
     </ClInclude>
     <ClInclude Include="Code\Component\TowerBuilding.h">
       <Filter>Header Files\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Object\Character.h">
+      <Filter>Header Files\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Object\GameObject.h">
+      <Filter>Header Files\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Object\Tower.h">
+      <Filter>Header Files\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -134,9 +137,6 @@
     <ClCompile Include="Code\Level\TestLevel.cpp">
       <Filter>Source Files\Level</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Enemy\Character.cpp">
-      <Filter>Source Files\Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="Code\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -149,12 +149,21 @@
     <ClCompile Include="Code\Component\TowerBuilding.cpp">
       <Filter>Source Files\Component</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Object\Character.cpp">
+      <Filter>Source Files\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Object\Tower.cpp">
+      <Filter>Source Files\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="data\Test_Level.txt">
-      <Filter>Resource Files\Level</Filter>
-    </Text>
     <Text Include="data\EnemyData.txt">
+      <Filter>Resource Files\Data</Filter>
+    </Text>
+    <Text Include="data\Test_Level.txt">
+      <Filter>Resource Files\Data</Filter>
+    </Text>
+    <Text Include="data\TowerData.txt">
       <Filter>Resource Files\Data</Filter>
     </Text>
   </ItemGroup>
