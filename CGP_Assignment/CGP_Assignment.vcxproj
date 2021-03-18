@@ -132,6 +132,7 @@
   <ItemGroup>
     <Image Include="resource\Boss_Sheet.png" />
     <Image Include="resource\Minion_Sheet.png" />
+    <Image Include="resource\selectBox.png" />
     <Image Include="resource\TileSet.png" />
     <Image Include="resource\tower.ico" />
     <Image Include="resource\tower.png" />
@@ -149,10 +150,11 @@
     <ClInclude Include="Code\Component\G_Timer.h" />
     <ClInclude Include="Code\Component\Map.h" />
     <ClInclude Include="Code\Component\TowerBuilding.h" />
-    <ClInclude Include="Code\Enemy\Character.h" />
-    <ClInclude Include="Code\GameObject.h" />
     <ClInclude Include="Code\Level\GameState.h" />
     <ClInclude Include="Code\Level\TestLevel.h" />
+    <ClInclude Include="Code\Object\Character.h" />
+    <ClInclude Include="Code\Object\GameObject.h" />
+    <ClInclude Include="Code\Object\Tower.h" />
     <ClInclude Include="Code\resource.h" />
   </ItemGroup>
   <ItemGroup>
@@ -165,13 +167,15 @@
     <ClCompile Include="Code\Component\G_Timer.cpp" />
     <ClCompile Include="Code\Component\Map.cpp" />
     <ClCompile Include="Code\Component\TowerBuilding.cpp" />
-    <ClCompile Include="Code\Enemy\Character.cpp" />
     <ClCompile Include="Code\Level\TestLevel.cpp" />
     <ClCompile Include="Code\main.cpp" />
+    <ClCompile Include="Code\Object\Character.cpp" />
+    <ClCompile Include="Code\Object\Tower.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="data\EnemyData.txt" />
     <Text Include="data\Test_Level.txt" />
+    <Text Include="data\TowerData.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -35,39 +35,28 @@ void TestLevel::init()
 
 void TestLevel::fixUpdate()
 {
-	EnemyController::getInstance()->fixUpdate();
 	towerBuilding->fixUpdate();
+	EnemyController::getInstance()->fixUpdate();
 }
-
-bool isTrue = true;
-std::vector<GameObject*> targetList;
 
 void TestLevel::update()
 {
-	EnemyController::getInstance()->update();
-
-	if (DirectInput::getInstance()->diKeys[DIK_UP] && isTrue)
-	{
-		EnemyController::getInstance()->isNextWave = true;
-
-		isTrue = false;
-	}
-
+	//testing enemy move forward
 	for (int i = 0; i < EnemyController::getInstance()->enemyList.size(); i++)
 	{
 		EnemyController::getInstance()->enemyList[i]->charDirection.x = 1;
 	}
 
-	EnemyController::getInstance()->update();
 	towerBuilding->update();
+	EnemyController::getInstance()->update();
 }
 
 void TestLevel::draw()
 {
 	Map::getInstance()->drawMap();
 
-	EnemyController::getInstance()->draw();
 	towerBuilding->draw();
+	EnemyController::getInstance()->draw();
 }
 
 void TestLevel::release()

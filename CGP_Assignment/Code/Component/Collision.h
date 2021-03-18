@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include "../GameObject.h"
+#include "../Object/GameObject.h"
 
 class Collision
 {

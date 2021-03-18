@@ -3,7 +3,7 @@
 #include "EnemyController.h"
 #include "Graphic.h"
 #include "Map.h"
-#include "../Enemy/Character.h"
+#include "../Object/Character.h"
 
 #include <stdio.h>
 
@@ -45,7 +45,7 @@ EnemyController::EnemyController()
 
 EnemyController::~EnemyController()
 {
-	
+
 }
 
 void EnemyController::init()
@@ -82,26 +82,29 @@ void EnemyController::init()
 	for (int i = 0; i < MAX_ENEMY_TYPE; i++)
 	{
 		Character * enemy = new Character;
-		int sizeX, sizeY, aniSpeed, charSpeed;
+		int sizeX, sizeY, aniSpeed, charSpeed, health;
 
-		fscanf(fp, "%d,%d", &sizeX,&sizeY);
+		fscanf(fp, "%d", &health);
+		fscanf(fp, "|%d,%d", &sizeX, &sizeY);
 		fscanf(fp, "|%d", &aniSpeed);
-		fscanf(fp, "|%d\n",& charSpeed);
+		fscanf(fp, "|%d\n", &charSpeed);
 
+		enemy->health = health;
 		enemy->objSize.x = sizeX;
 		enemy->objSize.y = sizeY;
 		enemy->animationSpeed = aniSpeed;
 		enemy->charSpeed = charSpeed;
 		enemy->charNo = i;
-		
+
 		enemyData.push_back(enemy);
 
 		//Testing
-		printf("%.2f,%.2f", enemyData[i]->objSize.x, enemyData[i]->objSize.y);
+		printf("%.2f", enemyData[i]->health);
+		printf("|%.2f,%.2f", enemyData[i]->objSize.x, enemyData[i]->objSize.y);
 		printf("|%.2f", enemyData[i]->animationSpeed);
 		printf("|%.2f\n", enemyData[i]->charSpeed);
 	}
-	
+
 	/* Close the file afterwards */
 	fclose(fp);
 
@@ -212,7 +215,6 @@ void EnemyController::enemySpawn()
 		if (spawnTime > 1)
 		{
 			enemyList.push_back(spawnList[enemyNum]);
-
 			//tile's middle point
 			enemyList[enemyNum]->objPosition.x = (30 + (60 * Map::getInstance()->startPoint[Map::getInstance()->spawnPoint[currentWave]].x));
 			enemyList[enemyNum]->objPosition.y = (30 + (60 * Map::getInstance()->startPoint[Map::getInstance()->spawnPoint[currentWave]].y));

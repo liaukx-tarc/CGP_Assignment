@@ -4,7 +4,7 @@
 #include <d3dx9.h>
 #include <vector>
 
-#include "../GameObject.h"
+#include "../Object/GameObject.h"
 
 class Character : public GameObject
 {
@@ -30,14 +30,15 @@ public:
 
 	int charState;		//Character State. 0 = idle, 1 = move
 
+	float health;
 	float charSpeed;	//The movement speed of the character in 1 time
 
-	virtual void init();
-	virtual void draw();
-	virtual void fixUpdate();
-	virtual void update();
-	virtual void release();
-	virtual void move(D3DXVECTOR2 direction);
+	void init();
+	void draw();
+	void fixUpdate();
+	void update();
+	void release();
+	void move(D3DXVECTOR2 direction);
 };
 
 #endif // !CHARACTER

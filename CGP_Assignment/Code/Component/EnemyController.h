@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include "../Enemy/Character.h"
+#include "../Object/Character.h"
 
 #define MAX_ENEMY_TYPE 17
 #define MAX_ENEMY_ONEWAVE	50
