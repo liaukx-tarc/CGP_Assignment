@@ -43,10 +43,6 @@ void TowerBuilding::init()
 		}
 	}
 
-	towerRect.top = towerRect.left = 0;
-	towerRect.bottom = 90;
-	towerRect.right = 46;
-
 	selectBoxRect.top = selectBoxRect.left = 0;
 	selectBoxRect.bottom = 60;
 	selectBoxRect.right = 60;
@@ -148,6 +144,11 @@ void TowerBuilding::update()
 		tileSelectX = mousePos.x / TILE_WIDTH;
 		tileSelectY = mousePos.y / TILE_HIGHT;
 
+		towerRect.top = 90 * towerSelect;
+		towerRect.left = 0;
+		towerRect.bottom = towerRect.top + 90;
+		towerRect.right = 46;
+
 		if (DirectInput::getInstance()->mouseState.rgbButtons[0] & 0x80)
 		{
 			if (Map::getInstance()->pathMap[tileSelectY][tileSelectX] == 0)
@@ -212,7 +213,11 @@ void TowerBuilding::draw()
 		}
 	}	
 	
-	sprite->Draw(towerTexture, &towerRect, &D3DXVECTOR3(towerRect.right/2, towerRect.bottom, 0), &D3DXVECTOR3(mousePos.x, mousePos.y, 0), D3DCOLOR_XRGB(255, 255, 255));
+	if (isBuilding)
+	{
+		sprite->Draw(towerTexture, &towerRect, &D3DXVECTOR3(46 / 2, 90, 0), &D3DXVECTOR3(mousePos.x, mousePos.y, 0), D3DCOLOR_XRGB(255, 255, 255));
+	}
+	
 	sprite->End();
 }
 
