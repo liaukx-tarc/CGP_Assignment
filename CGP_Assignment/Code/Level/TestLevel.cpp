@@ -55,8 +55,8 @@ void TestLevel::draw()
 {
 	Map::getInstance()->drawMap();
 
-	towerBuilding->draw();
 	EnemyController::getInstance()->draw();
+	towerBuilding->draw();
 }
 
 void TestLevel::release()
