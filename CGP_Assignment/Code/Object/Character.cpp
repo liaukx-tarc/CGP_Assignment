@@ -50,20 +50,15 @@ void Character::init()
 		for (int x = 0; x < MAX_MAP_X; x++)
 		{
 			pathRoute[y][x] = Map::getInstance()->pathMap[y][x];
-			if (pathRoute[y][x] == 2)
-			{
-				startPoint.x = x;
-				startPoint.y = y;
-			}
-			else if (pathRoute[y][x] == 3)
+			if (pathRoute[y][x] == 3)
 			{
 				endPoint.x = x;
 				endPoint.y = y;
 			}
 		}
 	}
-	currentPointX = startPoint.x;
-	currentPointY = startPoint.y;
+	currentPointX = objPosition.x / 60;
+	currentPointY = objPosition.y / 60;
 }
 
 void Character::draw()
@@ -195,10 +190,49 @@ void Character::move(D3DXVECTOR2 direction)
 		}
 	}
 
-	
+	else
+	{
+		if (pathRoute[topY][topX] == 1)
+		{
+			direction.x = 0;
+			direction.y = -1;
+			directionState = 't';
+		}
+
+		else if (pathRoute[rightY][rightX] == 1)
+		{
+			direction.x = 1;
+			direction.y = 0;
+			directionState = 'r';
+		}
+		else if (pathRoute[leftY][leftX] == 1)
+		{
+			direction.x = -1;
+			direction.y = 0;
+			directionState = 'l';
+		}
+		else if (pathRoute[btmY][btmX] == 1)
+		{
+			direction.x = 0;
+			direction.y = 1;
+			directionState = 'b';
+		}
+	}
+
 	objPosition.x += direction.x * (1.0f * charSpeed);
 	objPosition.y += direction.y * (1.0f * charSpeed);
-	currentPointX = (objPosition.x - 30) / 60;
-	currentPointY = (objPosition.y - 30) / 60;
+	
+	if (directionState == 'l' || directionState == 't')
+	{
+		currentPointX = (objPosition.x + 29) / 60;
+		currentPointY = (objPosition.y + 29) / 60;
+	}
+
+	if (directionState == 'r' || directionState == 'b')
+	{
+		currentPointX = (objPosition.x - 29) / 60;
+		currentPointY = (objPosition.y - 29) / 60;
+	}
+
 	printf("%d |%d | %c\n", currentPointX, currentPointY, directionState);
 }
