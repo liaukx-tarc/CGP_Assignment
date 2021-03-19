@@ -107,7 +107,7 @@ void Map::loadMap(char * name)
 		{
 			fscanf(fp, "%d,", &EnemyController::getInstance()->enemyWave[i][j]);
 		}
-		fscanf(fp, "%d,%d", &spawnPoint[i], &targetPoint[i]);
+		fscanf(fp, "%d,%d,", &spawnPoint[i], &targetPoint[i]);
 	}
 
 	/* Close the file afterwards */
