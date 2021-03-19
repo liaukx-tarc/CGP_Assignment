@@ -2,7 +2,7 @@
 
 #include "Map.h"
 #include "Graphic.h"
-
+#include "../Object/Character.h"
 #include <stdio.h>
 
 Map* Map::sInstance = NULL;

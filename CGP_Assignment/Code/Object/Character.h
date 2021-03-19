@@ -20,6 +20,21 @@ public:
 	int charNo;				//The No. of character in the sheet
 	int frameNum;			//The character's animation have how many frame
 
+	int pathRoute[18][32]; // get path from map
+	D3DXVECTOR2 startPoint;
+	D3DXVECTOR2 endPoint;
+	int currentPointX;
+	int currentPointY;
+	char directionState;
+	int leftX;
+	int leftY;
+	int rightX;
+	int rightY;
+	int topX;
+	int topY;
+	int btmX;
+	int btmY;
+
 	float animationSpeed;	//How many frame want to diplay in 1 second
 	float frameRate;		//How many second display 1 frame
 	float frameTimer;		//The timer of each frame
