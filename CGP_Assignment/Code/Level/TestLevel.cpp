@@ -5,6 +5,7 @@
 #include "../Component/EnemyController.h"
 #include "../Component/TowerBuilding.h"
 
+
 TestLevel::TestLevel()
 {
 	
@@ -41,11 +42,7 @@ void TestLevel::fixUpdate()
 
 void TestLevel::update()
 {
-	//testing enemy move forward
-	for (int i = 0; i < EnemyController::getInstance()->enemyList.size(); i++)
-	{
-		EnemyController::getInstance()->enemyList[i]->charDirection.x = 1;
-	}
+
 
 	towerBuilding->update();
 	EnemyController::getInstance()->update();

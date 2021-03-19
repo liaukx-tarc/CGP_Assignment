@@ -1,8 +1,10 @@
 #include "Character.h"
 #include "../Component/DirectInput.h"
 #include "../Component/Graphic.h"
+#include "../Component/Map.h"
 
 #include <stdio.h>
+#include <algorithm>
 
 Character::Character()
 {
@@ -43,6 +45,25 @@ void Character::init()
 	frameNum = 4;
 
 	charState = 1; //0 = idle, 1 = move
+	for (int y = 0; y < MAX_MAP_Y; y++)
+	{
+		for (int x = 0; x < MAX_MAP_X; x++)
+		{
+			pathRoute[y][x] = Map::getInstance()->pathMap[y][x];
+			if (pathRoute[y][x] == 2)
+			{
+				startPoint.x = x;
+				startPoint.y = y;
+			}
+			else if (pathRoute[y][x] == 3)
+			{
+				endPoint.x = x;
+				endPoint.y = y;
+			}
+		}
+	}
+	currentPointX = startPoint.x;
+	currentPointY = startPoint.y;
 }
 
 void Character::draw()
@@ -79,6 +100,105 @@ void Character::release()
 
 void Character::move(D3DXVECTOR2 direction)
 {
-	objPosition.x += direction.x * (0.05f * charSpeed);
-	objPosition.y += direction.y * (0.05f * charSpeed);
+	leftX = currentPointX - 1;
+	leftY = currentPointY;
+	rightX = currentPointX + 1;
+	rightY = currentPointY;
+	topX = currentPointX;
+	topY = currentPointY - 1;
+	btmX = currentPointX;
+	btmY = currentPointY + 1;
+
+	if (leftX < 0 || directionState == 'r')
+	{
+		if (pathRoute[rightY][rightX] == 1)
+		{
+			direction.x = 1;
+			direction.y = 0;
+			directionState = 'r';
+		}
+		else if (pathRoute[topY][topX] == 1)
+		{
+			direction.x = 0;
+			direction.y = -1;
+			directionState = 't';
+		}
+		else if (pathRoute[btmY][btmX] == 1)
+		{
+			direction.x = 0;
+			direction.y = 1;
+			directionState = 'b';
+		}
+	}
+	else if (rightX > MAX_MAP_X || directionState == 'l')
+	{
+		if (pathRoute[leftY][leftX] == 1)
+		{
+			direction.x = -1;
+			direction.y = 0;
+			directionState = 'l';
+		}
+		else if (pathRoute[topY][topX] == 1)
+		{
+			direction.x = 0;
+			direction.y = -1;
+			directionState = 't';
+		}
+		else if (pathRoute[btmY][btmX] == 1)
+		{
+			direction.x = 0;
+			direction.y = 1;
+			directionState = 'b';
+		}
+	}
+	else if (topY < 0 || directionState == 'b')
+	{
+		if (pathRoute[btmY][btmX] == 1)
+		{
+			direction.x = 0;
+			direction.y = 1;
+			directionState = 'b';
+		}
+		else if (pathRoute[rightY][rightX] == 1)
+		{
+			direction.x = 1;
+			direction.y = 0;
+			directionState = 'r';
+		}
+		else if (pathRoute[leftY][leftX] == 1)
+		{
+			direction.x = -1;
+			direction.y = 0;
+			directionState = 'l';
+		}
+	}
+	else if (btmY > MAX_MAP_Y || directionState == 't')
+	{
+		if (pathRoute[topY][topX] == 1)
+		{
+			direction.x = 0;
+			direction.y = -1;
+			directionState = 't';
+		}
+
+		else if (pathRoute[rightY][rightX] == 1)
+		{
+			direction.x = 1;
+			direction.y = 0;
+			directionState = 'r';
+		}
+		else if (pathRoute[leftY][leftX] == 1)
+		{
+			direction.x = -1;
+			direction.y = 0;
+			directionState = 'l';
+		}
+	}
+
+	
+	objPosition.x += direction.x * (1.0f * charSpeed);
+	objPosition.y += direction.y * (1.0f * charSpeed);
+	currentPointX = (objPosition.x - 30) / 60;
+	currentPointY = (objPosition.y - 30) / 60;
+	printf("%d |%d | %c\n", currentPointX, currentPointY, directionState);
 }
