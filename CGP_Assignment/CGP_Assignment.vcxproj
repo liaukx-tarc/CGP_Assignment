@@ -154,6 +154,7 @@
     <ClInclude Include="Code\Level\TestLevel.h" />
     <ClInclude Include="Code\Object\Character.h" />
     <ClInclude Include="Code\Object\GameObject.h" />
+    <ClInclude Include="Code\Object\Spawner.h" />
     <ClInclude Include="Code\Object\Tower.h" />
     <ClInclude Include="Code\resource.h" />
   </ItemGroup>
@@ -170,6 +171,7 @@
     <ClCompile Include="Code\Level\TestLevel.cpp" />
     <ClCompile Include="Code\main.cpp" />
     <ClCompile Include="Code\Object\Character.cpp" />
+    <ClCompile Include="Code\Object\Spawner.cpp" />
     <ClCompile Include="Code\Object\Tower.cpp" />
   </ItemGroup>
   <ItemGroup>

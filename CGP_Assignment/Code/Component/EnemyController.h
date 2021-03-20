@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "../Object/Character.h"
+#include "../Object/Spawner.h"
 #include "Map.h"
 
 class EnemyController
@@ -45,11 +46,9 @@ public:
 	int waveNum, currentWave;
 	std::vector<Character*> spawnList;
 
-	int spawnNum, totalSpawn[MAX_WAVE], spawnSpeed;
-	float spawnTime;
+	int totalSpawn[MAX_WAVE];
 	bool isNextWave;
-
-	void enemySpawn();
+	std::vector<Spawner*> spawnerList;
 };
 
 
