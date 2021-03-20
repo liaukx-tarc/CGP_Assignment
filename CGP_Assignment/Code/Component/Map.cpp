@@ -1,5 +1,6 @@
 #pragma warning(disable : 4996)
 
+#include "EnemyController.h"
 #include "Map.h"
 #include "Graphic.h"
 #include "../Object/Character.h"

@@ -44,7 +44,8 @@ void Character::init()
 	frameRate = 1.0f / animationSpeed;
 	frameNum = 4;
 
-	charState = 1; //0 = idle, 1 = move
+	charState = 0; //0 = idle, 1 = move
+
 	for (int y = 0; y < MAX_MAP_Y; y++)
 	{
 		for (int x = 0; x < MAX_MAP_X; x++)
@@ -57,8 +58,8 @@ void Character::init()
 			}
 		}
 	}
-	currentPointX = objPosition.x / 60;
-	currentPointY = objPosition.y / 60;
+	currentPointX = objPosition.x / TILE_WIDTH;
+	currentPointY = objPosition.y / TILE_HIGHT;
 }
 
 void Character::draw()
@@ -219,19 +220,20 @@ void Character::move(D3DXVECTOR2 direction)
 		}
 	}
 
+	charState = 1; //move
 	objPosition.x += direction.x * (1.0f * charSpeed);
 	objPosition.y += direction.y * (1.0f * charSpeed);
 	
 	if (directionState == 'l' || directionState == 't')
 	{
-		currentPointX = (objPosition.x + 29) / 60;
-		currentPointY = (objPosition.y + 29) / 60;
+		currentPointX = (objPosition.x + 29) / TILE_WIDTH;
+		currentPointY = (objPosition.y + 29) / TILE_HIGHT;
 	}
 
 	if (directionState == 'r' || directionState == 'b')
 	{
-		currentPointX = (objPosition.x - 29) / 60;
-		currentPointY = (objPosition.y - 29) / 60;
+		currentPointX = (objPosition.x - 29) / TILE_WIDTH;
+		currentPointY = (objPosition.y - 29) / TILE_HIGHT;
 	}
 
 	printf("%d |%d | %c\n", currentPointX, currentPointY, directionState);

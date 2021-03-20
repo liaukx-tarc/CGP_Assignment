@@ -4,7 +4,8 @@
 #include <d3dx9.h>
 #include <vector>
 
-#include "../Object/GameObject.h"
+#include "../Component/Map.h"
+#include "GameObject.h"
 
 class Character : public GameObject
 {
@@ -20,7 +21,7 @@ public:
 	int charNo;				//The No. of character in the sheet
 	int frameNum;			//The character's animation have how many frame
 
-	int pathRoute[18][32]; // get path from map
+	int pathRoute[MAX_MAP_Y][MAX_MAP_X]; // get path from map
 	D3DXVECTOR2 startPoint;
 	D3DXVECTOR2 endPoint;
 	int currentPointX;

@@ -4,10 +4,7 @@
 #include <vector>
 
 #include "../Object/Character.h"
-
-#define MAX_ENEMY_TYPE 17
-#define MAX_ENEMY_ONEWAVE	50
-#define MAX_WAVE			10
+#include "Map.h"
 
 class EnemyController
 {
