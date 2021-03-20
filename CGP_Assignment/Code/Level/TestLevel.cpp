@@ -4,7 +4,7 @@
 #include "../Component/DirectInput.h"
 #include "../Component/EnemyController.h"
 #include "../Component/TowerBuilding.h"
-
+#include "../Component/GameWindows.h"
 
 TestLevel::TestLevel()
 {
@@ -42,7 +42,10 @@ void TestLevel::fixUpdate()
 
 void TestLevel::update()
 {
-
+	if (GameWindows::getInstance()->keyIn == VK_DOWN)
+	{
+		EnemyController::getInstance()->isNextWave = true;
+	}
 
 	towerBuilding->update();
 	EnemyController::getInstance()->update();

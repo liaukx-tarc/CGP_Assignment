@@ -4,6 +4,7 @@
 #include "Graphic.h"
 #include "Map.h"
 #include "../Object/Character.h"
+#include "../Object/Spawner.h"
 
 #include <stdio.h>
 
@@ -33,9 +34,6 @@ EnemyController::EnemyController()
 	ZeroMemory(&enemyData, sizeof(enemyData));
 
 	currentWave = 0;
-	spawnNum = 0;
-	spawnTime = 0;
-	spawnSpeed = 0;
 	waveNum = 0;
 
 	isNextWave = false;
@@ -128,7 +126,9 @@ void EnemyController::init()
 		}
 	}
 
-	spawnSpeed = 4;
+	Spawner * spawner = new Spawner;
+	spawner->init();
+	spawnerList.push_back(spawner);
 }
 
 void EnemyController::fixUpdate()
@@ -142,7 +142,20 @@ void EnemyController::fixUpdate()
 
 void EnemyController::update()
 {
-	enemySpawn();
+	//go to next wave
+	if (isNextWave)
+	{
+		currentWave++;
+		Spawner * spawner = new Spawner;
+		spawner->init();
+		spawnerList.push_back(spawner);
+		isNextWave = false;
+	}
+
+	for (int i = 0; i < spawnerList.size(); i++)
+	{
+		spawnerList[i]->update();
+	}
 
 	//update the enemy
 	for (int i = 0; i < enemyList.size(); i++)
@@ -188,6 +201,12 @@ void EnemyController::release()
 		enemyList[i] = NULL;
 	}
 
+	for (int i = 0; i < spawnerList.size(); i++)
+	{
+		delete spawnerList[i];
+		spawnerList[i] = NULL;
+	}
+
 	sprite->Release();
 	sprite = NULL;
 
@@ -196,32 +215,4 @@ void EnemyController::release()
 
 	bossTexture->Release();
 	bossTexture = NULL;
-}
-
-void EnemyController::enemySpawn()
-{
-	//go to next wave
-	if (isNextWave)
-	{
-		currentWave++;
-		spawnNum = 0;
-		isNextWave = false;
-	}
-
-	//spawner delay
-	if (spawnNum < totalSpawn[currentWave])
-	{
-		spawnTime += (0.001f) * spawnSpeed;
-		if (spawnTime > 1)
-		{
-			enemyList.push_back(spawnList[enemyNum]);
-			//tile's middle point
-			enemyList[enemyNum]->objPosition.x = (30 + (60 * Map::getInstance()->startPoint[Map::getInstance()->spawnPoint[currentWave]].x));
-			enemyList[enemyNum]->objPosition.y = (30 + (60 * Map::getInstance()->startPoint[Map::getInstance()->spawnPoint[currentWave]].y));
-			enemyList[enemyNum]->init();
-			enemyNum++;
-			spawnNum++;
-			spawnTime = 0;
-		}
-	}
 }
