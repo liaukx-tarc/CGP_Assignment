@@ -25,7 +25,7 @@ void MainMenu::init()
 {
 	hr[0] = D3DXCreateSprite(Graphic::getInstance()->d3dDevice, &sprite);
 	hr[1] = D3DXCreateTextureFromFile(Graphic::getInstance()->d3dDevice, "resource/Button.png", &buttonTexture);
-	hr[2] = D3DXCreateTextureFromFile(Graphic::getInstance()->d3dDevice, "resource/MainMenuBack.jpg", &background);
+	hr[2] = D3DXCreateTextureFromFile(Graphic::getInstance()->d3dDevice, "resource/MainMenuBack.png", &background);
 
 	hr[3] = D3DXCreateFont(Graphic::getInstance()->d3dDevice, 35, 0, FW_BOLD, 1, false,
 		DEFAULT_CHARSET, OUT_TT_ONLY_PRECIS, DEFAULT_QUALITY,
