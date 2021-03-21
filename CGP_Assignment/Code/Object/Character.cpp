@@ -221,8 +221,8 @@ void Character::move(D3DXVECTOR2 direction)
 	}
 
 	charState = 1; //move
-	objPosition.x += direction.x * (1.0f * charSpeed);
-	objPosition.y += direction.y * (1.0f * charSpeed);
+	objPosition.x += direction.x * (0.1f * charSpeed);
+	objPosition.y += direction.y * (0.1f * charSpeed);
 	
 	if (directionState == 'l' || directionState == 't')
 	{
@@ -236,5 +236,5 @@ void Character::move(D3DXVECTOR2 direction)
 		currentPointY = (objPosition.y - 29) / TILE_HIGHT;
 	}
 
-	printf("%d |%d | %c\n", currentPointX, currentPointY, directionState);
+	//printf("%d |%d | %c\n", currentPointX, currentPointY, directionState);
 }
