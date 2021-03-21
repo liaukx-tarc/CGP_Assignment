@@ -1,6 +1,9 @@
 #include "GameStateManager.h"
+#include "GameWindows.h"
+
+//Level
 #include "../Level/TestLevel.h"
-#include "../Component/GameWindows.h"
+#include "../Level/MainMenu.h"
 
 //singleton
 GameStateManager* GameStateManager::sInstance = NULL;
@@ -30,6 +33,10 @@ GameStateManager::GameStateManager()
 
 	g_Timer = new G_Timer();
 	g_Timer->init(GAME_FPS);
+
+	MainMenu* mainMenu = new MainMenu;
+	mainMenu->init();
+	stateList.push_back(mainMenu);
 
 	TestLevel* testLevel = new TestLevel();
 	testLevel->init();
