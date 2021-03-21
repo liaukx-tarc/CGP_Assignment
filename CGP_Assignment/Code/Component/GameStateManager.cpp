@@ -39,15 +39,15 @@ GameStateManager::GameStateManager()
 	stateList.push_back(mainMenu);
 
 	TestLevel* testLevel = new TestLevel();
-	testLevel->init();
 	stateList.push_back(testLevel);
 }
 
 GameStateManager::~GameStateManager()
 {
+	stateList[currentState]->release();
+
 	for (int i = 0; i < stateList.size(); i++)
 	{
-		stateList[i]->release();
 		delete stateList[i];
 		stateList[i] = NULL;
 	}
@@ -85,6 +85,14 @@ void GameStateManager::update()
 			stateList[0]->fixUpdate();
 		}
 	}
+
+	if (currentState != preState)
+	{
+		stateList[currentState]->init();
+		stateList[preState]->release();
+	}
+
+	preState = currentState;
 }
 
 void GameStateManager::draw()
