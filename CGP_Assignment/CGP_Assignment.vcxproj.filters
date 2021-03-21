@@ -62,6 +62,9 @@
     <Image Include="resource\selectBox.png">
       <Filter>Resource Files\Picture</Filter>
     </Image>
+    <Image Include="resource\Button.png">
+      <Filter>Resource Files\Picture</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="resource\Arrow.ani">
@@ -117,6 +120,12 @@
     <ClInclude Include="Code\Object\Spawner.h">
       <Filter>Header Files\Object</Filter>
     </ClInclude>
+    <ClInclude Include="Code\Level\MainMenu.h">
+      <Filter>Header Files\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Object\Button.h">
+      <Filter>Header Files\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Component\DirectInput.cpp">
@@ -159,6 +168,12 @@
       <Filter>Source Files\Object</Filter>
     </ClCompile>
     <ClCompile Include="Code\Object\Spawner.cpp">
+      <Filter>Source Files\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Level\MainMenu.cpp">
+      <Filter>Source Files\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Object\Button.cpp">
       <Filter>Source Files\Object</Filter>
     </ClCompile>
   </ItemGroup>

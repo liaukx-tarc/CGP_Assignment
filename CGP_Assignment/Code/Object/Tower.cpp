@@ -20,8 +20,8 @@ Tower::~Tower()
 
 void Tower::init()
 {
-	spriteSize.x = 46;
-	spriteSize.y = 90;
+	spriteSize.x = 32;
+	spriteSize.y = 32;
 
 	animationSpeed = 10;
 	frameRate = 1.0f / animationSpeed;

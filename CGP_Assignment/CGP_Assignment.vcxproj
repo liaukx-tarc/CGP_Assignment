@@ -131,6 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="resource\Boss_Sheet.png" />
+    <Image Include="resource\Button.png" />
     <Image Include="resource\Minion_Sheet.png" />
     <Image Include="resource\selectBox.png" />
     <Image Include="resource\TileSet.png" />
@@ -151,7 +152,9 @@
     <ClInclude Include="Code\Component\Map.h" />
     <ClInclude Include="Code\Component\TowerBuilding.h" />
     <ClInclude Include="Code\Level\GameState.h" />
+    <ClInclude Include="Code\Level\MainMenu.h" />
     <ClInclude Include="Code\Level\TestLevel.h" />
+    <ClInclude Include="Code\Object\Button.h" />
     <ClInclude Include="Code\Object\Character.h" />
     <ClInclude Include="Code\Object\GameObject.h" />
     <ClInclude Include="Code\Object\Spawner.h" />
@@ -168,8 +171,10 @@
     <ClCompile Include="Code\Component\G_Timer.cpp" />
     <ClCompile Include="Code\Component\Map.cpp" />
     <ClCompile Include="Code\Component\TowerBuilding.cpp" />
+    <ClCompile Include="Code\Level\MainMenu.cpp" />
     <ClCompile Include="Code\Level\TestLevel.cpp" />
     <ClCompile Include="Code\main.cpp" />
+    <ClCompile Include="Code\Object\Button.cpp" />
     <ClCompile Include="Code\Object\Character.cpp" />
     <ClCompile Include="Code\Object\Spawner.cpp" />
     <ClCompile Include="Code\Object\Tower.cpp" />
