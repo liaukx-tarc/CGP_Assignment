@@ -62,7 +62,7 @@ void GameStateManager::update()
 		isPause = !isPause;
 	}
 
-	if (!isPause)
+	if (!isPause && currentState != 0)
 	{
 		stateList[currentState]->update();
 
@@ -71,6 +71,18 @@ void GameStateManager::update()
 		for (int i = 0; i < framesToUpdate; i++)
 		{
 			stateList[currentState]->fixUpdate();
+		}
+	}
+
+	else
+	{
+		stateList[0]->update();
+
+		framesToUpdate = g_Timer->framesToUpdate();
+
+		for (int i = 0; i < framesToUpdate; i++)
+		{
+			stateList[0]->fixUpdate();
 		}
 	}
 }

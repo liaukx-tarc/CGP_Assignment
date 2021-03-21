@@ -150,6 +150,8 @@ void EnemyController::update()
 		spawner->init();
 		spawnerList.push_back(spawner);
 		isNextWave = false;
+
+		printf("Spawner-%d\n", currentWave + 1);
 	}
 
 	for (int i = 0; i < spawnerList.size(); i++)
