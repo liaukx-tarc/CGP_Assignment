@@ -11,6 +11,7 @@ Tower::Tower()
 	animationSpeed = 0;
 	frameRate = 0;
 	frameTimer = 0;
+	rangeRadius = 0;
 }
 
 Tower::~Tower()
@@ -28,6 +29,8 @@ void Tower::init()
 	frameNum = 4;
 
 	towerFrame = 0;
+
+	rangeRadius = 150;
 
 	towerRect.top = spriteSize.y* towerNo + 1;
 	towerRect.left = spriteSize.x * towerFrame;
@@ -54,7 +57,7 @@ void Tower::fixUpdate()
 
 void Tower::update()
 {
-	
+	inRange(EnemyController::getInstance()->enemyList);
 }
 
 void Tower::draw()
@@ -65,4 +68,19 @@ void Tower::draw()
 void Tower::release()
 {
 
+}
+void Tower::inRange(std::vector<Character*>enemy)
+{
+
+	for (int i = 0; i < enemy.size(); i++)
+	{
+		distanceX = objPosition.x - enemy[i]->objPosition.x;
+		distanceY = objPosition.y - enemy[i]->objPosition.y;
+		distance = sqrt((distanceX*distanceX) + (distanceY*distanceY));
+
+		if (rangeRadius + enemy[i]->hitboxRadius > distance)
+		{
+			printf("%d in range\n", i);
+		}
+	}
 }
