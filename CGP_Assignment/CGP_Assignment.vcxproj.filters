@@ -188,4 +188,9 @@
       <Filter>Resource Files\Data</Filter>
     </Text>
   </ItemGroup>
+  <ItemGroup>
+    <Font Include="resource\pixel.ttf">
+      <Filter>Resource Files</Filter>
+    </Font>
+  </ItemGroup>
 </Project>

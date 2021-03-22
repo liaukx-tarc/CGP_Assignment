@@ -27,9 +27,11 @@ void MainMenu::init()
 	hr[1] = D3DXCreateTextureFromFile(Graphic::getInstance()->d3dDevice, "resource/Button.png", &buttonTexture);
 	hr[2] = D3DXCreateTextureFromFile(Graphic::getInstance()->d3dDevice, "resource/MainMenuBack.png", &background);
 
-	hr[3] = D3DXCreateFont(Graphic::getInstance()->d3dDevice, 35, 0, FW_BOLD, 1, false,
+	AddFontResourceEx("resource/pixel.ttf", FR_PRIVATE, 0);
+
+	hr[3] = D3DXCreateFont(Graphic::getInstance()->d3dDevice, 35, 0, 0, 1, false,
 		DEFAULT_CHARSET, OUT_TT_ONLY_PRECIS, DEFAULT_QUALITY,
-		DEFAULT_PITCH | FF_DONTCARE, "Arial", &font);
+		DEFAULT_PITCH | FF_DONTCARE, "Pixel", &font);
 
 	for (int i = 0; i < 4; i++)
 	{
@@ -57,9 +59,9 @@ void MainMenu::init()
 	
 	button->word = "START";
 	button->textRect.top = (button->position.y - 25);
-	button->textRect.left = (button->position.x - 50);
-	button->textRect.bottom = button->textRect.top + 30;
-	button->textRect.right = button->textRect.left + 100;
+	button->textRect.left = (button->position.x - 60);
+	button->textRect.bottom = button->textRect.top + 40;
+	button->textRect.right = button->textRect.left + 200;
 	
 	button->init();
 	buttonList.push_back(button);
@@ -77,8 +79,8 @@ void MainMenu::init()
 	
 	button->word = "QUIT";
 	button->textRect.top = button->position.y - 28;
-	button->textRect.left = button->position.x - 35;
-	button->textRect.bottom = button->textRect.top + 30;
+	button->textRect.left = button->position.x - 45;
+	button->textRect.bottom = button->textRect.top + 40;
 	button->textRect.right = button->textRect.left + 100;
 	
 	button->init();
@@ -205,4 +207,6 @@ void MainMenu::release()
 		delete buttonList[i];
 		buttonList[i] = NULL;
 	}
+
+	RemoveFontResourceEx("resource\pixel.ttf", FR_PRIVATE, 0);
 }
