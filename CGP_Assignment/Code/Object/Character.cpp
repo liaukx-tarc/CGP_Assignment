@@ -24,6 +24,7 @@ Character::Character()
 	frameRate = 0;
 	frameTimer = 0;
 	health = 0;
+	hitboxRadius = 0;
 }
 
 Character::~Character()
@@ -60,6 +61,8 @@ void Character::init()
 	}
 	currentPointX = objPosition.x / TILE_WIDTH;
 	currentPointY = objPosition.y / TILE_HIGHT;
+
+	hitboxRadius = 30;
 }
 
 void Character::draw()

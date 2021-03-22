@@ -2,8 +2,11 @@
 #define TOWER
 
 #include <d3dx9.h>
+#include <vector>
 
 #include "../Object/GameObject.h"
+#include "Character.h"
+#include "../Component/EnemyController.h"
 
 class Tower : public GameObject
 {
@@ -18,6 +21,7 @@ public:
 	void update();
 	void draw();
 	void release();
+	void inRange(std::vector<Character*>enemy);
 
 	RECT towerRect;
 	D3DXVECTOR2 spriteSize;
@@ -32,6 +36,10 @@ public:
 
 	float damage;			//Tower attack damage
 	float atkSpeed;			//Tower attack speed
+	float rangeRadius;
+	float distanceX;
+	float distanceY;
+	float distance;
 };
 
 #endif // !TOWER

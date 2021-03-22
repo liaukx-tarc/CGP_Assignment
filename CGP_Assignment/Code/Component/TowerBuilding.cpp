@@ -170,7 +170,7 @@ void TowerBuilding::update()
 						towerList[tileSelectY][tileSelectX] = tower;
 
 						isBuilding = false;
-						printf("Is Builded\n");
+						printf("Is Built\n");
 					}
 				}
 			}
