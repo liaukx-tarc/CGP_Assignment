@@ -105,6 +105,15 @@ void MainMenu::update()
 				buttonList[i]->textRect.bottom += 8;
 				buttonList[i]->isAni = true;
 			}
+
+			if (!buttonList[i]->isClick && buttonList[i]->isAni)
+			{
+				buttonList[i]->frame = 0;
+				buttonList[i]->update();
+				buttonList[i]->textRect.top -= 8;
+				buttonList[i]->textRect.bottom -= 8;
+				buttonList[i]->isAni = false;
+			}
 		}
 	}
 
