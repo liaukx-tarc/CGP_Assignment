@@ -33,7 +33,15 @@ void MainMenu::init()
 		DEFAULT_CHARSET, OUT_TT_ONLY_PRECIS, DEFAULT_QUALITY,
 		DEFAULT_PITCH | FF_DONTCARE, "Pixel", &font);
 
-	for (int i = 0; i < 5; i++)
+	hr[5] = D3DXCreateFont(Graphic::getInstance()->d3dDevice, 150, 0, 0, FW_BOLD, false,
+		DEFAULT_CHARSET, OUT_TT_ONLY_PRECIS, DEFAULT_QUALITY,
+		DEFAULT_PITCH | FF_DONTCARE, "Pixel", &title);
+
+	hr[6] = D3DXCreateFont(Graphic::getInstance()->d3dDevice, 30, 0, 0, 0, false,
+		DEFAULT_CHARSET, OUT_TT_ONLY_PRECIS, DEFAULT_QUALITY,
+		DEFAULT_PITCH | FF_DONTCARE, "Arial", &madeBy);
+
+	for (int i = 0; i < 7; i++)
 	{
 		if (FAILED(hr[i]))
 		{
@@ -46,10 +54,27 @@ void MainMenu::init()
 	backgroundRect.bottom = 1440;
 	backgroundRect.right = 2560;
 
+	//Title
+	titleRect1.top = 200;
+	titleRect1.left = 950;
+	titleRect1.bottom = titleRect1.top + 200;
+	titleRect1.right = titleRect1.left + 2000;
+
+	titleRect2.top = 400;
+	titleRect2.left = 850;
+	titleRect2.bottom = titleRect2.top + 200;
+	titleRect2.right = titleRect2.left + 2000;
+
+	//Made by
+	madeByRect.top = 1250;
+	madeByRect.left = 1075;
+	madeByRect.bottom = madeByRect.top + 100;
+	madeByRect.right = madeByRect.left + 2000;
+	
 	//Start Button
 	Button * button = new Button;
 	button->position.x = 1280;
-	button->position.y = 700;
+	button->position.y = 720;
 	button->size.x = 345;
 	button->size.y = 122;
 
@@ -69,7 +94,7 @@ void MainMenu::init()
 	//Quit Button
 	button = new Button;
 	button->position.x = 1280;
-	button->position.y = 860;
+	button->position.y = 880;
 	button->size.x = 345;
 	button->size.y = 122;
 
@@ -172,6 +197,9 @@ void MainMenu::draw()
 	sprite->Begin(D3DXSPRITE_ALPHABLEND);
 	sprite->Draw(background, &backgroundRect, NULL, NULL, D3DCOLOR_XRGB(255, 255, 255));
 
+	title->DrawText(sprite, TITLE1, -1, &titleRect1, 0, D3DCOLOR_XRGB(255, 255, 255));
+	title->DrawText(sprite, TITLE2, -1, &titleRect2, 0, D3DCOLOR_XRGB(255, 255, 255));
+
 	for (int i = 0; i < buttonList.size(); i++)
 	{
 		sprite->Draw(buttonTexture, &buttonList[i]->buttonRect,
@@ -184,7 +212,8 @@ void MainMenu::draw()
 			font->DrawText(sprite, buttonList[i]->word.c_str(), -1, &buttonList[i]->textRect, 0, D3DCOLOR_XRGB(255, 255, 255));
 		}
 	}
-	
+
+	madeBy->DrawText(sprite, MADEBY, -1, &madeByRect, 0, D3DCOLOR_XRGB(255, 255, 255));
 
 	sprite->End();
 }
@@ -202,6 +231,9 @@ void MainMenu::release()
 
 	font->Release();
 	font = NULL;
+
+	title->Release();
+	title = NULL;
 
 	for (int i = 0; i < buttonList.size(); i++)
 	{

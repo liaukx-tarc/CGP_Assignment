@@ -151,24 +151,27 @@ void TowerBuilding::update()
 
 		if (DirectInput::getInstance()->mouseState.rgbButtons[0] & 0x80)
 		{
-			if (Map::getInstance()->pathMap[tileSelectY][tileSelectX] == 0)
+			if (mousePos.x / TILE_WIDTH < MAX_MAP_X && mousePos.y / TILE_HIGHT < MAX_MAP_Y)
 			{
-				if (towerList[tileSelectY][tileSelectX] == NULL)
+				if (Map::getInstance()->pathMap[tileSelectY][tileSelectX] == 0)
 				{
-					Tower * tower = new Tower();
+					if (towerList[tileSelectY][tileSelectX] == NULL)
+					{
+						Tower * tower = new Tower();
 
-					//Save data
-					tower->towerNo = towerSelect;
-					tower->damage = towerData[towerSelect]->damage;
-					tower->atkSpeed = towerData[towerSelect]->atkSpeed;
-					tower->objPosition.x = tileSelectX * TILE_WIDTH + (TILE_WIDTH / 2);
-					tower->objPosition.y = tileSelectY * TILE_WIDTH + (TILE_HIGHT / 2);
+						//Save data
+						tower->towerNo = towerSelect;
+						tower->damage = towerData[towerSelect]->damage;
+						tower->atkSpeed = towerData[towerSelect]->atkSpeed;
+						tower->objPosition.x = tileSelectX * TILE_WIDTH + (TILE_WIDTH / 2);
+						tower->objPosition.y = tileSelectY * TILE_WIDTH + (TILE_HIGHT / 2);
 
-					tower->init();
-					towerList[tileSelectY][tileSelectX] = tower;
+						tower->init();
+						towerList[tileSelectY][tileSelectX] = tower;
 
-					isBuilding = false;
-					printf("Is Builded\n");
+						isBuilding = false;
+						printf("Is Builded\n");
+					}
 				}
 			}
 		}
@@ -190,10 +193,6 @@ void TowerBuilding::draw()
 {
 	sprite->Begin(D3DXSPRITE_ALPHABLEND);
 
-	scaling.x = scaling.y = 3.0f;
-	D3DXMatrixTransformation2D(&mat, NULL, 0.0, &scaling, NULL, NULL, NULL);
-	sprite->SetTransform(&mat);
-
 	for (int a = 0; a < MAX_MAP_Y; a++)
 	{
 		for (int b = 0; b < MAX_MAP_X; b++)
@@ -206,25 +205,28 @@ void TowerBuilding::draw()
 	}
 
 	//draw a select Box
-	scaling.x = scaling.y = 1.0f;
-	D3DXMatrixTransformation2D(&mat, NULL, 0.0, &scaling, NULL, NULL, NULL);
-	sprite->SetTransform(&mat);
-
-	if (Map::getInstance()->pathMap[tileSelectY][tileSelectX] == 0)
+	if (mousePos.x / TILE_WIDTH < MAX_MAP_X && mousePos.y / TILE_HIGHT < MAX_MAP_Y)
 	{
-		if (isBuilding && towerList[tileSelectY][tileSelectX] == NULL)
+		if (Map::getInstance()->pathMap[tileSelectY][tileSelectX] == 0)
 		{
-			sprite->Draw(selectBoxTeture, &selectBoxRect,
-				&D3DXVECTOR3((TILE_WIDTH / 2) * Map::getInstance()->tileScaling.x, (TILE_HIGHT / 2) * Map::getInstance()->tileScaling.y, 0),
-				&D3DXVECTOR3((tileSelectX * TILE_WIDTH + (TILE_WIDTH / 2)) * Map::getInstance()->tileScaling.x, (tileSelectY * TILE_HIGHT + (TILE_HIGHT / 2)) * Map::getInstance()->tileScaling.y, 0),
-				D3DCOLOR_XRGB(255, 255, 255));
-		}
-	}	
-	
-	scaling.x = scaling.y = 3.0f;
-	D3DXMatrixTransformation2D(&mat, NULL, 0.0, &scaling, NULL, NULL, NULL);
-	sprite->SetTransform(&mat);
+			if (isBuilding && towerList[tileSelectY][tileSelectX] == NULL)
+			{
+				scaling.x = scaling.y = 1.0f;
+				D3DXMatrixTransformation2D(&mat, NULL, 0.0, &scaling, NULL, NULL, NULL);
+				sprite->SetTransform(&mat);
 
+				sprite->Draw(selectBoxTeture, &selectBoxRect,
+					&D3DXVECTOR3((TILE_WIDTH / 2) * Map::getInstance()->tileScaling.x, (TILE_HIGHT / 2) * Map::getInstance()->tileScaling.y, 0),
+					&D3DXVECTOR3((tileSelectX * TILE_WIDTH + (TILE_WIDTH / 2)) * Map::getInstance()->tileScaling.x, (tileSelectY * TILE_HIGHT + (TILE_HIGHT / 2)) * Map::getInstance()->tileScaling.y, 0),
+					D3DCOLOR_XRGB(255, 255, 255));
+
+				scaling.x = scaling.y = 3.0f;
+				D3DXMatrixTransformation2D(&mat, NULL, 0.0, &scaling, NULL, NULL, NULL);
+				sprite->SetTransform(&mat);
+			}
+		}
+	}
+	
 	if (isBuilding)
 	{
 		sprite->Draw(towerTexture, &towerRect, &D3DXVECTOR3(32 / 2, 32 * 3 / 4, 0),

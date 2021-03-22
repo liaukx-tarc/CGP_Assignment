@@ -52,8 +52,19 @@ LRESULT CALLBACK WindowProcedure(HWND hWnd, UINT message, WPARAM wParam, LPARAM 
 	case WM_MOUSEMOVE:
 		GameWindows::getInstance()->mousePos.x = LOWORD(lParam) * BUFFER_WIDTH / WINDOWS_WIDTH;
 		GameWindows::getInstance()->mousePos.y = HIWORD(lParam) * BUFFER_HEIGHT / WINDOWS_HEIGHT;
-		GameWindows::getInstance()->mousePos.x = min(GameWindows::getInstance()->mousePos.x, BUFFER_WIDTH);
-		GameWindows::getInstance()->mousePos.y = min(GameWindows::getInstance()->mousePos.y, BUFFER_HEIGHT);
+		if (GameWindows::getInstance()->mousePos.x < 0 || GameWindows::getInstance()->mousePos.x > BUFFER_WIDTH || 
+			GameWindows::getInstance()->mousePos.y < 0 || GameWindows::getInstance()->mousePos.y > BUFFER_HEIGHT)
+		{
+			ShowCursor(true);
+		}
+
+		else
+		{
+			ShowCursor(false);
+			GameWindows::getInstance()->mousePos.x = min(GameWindows::getInstance()->mousePos.x, BUFFER_WIDTH);
+			GameWindows::getInstance()->mousePos.y = min(GameWindows::getInstance()->mousePos.y, BUFFER_HEIGHT);
+		}
+		printf("%.2f, %.2f\n", GameWindows::getInstance()->mousePos.x, GameWindows::getInstance()->mousePos.y);
 		break;
 
 	default:
@@ -73,7 +84,7 @@ void GameWindows::createWindows()
 	wndClass.lpszClassName = APP_NAME; //APP_NAME is a constant variable at define
 
 	//App Cursor
-	//wndClass.hCursor = LoadCursorFromFile("resource/Arrow.ani");
+	wndClass.hCursor = LoadCursorFromFile("resource/Arrow.ani");
 
 	//App Icon
 	wndClass.hIcon = LoadIcon(hInstance, MAKEINTATOM(IDI_ICON1));
@@ -82,7 +93,6 @@ void GameWindows::createWindows()
 
 	g_hWnd = CreateWindowEx(0, wndClass.lpszClassName, APP_NAME, WS_OVERLAPPEDWINDOW, 100, 50, WINDOWS_WIDTH + 17, WINDOWS_HEIGHT + 40, NULL, NULL, hInstance, NULL);
 	ShowWindow(g_hWnd, 1);
-	ShowCursor(false);
 }
 
 bool GameWindows::windowsLoop()
