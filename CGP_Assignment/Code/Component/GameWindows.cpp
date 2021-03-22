@@ -52,8 +52,8 @@ LRESULT CALLBACK WindowProcedure(HWND hWnd, UINT message, WPARAM wParam, LPARAM 
 	case WM_MOUSEMOVE:
 		GameWindows::getInstance()->mousePos.x = LOWORD(lParam) * BUFFER_WIDTH / WINDOWS_WIDTH;
 		GameWindows::getInstance()->mousePos.y = HIWORD(lParam) * BUFFER_HEIGHT / WINDOWS_HEIGHT;
-		GameWindows::getInstance()->mousePos.x = min(GameWindows::getInstance()->mousePos.x, 1920);
-		GameWindows::getInstance()->mousePos.y = min(GameWindows::getInstance()->mousePos.y, 1080);
+		GameWindows::getInstance()->mousePos.x = min(GameWindows::getInstance()->mousePos.x, BUFFER_WIDTH);
+		GameWindows::getInstance()->mousePos.y = min(GameWindows::getInstance()->mousePos.y, BUFFER_HEIGHT);
 		break;
 
 	default:

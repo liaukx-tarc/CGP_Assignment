@@ -13,7 +13,7 @@ public:
 	MainMenu();
 	~MainMenu();
 
-	HRESULT hr[4];
+	HRESULT hr[5];
 
 	void init();
 	void fixUpdate();

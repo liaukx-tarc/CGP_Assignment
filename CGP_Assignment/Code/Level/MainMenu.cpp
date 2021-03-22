@@ -27,13 +27,13 @@ void MainMenu::init()
 	hr[1] = D3DXCreateTextureFromFile(Graphic::getInstance()->d3dDevice, "resource/Button.png", &buttonTexture);
 	hr[2] = D3DXCreateTextureFromFile(Graphic::getInstance()->d3dDevice, "resource/MainMenuBack.png", &background);
 
-	AddFontResourceEx("resource/pixel.ttf", FR_PRIVATE, 0);
+	hr[3] = AddFontResourceEx("resource/pixel.ttf", FR_PRIVATE, 0);
 
-	hr[3] = D3DXCreateFont(Graphic::getInstance()->d3dDevice, 35, 0, 0, 1, false,
+	hr[4] = D3DXCreateFont(Graphic::getInstance()->d3dDevice, 35, 0, 0, 1, false,
 		DEFAULT_CHARSET, OUT_TT_ONLY_PRECIS, DEFAULT_QUALITY,
 		DEFAULT_PITCH | FF_DONTCARE, "Pixel", &font);
 
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		if (FAILED(hr[i]))
 		{
@@ -43,13 +43,13 @@ void MainMenu::init()
 
 	//Background
 	backgroundRect.top = backgroundRect.left = 0;
-	backgroundRect.bottom = 1080;
-	backgroundRect.right = 1920;
+	backgroundRect.bottom = 1440;
+	backgroundRect.right = 2560;
 
 	//Start Button
 	Button * button = new Button;
-	button->position.x = 960;
-	button->position.y = 500;
+	button->position.x = 1280;
+	button->position.y = 700;
 	button->size.x = 345;
 	button->size.y = 122;
 
@@ -68,8 +68,8 @@ void MainMenu::init()
 	
 	//Quit Button
 	button = new Button;
-	button->position.x = 960;
-	button->position.y = 660;
+	button->position.x = 1280;
+	button->position.y = 860;
 	button->size.x = 345;
 	button->size.y = 122;
 
@@ -170,7 +170,6 @@ void MainMenu::update()
 void MainMenu::draw()
 {
 	sprite->Begin(D3DXSPRITE_ALPHABLEND);
-	
 	sprite->Draw(background, &backgroundRect, NULL, NULL, D3DCOLOR_XRGB(255, 255, 255));
 
 	for (int i = 0; i < buttonList.size(); i++)
@@ -180,7 +179,10 @@ void MainMenu::draw()
 			&D3DXVECTOR3(buttonList[i]->position.x, buttonList[i]->position.y, 0),
 			D3DCOLOR_XRGB(buttonList[i]->r, buttonList[i]->g, buttonList[i]->b));
 
-		font->DrawText(sprite, buttonList[i]->word.c_str(), -1, &buttonList[i]->textRect, 0, D3DCOLOR_XRGB(255, 255, 255));
+		if (buttonList[i]->word != "")
+		{
+			font->DrawText(sprite, buttonList[i]->word.c_str(), -1, &buttonList[i]->textRect, 0, D3DCOLOR_XRGB(255, 255, 255));
+		}
 	}
 	
 

@@ -74,7 +74,7 @@ void GameStateManager::update()
 		}
 	}
 
-	else
+	else if (currentState == 0)
 	{
 		stateList[0]->update();
 
