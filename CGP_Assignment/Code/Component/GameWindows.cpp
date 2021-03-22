@@ -73,7 +73,7 @@ void GameWindows::createWindows()
 	wndClass.lpszClassName = APP_NAME; //APP_NAME is a constant variable at define
 
 	//App Cursor
-	wndClass.hCursor = LoadCursorFromFile("resource/Arrow.ani");
+	//wndClass.hCursor = LoadCursorFromFile("resource/Arrow.ani");
 
 	//App Icon
 	wndClass.hIcon = LoadIcon(hInstance, MAKEINTATOM(IDI_ICON1));
@@ -82,6 +82,7 @@ void GameWindows::createWindows()
 
 	g_hWnd = CreateWindowEx(0, wndClass.lpszClassName, APP_NAME, WS_OVERLAPPEDWINDOW, 100, 50, WINDOWS_WIDTH + 17, WINDOWS_HEIGHT + 40, NULL, NULL, hInstance, NULL);
 	ShowWindow(g_hWnd, 1);
+	ShowCursor(false);
 }
 
 bool GameWindows::windowsLoop()
