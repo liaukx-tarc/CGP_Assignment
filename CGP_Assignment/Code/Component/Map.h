@@ -2,12 +2,12 @@
 #define MAP
 #include <d3dx9.h>
 
-#define MAX_ENEMY_TYPE 17
+#define MAX_ENEMY_TYPE		17
 #define MAX_ENEMY_ONEWAVE	50
 #define MAX_WAVE			10
 
 #define MAX_MAP_Y 18
-#define MAX_MAP_X 32
+#define MAX_MAP_X 42
 #define TILE_HIGHT 60
 #define TILE_WIDTH 60
 #define MAX_START 4
