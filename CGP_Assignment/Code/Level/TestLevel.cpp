@@ -16,7 +16,6 @@ TestLevel::~TestLevel()
 	delete levelFile;
 }
 
-TowerBuilding * towerBuilding;
 Ui * ui;
 
 void TestLevel::init()
@@ -31,8 +30,7 @@ void TestLevel::init()
 	Map::getInstance()->loadMap(levelFile);
 	EnemyController::getInstance()->init();
 
-	towerBuilding = new TowerBuilding;
-	towerBuilding->init();
+	TowerBuilding::getInstance()->init();
 
 	ui = new Ui;
 	ui->init();
@@ -42,7 +40,7 @@ void TestLevel::fixUpdate()
 {
 	ui->fixUpdate();
 
-	towerBuilding->fixUpdate();
+	TowerBuilding::getInstance()->fixUpdate();
 	EnemyController::getInstance()->fixUpdate();
 }
 
@@ -55,7 +53,7 @@ void TestLevel::update()
 		EnemyController::getInstance()->isNextWave = true;
 	}
 
-	towerBuilding->update();
+	TowerBuilding::getInstance()->update();
 	EnemyController::getInstance()->update();
 }
 
@@ -66,15 +64,17 @@ void TestLevel::draw()
 	Map::getInstance()->drawMap();
 
 	EnemyController::getInstance()->draw();
-	towerBuilding->draw();
 
 	ui->draw();
+
+	TowerBuilding::getInstance()->draw();	
 }
 
 void TestLevel::release()
 {
 	EnemyController::getInstance()->release();
 	EnemyController::getInstance()->releaseInsrance();
-	towerBuilding->release();
+	TowerBuilding::getInstance()->release();
+	TowerBuilding::getInstance()->releaseInsrance();
 	ui->release();
 }

@@ -6,6 +6,25 @@
 #include "Graphic.h"
 #include "Map.h"
 
+//Singleton
+TowerBuilding* TowerBuilding::sInstance = NULL;
+
+TowerBuilding* TowerBuilding::getInstance()
+{
+	if (TowerBuilding::sInstance == NULL)
+	{
+		sInstance = new TowerBuilding;
+	}
+
+	return sInstance;
+}
+
+void TowerBuilding::releaseInsrance()
+{
+	delete sInstance;
+	sInstance = NULL;
+}
+
 TowerBuilding::TowerBuilding()
 {
 	boxFrame = 0;
