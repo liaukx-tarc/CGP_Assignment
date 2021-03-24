@@ -9,7 +9,7 @@
 
 #define TITLE1 "TOWER"
 #define TITLE2 "DEFENSE"
-#define MADEBY "Made by Voong Meng & Kai Xian Team"
+#define MADEBY "Made by Voon Meng & Kai Xian"
 
 class MainMenu : public GameState
 {

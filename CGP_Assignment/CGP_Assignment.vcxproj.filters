@@ -65,6 +65,12 @@
     <Image Include="resource\Button.png">
       <Filter>Resource Files\Picture</Filter>
     </Image>
+    <Image Include="resource\MainMenuBack.png">
+      <Filter>Resource Files\Picture</Filter>
+    </Image>
+    <Image Include="resource\Button2.png">
+      <Filter>Resource Files\Picture</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="resource\Arrow.ani">
@@ -99,9 +105,6 @@
     <ClInclude Include="Code\Level\GameState.h">
       <Filter>Header Files\Level</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Component\Collision.h">
-      <Filter>Header Files\Component</Filter>
-    </ClInclude>
     <ClInclude Include="Code\Component\EnemyController.h">
       <Filter>Header Files\Component</Filter>
     </ClInclude>
@@ -125,6 +128,9 @@
     </ClInclude>
     <ClInclude Include="Code\Object\Button.h">
       <Filter>Header Files\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Component\UI.h">
+      <Filter>Header Files\Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -152,9 +158,6 @@
     <ClCompile Include="Code\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Component\Collision.cpp">
-      <Filter>Source Files\Component</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Component\EnemyController.cpp">
       <Filter>Source Files\Component</Filter>
     </ClCompile>
@@ -175,6 +178,9 @@
     </ClCompile>
     <ClCompile Include="Code\Object\Button.cpp">
       <Filter>Source Files\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Component\UI.cpp">
+      <Filter>Source Files\Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
