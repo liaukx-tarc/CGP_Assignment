@@ -12,6 +12,15 @@
 class TowerBuilding
 {
 private:
+	static TowerBuilding * sInstance;
+	TowerBuilding();
+	~TowerBuilding();
+
+public:
+	//Singleton
+	static TowerBuilding * getInstance();
+	static void releaseInsrance();
+
 	HRESULT hr[3];
 
 	//mouse
@@ -43,11 +52,7 @@ private:
 
 	std::vector<Tower*> towerData;
 	Tower * towerList[MAX_MAP_Y][MAX_MAP_X];
-
-public:
-	TowerBuilding();
-	~TowerBuilding();
-
+	
 	void init();
 	void fixUpdate();
 	void update();

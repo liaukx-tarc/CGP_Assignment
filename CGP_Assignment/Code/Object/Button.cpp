@@ -45,8 +45,8 @@ void Button::update()
 		isClick = false;
 	}
 
-	buttonRect.left = frame * (345 + 1);
-	buttonRect.right = buttonRect.left + 345;
+	buttonRect.left = frame * (size.x + 1);
+	buttonRect.right = buttonRect.left + size.x;
 }
 
 void Button::draw()

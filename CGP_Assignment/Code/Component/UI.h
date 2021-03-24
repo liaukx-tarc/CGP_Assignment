@@ -6,15 +6,13 @@
 
 #include "../Object/Button.h"
 
-#define UI_X_FIX 20
-
 class Ui
 {
 public:
 	Ui();
 	~Ui();
 
-	HRESULT hr[3];
+	HRESULT hr[5];
 
 	void init();
 	void fixUpdate();
@@ -25,13 +23,15 @@ public:
 	void backDraw();
 
 	LPD3DXSPRITE sprite;
+	LPD3DXFONT font;
 
 	LPDIRECT3DTEXTURE9 backgroundTexture;
 	LPDIRECT3DTEXTURE9 buttonTexture;
 
 	std::vector<Button*> buttonList;
 
-	D3DXVECTOR2 mapPos;
+	int function;
+	bool isFunction;
 };
 
 #endif //!MAIN_MENU
