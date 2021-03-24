@@ -64,7 +64,6 @@ LRESULT CALLBACK WindowProcedure(HWND hWnd, UINT message, WPARAM wParam, LPARAM 
 			GameWindows::getInstance()->mousePos.x = min(GameWindows::getInstance()->mousePos.x, BUFFER_WIDTH);
 			GameWindows::getInstance()->mousePos.y = min(GameWindows::getInstance()->mousePos.y, BUFFER_HEIGHT);
 		}
-		printf("%.2f, %.2f\n", GameWindows::getInstance()->mousePos.x, GameWindows::getInstance()->mousePos.y);
 		break;
 
 	default:

@@ -7,6 +7,9 @@
 #include <d3d9.h>
 #include <stdio.h>
 
+#define START	0
+#define QUIT	1
+
 MainMenu::MainMenu()
 {
 	sprite = NULL;
@@ -51,8 +54,8 @@ void MainMenu::init()
 
 	//Background
 	backgroundRect.top = backgroundRect.left = 0;
-	backgroundRect.bottom = 1440;
-	backgroundRect.right = 2560;
+	backgroundRect.bottom = 1418;
+	backgroundRect.right = 2520;
 
 	//Title
 	titleRect1.top = 200;
@@ -66,14 +69,14 @@ void MainMenu::init()
 	titleRect2.right = titleRect2.left + 2000;
 
 	//Made by
-	madeByRect.top = 1250;
+	madeByRect.top = 1230;
 	madeByRect.left = 1075;
 	madeByRect.bottom = madeByRect.top + 100;
 	madeByRect.right = madeByRect.left + 2000;
 	
 	//Start Button
 	Button * button = new Button;
-	button->position.x = 1280;
+	button->position.x = 1250;
 	button->position.y = 720;
 	button->size.x = 345;
 	button->size.y = 122;
@@ -93,7 +96,7 @@ void MainMenu::init()
 	
 	//Quit Button
 	button = new Button;
-	button->position.x = 1280;
+	button->position.x = 1250;
 	button->position.y = 880;
 	button->size.x = 345;
 	button->size.y = 122;
@@ -174,11 +177,11 @@ void MainMenu::update()
 		{
 			switch (function)
 			{
-			case 0:
+			case START:
 				GameStateManager::getInstance()->currentState = 1;
 				break;
 
-			case 1:
+			case QUIT:
 				PostQuitMessage(0);
 				break;
 

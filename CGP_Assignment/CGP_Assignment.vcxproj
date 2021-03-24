@@ -132,6 +132,8 @@
   <ItemGroup>
     <Image Include="resource\Boss_Sheet.png" />
     <Image Include="resource\Button.png" />
+    <Image Include="resource\Button2.png" />
+    <Image Include="resource\MainMenuBack.png" />
     <Image Include="resource\Minion_Sheet.png" />
     <Image Include="resource\selectBox.png" />
     <Image Include="resource\TileSet.png" />
@@ -142,7 +144,6 @@
     <None Include="resource\Arrow.ani" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Code\Component\Collision.h" />
     <ClInclude Include="Code\Component\DirectInput.h" />
     <ClInclude Include="Code\Component\EnemyController.h" />
     <ClInclude Include="Code\Component\GameStateManager.h" />
@@ -151,6 +152,7 @@
     <ClInclude Include="Code\Component\G_Timer.h" />
     <ClInclude Include="Code\Component\Map.h" />
     <ClInclude Include="Code\Component\TowerBuilding.h" />
+    <ClInclude Include="Code\Component\UI.h" />
     <ClInclude Include="Code\Level\GameState.h" />
     <ClInclude Include="Code\Level\MainMenu.h" />
     <ClInclude Include="Code\Level\TestLevel.h" />
@@ -162,7 +164,6 @@
     <ClInclude Include="Code\resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Code\Component\Collision.cpp" />
     <ClCompile Include="Code\Component\DirectInput.cpp" />
     <ClCompile Include="Code\Component\EnemyController.cpp" />
     <ClCompile Include="Code\Component\GameStateManager.cpp" />
@@ -171,6 +172,7 @@
     <ClCompile Include="Code\Component\G_Timer.cpp" />
     <ClCompile Include="Code\Component\Map.cpp" />
     <ClCompile Include="Code\Component\TowerBuilding.cpp" />
+    <ClCompile Include="Code\Component\UI.cpp" />
     <ClCompile Include="Code\Level\MainMenu.cpp" />
     <ClCompile Include="Code\Level\TestLevel.cpp" />
     <ClCompile Include="Code\main.cpp" />
