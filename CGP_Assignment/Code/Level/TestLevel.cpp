@@ -4,6 +4,7 @@
 #include "../Component/EnemyController.h"
 #include "../Component/TowerBuilding.h"
 #include "../Component/GameWindows.h"
+#include "../Component/GameStateManager.h"
 #include "../Component/UI.h"
 
 TestLevel::TestLevel()
@@ -38,23 +39,34 @@ void TestLevel::init()
 
 void TestLevel::fixUpdate()
 {
-	ui->fixUpdate();
+	if (!GameStateManager::getInstance()->isPause)
+	{
+		ui->fixUpdate();
 
-	TowerBuilding::getInstance()->fixUpdate();
-	EnemyController::getInstance()->fixUpdate();
+		TowerBuilding::getInstance()->fixUpdate();
+		EnemyController::getInstance()->fixUpdate();
+	}
 }
 
 void TestLevel::update()
 {
-	ui->update();
-
-	if (GameWindows::getInstance()->keyIn == VK_DOWN)
+	if (!GameStateManager::getInstance()->isPause)
 	{
-		EnemyController::getInstance()->isNextWave = true;
+		ui->update();
+
+		if (GameWindows::getInstance()->keyIn == VK_DOWN)
+		{
+			EnemyController::getInstance()->isNextWave = true;
+		}
+
+		TowerBuilding::getInstance()->update();
+		EnemyController::getInstance()->update();
 	}
 
-	TowerBuilding::getInstance()->update();
-	EnemyController::getInstance()->update();
+	else
+	{
+		ui->pauseFunction();
+	}
 }
 
 void TestLevel::draw()
@@ -68,6 +80,11 @@ void TestLevel::draw()
 	ui->draw();
 
 	TowerBuilding::getInstance()->draw();	
+
+	if (GameStateManager::getInstance()->isPause)
+	{
+		ui->pauseMenu();
+	}
 }
 
 void TestLevel::release()

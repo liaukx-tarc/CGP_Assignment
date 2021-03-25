@@ -57,45 +57,41 @@ GameStateManager::~GameStateManager()
 
 void GameStateManager::update()
 {
-	if (GameWindows::getInstance()->keyIn == VK_ESCAPE)
+	//Pause Funtion
+	if (currentState != 0) //Not Main Menu
 	{
-		isPause = !isPause;
-	}
-
-	if (!isPause && currentState != 0)
-	{
-		stateList[currentState]->update();
-
-		framesToUpdate = g_Timer->framesToUpdate();
-
-		for (int i = 0; i < framesToUpdate; i++)
+		if (GameWindows::getInstance()->keyIn == VK_ESCAPE)
 		{
-			stateList[currentState]->fixUpdate();
+			isPause = !isPause;
 		}
 	}
 
-	else if (currentState == 0)
+	stateList[currentState]->update();
+
+	framesToUpdate = g_Timer->framesToUpdate();
+
+	for (int i = 0; i < framesToUpdate; i++)
 	{
-		stateList[0]->update();
-
-		framesToUpdate = g_Timer->framesToUpdate();
-
-		for (int i = 0; i < framesToUpdate; i++)
-		{
-			stateList[0]->fixUpdate();
-		}
+		stateList[currentState]->fixUpdate();
 	}
 
 	if (currentState != preState)
 	{
+		isPause = false;
 		stateList[currentState]->init();
 		stateList[preState]->release();
 	}
-
-	preState = currentState;
 }
 
 void GameStateManager::draw()
 {
-	stateList[currentState]->draw();
+	if (currentState == preState)
+	{
+		stateList[currentState]->draw();
+	}
+
+	else
+	{
+		preState = currentState;
+	}
 }
