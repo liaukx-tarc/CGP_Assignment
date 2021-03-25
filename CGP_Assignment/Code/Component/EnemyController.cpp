@@ -202,12 +202,14 @@ void EnemyController::release()
 		delete enemyList[i];
 		enemyList[i] = NULL;
 	}
-
+	
 	for (int i = 0; i < spawnerList.size(); i++)
 	{
 		delete spawnerList[i];
 		spawnerList[i] = NULL;
 	}
+
+	spawnerList.erase(spawnerList.begin(), spawnerList.begin() + spawnerList.size());
 
 	sprite->Release();
 	sprite = NULL;

@@ -71,6 +71,18 @@
     <Image Include="resource\Button2.png">
       <Filter>Resource Files\Picture</Filter>
     </Image>
+    <Image Include="resource\BruhBackground.png">
+      <Filter>Resource Files\Picture</Filter>
+    </Image>
+    <Image Include="resource\UI_Background.png">
+      <Filter>Resource Files\Picture</Filter>
+    </Image>
+    <Image Include="resource\MenuBack.png">
+      <Filter>Resource Files\Picture</Filter>
+    </Image>
+    <Image Include="resource\Yes_No.png">
+      <Filter>Resource Files\Picture</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="resource\Arrow.ani">

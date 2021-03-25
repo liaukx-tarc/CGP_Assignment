@@ -14,9 +14,6 @@ MainMenu::MainMenu()
 {
 	sprite = NULL;
 	buttonTexture = NULL;
-
-	timer = 0;
-	isFunction = false;
 }
 
 MainMenu::~MainMenu()
@@ -26,6 +23,9 @@ MainMenu::~MainMenu()
 
 void MainMenu::init()
 {
+	timer = 0;
+	isFunction = false;
+
 	hr[0] = D3DXCreateSprite(Graphic::getInstance()->d3dDevice, &sprite);
 	hr[1] = D3DXCreateTextureFromFile(Graphic::getInstance()->d3dDevice, "resource/Button.png", &buttonTexture);
 	hr[2] = D3DXCreateTextureFromFile(Graphic::getInstance()->d3dDevice, "resource/MainMenuBack.png", &background);
@@ -244,6 +244,8 @@ void MainMenu::release()
 		delete buttonList[i];
 		buttonList[i] = NULL;
 	}
+
+	buttonList.erase(buttonList.begin(), buttonList.begin() + buttonList.size());
 
 	RemoveFontResourceEx("resource\pixel.ttf", FR_PRIVATE, 0);
 }

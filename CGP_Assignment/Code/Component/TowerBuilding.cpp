@@ -136,27 +136,6 @@ void TowerBuilding::update()
 {
 	mousePos = GameWindows::getInstance()->mousePos;
 
-	//select tesing --> Future, it may change in button
-	keyIn = GameWindows::getInstance()->keyIn;
-	if (keyIn == VK_UP)
-	{
-		printf("is building\n");
-		isBuilding = !isBuilding;
-		
-		//choose tower type 
-		towerSelect = count;
-
-		if (count < 3)
-		{
-			count++;
-		}
-
-		else
-		{
-			count = 0;
-		}
-	}
-
 	//building function
 	if (isBuilding)
 	{
@@ -273,6 +252,8 @@ void TowerBuilding::release()
 		delete towerData[i];
 		towerData[i] = NULL;
 	}
+
+	towerData.erase(towerData.begin(), towerData.begin() + towerData.size());
 
 	for (int a = 0; a < MAX_MAP_Y; a++)
 	{

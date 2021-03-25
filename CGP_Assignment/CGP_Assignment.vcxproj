@@ -131,14 +131,18 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="resource\Boss_Sheet.png" />
+    <Image Include="resource\BruhBackground.png" />
     <Image Include="resource\Button.png" />
     <Image Include="resource\Button2.png" />
     <Image Include="resource\MainMenuBack.png" />
+    <Image Include="resource\MenuBack.png" />
     <Image Include="resource\Minion_Sheet.png" />
     <Image Include="resource\selectBox.png" />
     <Image Include="resource\TileSet.png" />
     <Image Include="resource\tower.ico" />
     <Image Include="resource\tower.png" />
+    <Image Include="resource\UI_Background.png" />
+    <Image Include="resource\Yes_No.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resource\Arrow.ani" />
