@@ -49,8 +49,10 @@ public:
 	LPD3DXFONT menuButtonFont;
 	RECT menuRect;
 	RECT menuTextRect;
+	RECT confrimRect[2];
 
-	int menuButtonNum;
+	bool isConfirming;
+	std::string cfmWord;
 
 	void backDraw();
 	void pauseMenu();
