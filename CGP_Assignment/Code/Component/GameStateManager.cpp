@@ -95,3 +95,10 @@ void GameStateManager::draw()
 		preState = currentState;
 	}
 }
+
+void GameStateManager::restart()
+{
+	stateList[currentState]->release();
+	stateList[currentState]->init();
+	isPause = false;
+}
