@@ -1,8 +1,21 @@
 #include "UI.h"
+#include "GameWindows.h"
 #include "Graphic.h"
 #include "GameStateManager.h"
 #include "DirectInput.h"
 #include "Map.h"
+
+#define UI_BUTTON_NUM		4
+#define MENU_BUTTON_NUM		7
+#define CONFIRM_BUTTON_NUM	9
+
+#define TOWER1		0
+#define TOWER2		1
+#define TOWER3		2
+#define TOWER4		3
+#define RESUME		4
+#define RESTART		5
+#define MAIN_MENU	6
 
 Ui::Ui()
 {
@@ -140,7 +153,7 @@ void Ui::init()
 	buttonList.push_back(button);
 
 	//Menu
-	menuButtonNum = 4;
+	isConfirming = false;
 
 	//Menu Background
 	menuRect.top = menuRect.left = 0;
@@ -213,6 +226,49 @@ void Ui::init()
 
 	button->init();
 	buttonList.push_back(button);
+
+	//Confirm Text Rect
+	confrimRect[0].top = BUFFER_HEIGHT / 2 - 20;
+	confrimRect[0].left = BUFFER_WIDTH / 2 - 80;
+	confrimRect[0].bottom = confrimRect[0].top + 40;
+	confrimRect[0].right = confrimRect[0].left + 400;
+
+	confrimRect[1].top = BUFFER_HEIGHT / 2 - 20;
+	confrimRect[1].left = BUFFER_WIDTH / 2 - 110;
+	confrimRect[1].bottom = confrimRect[1].top + 40;
+	confrimRect[1].right = confrimRect[1].left + 400;
+
+	//Yes Button
+	button = new Button;
+	button->position.x = BUFFER_WIDTH / 2 - 120;
+	button->position.y = (BUFFER_HEIGHT / 2) + 180;
+	button->size.x = 138;
+	button->size.y = 140;
+
+	button->r = 255;
+	button->g = 255;
+	button->b = 255;
+
+	button->init();
+	buttonList.push_back(button);
+
+	//No Button
+	button = new Button;
+	button->position.x = BUFFER_WIDTH / 2 + 120;
+	button->position.y = (BUFFER_HEIGHT / 2) + 180;
+	button->size.x = 138;
+	button->size.y = 140;
+
+	button->r = 255;
+	button->g = 255;
+	button->b = 255;
+
+	button->init();
+
+	button->buttonRect.top = button->size.y;
+	button->buttonRect.bottom = button->buttonRect.top + 133;
+
+	buttonList.push_back(button);
 }
 
 void Ui::fixUpdate()
@@ -222,9 +278,14 @@ void Ui::fixUpdate()
 
 void Ui::update()
 {
+	if (GameWindows::getInstance()->keyIn == VK_ESCAPE)
+	{
+		isConfirming = false;
+	}
+
 	if (DirectInput::getInstance()->mouseState.rgbButtons[0] & 0x80)
 	{
-		for (int i = 0; i < menuButtonNum; i++)
+		for (int i = 0; i < UI_BUTTON_NUM; i++)
 		{
 			buttonList[i]->update();
 
@@ -259,7 +320,7 @@ void Ui::update()
 
 	else if (!(DirectInput::getInstance()->mouseState.rgbButtons[0] & 0x80))
 	{
-		for (int i = 0; i < menuButtonNum; i++)
+		for (int i = 0; i < UI_BUTTON_NUM; i++)
 		{
 			buttonList[i]->frame = 0;
 
@@ -289,22 +350,22 @@ void Ui::update()
 	{
 		switch (function)
 		{
-		case 0:
+		case TOWER1:
 			TowerBuilding::getInstance()->isBuilding = true;
 			TowerBuilding::getInstance()->towerSelect = 0;
 			break;
 
-		case 1:
+		case TOWER2:
 			TowerBuilding::getInstance()->isBuilding = true;
 			TowerBuilding::getInstance()->towerSelect = 1;
 			break;
 
-		case 2:
+		case TOWER3:
 			TowerBuilding::getInstance()->isBuilding = true;
 			TowerBuilding::getInstance()->towerSelect = 2;
 			break;
 
-		case 3:
+		case TOWER4:
 			TowerBuilding::getInstance()->isBuilding = true;
 			TowerBuilding::getInstance()->towerSelect = 3;
 			break;
@@ -321,7 +382,7 @@ void Ui::draw()
 {
 	sprite->Begin(D3DXSPRITE_ALPHABLEND);
 
-	for (int i = 0; i < menuButtonNum; i++)
+	for (int i = 0; i < UI_BUTTON_NUM; i++)
 	{
 		sprite->Draw(buttonTexture, &buttonList[i]->buttonRect,
 			&D3DXVECTOR3(buttonList[i]->size.x / 2, buttonList[i]->size.y / 2, 0),
@@ -412,26 +473,55 @@ void Ui::backDraw()
 void Ui::pauseMenu()
 {
 	sprite->Begin(D3DXSPRITE_ALPHABLEND);
-
+	
 	sprite->Draw(blurBackground, NULL, NULL, NULL, D3DCOLOR_XRGB(255, 255, 255));
-	
-	sprite->Draw(menuBack, &menuRect, 
-		&D3DXVECTOR3(menuRect.right / 2, menuRect.bottom / 2, 0), 
-		&D3DXVECTOR3(BUFFER_WIDTH / 2, BUFFER_HEIGHT / 2, 0),
-		D3DCOLOR_XRGB(255, 255, 255));
 
-	menuFont->DrawText(sprite, "MENU", -1, &menuTextRect, 0, D3DCOLOR_XRGB(255, 255, 255));
-
-	for (int i = menuButtonNum; i < buttonList.size(); i++)
+	if (!isConfirming)
 	{
-		sprite->Draw(menuButtonTexture, &buttonList[i]->buttonRect,
-			&D3DXVECTOR3(buttonList[i]->size.x / 2, buttonList[i]->size.y / 2, 0),
-			&D3DXVECTOR3(buttonList[i]->position.x, buttonList[i]->position.y, 0),
-			D3DCOLOR_XRGB(buttonList[i]->r, buttonList[i]->g, buttonList[i]->b));
-	
-		if (buttonList[i]->word != "")
+		sprite->Draw(menuBack, &menuRect,
+			&D3DXVECTOR3(menuRect.right / 2, menuRect.bottom / 2, 0),
+			&D3DXVECTOR3(BUFFER_WIDTH / 2, BUFFER_HEIGHT / 2, 0),
+			D3DCOLOR_XRGB(255, 255, 255));
+
+		menuFont->DrawText(sprite, "MENU", -1, &menuTextRect, 0, D3DCOLOR_XRGB(255, 255, 255));
+
+		for (int i = UI_BUTTON_NUM; i < MENU_BUTTON_NUM; i++)
 		{
-			menuButtonFont->DrawText(sprite, buttonList[i]->word.c_str(), -1, &buttonList[i]->textRect, 0, D3DCOLOR_XRGB(255, 255, 255));
+			sprite->Draw(menuButtonTexture, &buttonList[i]->buttonRect,
+				&D3DXVECTOR3(buttonList[i]->size.x / 2, buttonList[i]->size.y / 2, 0),
+				&D3DXVECTOR3(buttonList[i]->position.x, buttonList[i]->position.y, 0),
+				D3DCOLOR_XRGB(buttonList[i]->r, buttonList[i]->g, buttonList[i]->b));
+
+			if (buttonList[i]->word != "")
+			{
+				menuButtonFont->DrawText(sprite, buttonList[i]->word.c_str(), -1, &buttonList[i]->textRect, 0, D3DCOLOR_XRGB(255, 255, 255));
+			}
+		}
+	}
+	
+	else
+	{
+		scaling.x = scaling.y = 0.5f;
+		D3DXMatrixTransformation2D(&mat, NULL, 0.0, &scaling, NULL, NULL, NULL);
+		sprite->SetTransform(&mat);
+
+		sprite->Draw(menuBack, &menuRect,
+			&D3DXVECTOR3(menuRect.right / 2, menuRect.bottom / 2, 0),
+			&D3DXVECTOR3(BUFFER_WIDTH / scaling.x / 2, BUFFER_HEIGHT / scaling.y / 2, 0),
+			D3DCOLOR_XRGB(255, 255, 255));
+
+		scaling.x = scaling.y = 1.0f;
+		D3DXMatrixTransformation2D(&mat, NULL, 0.0, &scaling, NULL, NULL, NULL);
+		sprite->SetTransform(&mat);
+
+		menuButtonFont->DrawText(sprite, cfmWord.c_str(), -1, &confrimRect[function - 5], 0, D3DCOLOR_XRGB(255, 255, 255));
+	
+		for (int i = MENU_BUTTON_NUM; i < CONFIRM_BUTTON_NUM; i++)
+		{
+			sprite->Draw(yes_No, &buttonList[i]->buttonRect,
+				&D3DXVECTOR3(buttonList[i]->size.x / 2, buttonList[i]->size.y / 2, 0),
+				&D3DXVECTOR3(buttonList[i]->position.x, buttonList[i]->position.y, 0),
+				D3DCOLOR_XRGB(buttonList[i]->r, buttonList[i]->g, buttonList[i]->b));
 		}
 	}
 
@@ -440,50 +530,123 @@ void Ui::pauseMenu()
 
 void Ui::pauseFunction()
 {
+	
 	if (DirectInput::getInstance()->mouseState.rgbButtons[0] & 0x80)
 	{
-		for (int i = menuButtonNum; i < buttonList.size(); i++)
+		if (!isConfirming)
 		{
-			buttonList[i]->update();
-
-			if (buttonList[i]->isClick && !buttonList[i]->isAni)
+			for (int i = UI_BUTTON_NUM; i < MENU_BUTTON_NUM; i++)
 			{
-				buttonList[i]->frame = 1;
-				buttonList[i]->textRect.top += 8;
-				buttonList[i]->textRect.bottom += 8;
-				buttonList[i]->isAni = true;
-			}
-
-			else if (!buttonList[i]->isClick && buttonList[i]->isAni)
-			{
-				buttonList[i]->frame = 0;
 				buttonList[i]->update();
-				buttonList[i]->textRect.top -= 8;
-				buttonList[i]->textRect.bottom -= 8;
-				buttonList[i]->isAni = false;
+
+				if (buttonList[i]->isClick && !buttonList[i]->isAni)
+				{
+					buttonList[i]->frame = 1;
+					buttonList[i]->textRect.top += 8;
+					buttonList[i]->textRect.bottom += 8;
+					buttonList[i]->isAni = true;
+				}
+
+				else if (!buttonList[i]->isClick && buttonList[i]->isAni)
+				{
+					buttonList[i]->frame = 0;
+					buttonList[i]->update();
+					buttonList[i]->textRect.top -= 8;
+					buttonList[i]->textRect.bottom -= 8;
+					buttonList[i]->isAni = false;
+				}
+			}
+		}
+
+		else
+		{
+			for (int i = MENU_BUTTON_NUM; i < CONFIRM_BUTTON_NUM; i++)
+			{
+				buttonList[i]->update();
+
+				if (buttonList[i]->isClick && !buttonList[i]->isAni)
+				{
+					buttonList[i]->frame = 1;
+					buttonList[i]->textRect.top += 8;
+					buttonList[i]->textRect.bottom += 8;
+					buttonList[i]->isAni = true;
+				}
+
+				else if (!buttonList[i]->isClick && buttonList[i]->isAni)
+				{
+					buttonList[i]->frame = 0;
+					buttonList[i]->update();
+					buttonList[i]->textRect.top -= 8;
+					buttonList[i]->textRect.bottom -= 8;
+					buttonList[i]->isAni = false;
+				}
 			}
 		}
 	}
 
 	else if (!(DirectInput::getInstance()->mouseState.rgbButtons[0] & 0x80))
 	{
-		for (int i = menuButtonNum; i < buttonList.size(); i++)
+		if (!isConfirming)
 		{
-			buttonList[i]->frame = 0;
-
-			if (buttonList[i]->isAni)
+			for (int i = UI_BUTTON_NUM; i < MENU_BUTTON_NUM; i++)
 			{
-				buttonList[i]->update();
-				buttonList[i]->textRect.top -= 8;
-				buttonList[i]->textRect.bottom -= 8;
-				buttonList[i]->isAni = false;
+				buttonList[i]->frame = 0;
+
+				if (buttonList[i]->isAni)
+				{
+					buttonList[i]->update();
+					buttonList[i]->textRect.top -= 8;
+					buttonList[i]->textRect.bottom -= 8;
+					buttonList[i]->isAni = false;
+				}
+
+				if (buttonList[i]->isClick)
+				{
+					function = i;
+					isFunction = true;
+					buttonList[i]->isClick = false;
+				}
 			}
+		}
 
-			if (buttonList[i]->isClick)
+		else
+		{
+			for (int i = MENU_BUTTON_NUM; i < CONFIRM_BUTTON_NUM; i++)
 			{
-				function = i;
-				isFunction = true;
-				buttonList[i]->isClick = false;
+				buttonList[i]->frame = 0;
+
+				if (buttonList[i]->isAni)
+				{
+					buttonList[i]->update();
+					buttonList[i]->textRect.top -= 8;
+					buttonList[i]->textRect.bottom -= 8;
+					buttonList[i]->isAni = false;
+				}
+
+				if (buttonList[i]->isClick)
+				{
+					if (i == 7)
+					{
+						if (function == RESTART)
+						{
+							buttonList[i]->isClick = false;
+							GameStateManager::getInstance()->restart();
+							break;
+						}
+
+						else if (function == MAIN_MENU)
+						{
+							buttonList[i]->isClick = false;
+							GameStateManager::getInstance()->currentState = 0;
+						}
+					}
+					
+					else if (i == 8)
+					{
+						buttonList[i]->isClick = false;
+						isConfirming = false;
+					}
+				}
 			}
 		}
 	}
@@ -492,19 +655,19 @@ void Ui::pauseFunction()
 	{
 		switch (function)
 		{
-		case 4:
+		case RESUME:
 			GameStateManager::getInstance()->isPause = false;
 			break;
 
-		case 5:
-			GameStateManager::getInstance()->restart();
+		case RESTART:
+			isConfirming = true;
+			cfmWord = buttonList[5]->word;
 			break;
 
-		case 6:
-			GameStateManager::getInstance()->currentState = 0;
+		case MAIN_MENU:
+			isConfirming = true;
+			cfmWord = buttonList[6]->word;
 			break;
-
-		
 
 		default:
 			break;

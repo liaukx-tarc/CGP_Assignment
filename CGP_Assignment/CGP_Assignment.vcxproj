@@ -155,6 +155,7 @@
     <ClInclude Include="Code\Component\Graphic.h" />
     <ClInclude Include="Code\Component\G_Timer.h" />
     <ClInclude Include="Code\Component\Map.h" />
+    <ClInclude Include="Code\Component\Physics.h" />
     <ClInclude Include="Code\Component\TowerBuilding.h" />
     <ClInclude Include="Code\Component\UI.h" />
     <ClInclude Include="Code\Level\GameState.h" />
@@ -175,6 +176,7 @@
     <ClCompile Include="Code\Component\Graphic.cpp" />
     <ClCompile Include="Code\Component\G_Timer.cpp" />
     <ClCompile Include="Code\Component\Map.cpp" />
+    <ClCompile Include="Code\Component\Physics.cpp" />
     <ClCompile Include="Code\Component\TowerBuilding.cpp" />
     <ClCompile Include="Code\Component\UI.cpp" />
     <ClCompile Include="Code\Level\MainMenu.cpp" />
