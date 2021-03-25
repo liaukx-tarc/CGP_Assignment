@@ -28,7 +28,9 @@ void TestLevel::init()
 	std::copy(name.begin(), name.end(), levelFile);
 	levelFile[name.size()] = '\0';
 
+	Map::getInstance()->createMap();
 	Map::getInstance()->loadMap(levelFile);
+	
 	EnemyController::getInstance()->init();
 
 	TowerBuilding::getInstance()->init();
@@ -89,6 +91,7 @@ void TestLevel::draw()
 
 void TestLevel::release()
 {
+	Map::getInstance()->releaseInsrance();
 	EnemyController::getInstance()->release();
 	EnemyController::getInstance()->releaseInsrance();
 	TowerBuilding::getInstance()->release();

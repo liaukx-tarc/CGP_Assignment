@@ -11,7 +11,6 @@ int main()	//App and Console
 	GameWindows::getInstance()->createWindows();
 	Graphic::getInstance()->createGraphic();
 	DirectInput::getInstance()->CreateInput();
-	Map::getInstance()->createMap();
 
 	while (GameWindows::getInstance()->windowsLoop())
 	{
@@ -27,7 +26,6 @@ int main()	//App and Console
 	GameWindows::getInstance()->releaseInsrance();
 	Graphic::getInstance()->releaseInsrance();
 	GameStateManager::getInstance()->releaseInsrance();
-	Map::getInstance()->releaseInsrance();
 
 	return 0;
 }

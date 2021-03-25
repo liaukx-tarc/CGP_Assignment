@@ -52,9 +52,9 @@ void Ui::init()
 	for (int i = 0; i < MAX_TOWER_TYPE; i++)
 	{
 		towerRect[i].top = 32 * i;
-		towerRect[i].left = 0;
+		towerRect[i].left = 32 * 3;
 		towerRect[i].bottom = towerRect[i].top + 32;
-		towerRect[i].right = 32;
+		towerRect[i].right = towerRect[i].left + 32;
 
 		towerTexMove[i] = 0;
 	}
@@ -174,10 +174,30 @@ void Ui::init()
 	button->init();
 	buttonList.push_back(button);
 
-	//Main Menu Button
+	//Restart Button
 	button = new Button;
 	button->position.x = BUFFER_WIDTH / 2;
 	button->position.y = (BUFFER_HEIGHT / 2) - (menuRect.bottom / 2) + 330;
+	button->size.x = 345;
+	button->size.y = 122;
+
+	button->r = 0;
+	button->g = 47;
+	button->b = 255;
+
+	button->word = "Restart";
+	button->textRect.top = button->position.y - 25;
+	button->textRect.left = button->position.x - 90;
+	button->textRect.bottom = button->textRect.top + 40;
+	button->textRect.right = button->textRect.left + 300;
+
+	button->init();
+	buttonList.push_back(button);
+
+	//Main Menu Button
+	button = new Button;
+	button->position.x = BUFFER_WIDTH / 2;
+	button->position.y = (BUFFER_HEIGHT / 2) - (menuRect.bottom / 2) + 480;
 	button->size.x = 345;
 	button->size.y = 122;
 
@@ -311,12 +331,12 @@ void Ui::draw()
 		//draw tower on button
 		if (i < MAX_TOWER_TYPE)
 		{
-			scaling.x = scaling.y = 4.0f;
+			scaling.x = scaling.y = 6.0f;
 			D3DXMatrixTransformation2D(&mat, NULL, 0.0, &scaling, NULL, NULL, NULL);
 			sprite->SetTransform(&mat);
 
 			sprite->Draw(TowerBuilding::getInstance()->towerTexture, &towerRect[i],
-				&D3DXVECTOR3(32 / 2, 32 / 2, 0),
+				&D3DXVECTOR3(32/2, 32*3/4, 0),
 				&D3DXVECTOR3(buttonList[i]->position.x / scaling.x, (buttonList[i]->position.y + towerTexMove[i]) / scaling.y, 0),
 				D3DCOLOR_XRGB(255, 255, 255));;
 
@@ -477,8 +497,14 @@ void Ui::pauseFunction()
 			break;
 
 		case 5:
+			GameStateManager::getInstance()->restart();
+			break;
+
+		case 6:
 			GameStateManager::getInstance()->currentState = 0;
 			break;
+
+		
 
 		default:
 			break;
