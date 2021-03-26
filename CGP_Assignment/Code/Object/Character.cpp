@@ -60,7 +60,7 @@ void Character::init()
 		}
 	}
 	currentPointX = objPosition.x / TILE_WIDTH;
-	currentPointY = objPosition.y / TILE_HIGHT;
+	currentPointY = objPosition.y / TILE_HEIGHT;
 
 	hitboxRadius = 30;
 }
@@ -230,13 +230,13 @@ void Character::move(D3DXVECTOR2 direction)
 	if (directionState == 'l' || directionState == 't')
 	{
 		currentPointX = (objPosition.x + 29) / TILE_WIDTH;
-		currentPointY = (objPosition.y + 29) / TILE_HIGHT;
+		currentPointY = (objPosition.y + 29) / TILE_HEIGHT;
 	}
 
 	if (directionState == 'r' || directionState == 'b')
 	{
 		currentPointX = (objPosition.x - 29) / TILE_WIDTH;
-		currentPointY = (objPosition.y - 29) / TILE_HIGHT;
+		currentPointY = (objPosition.y - 29) / TILE_HEIGHT;
 	}
 
 	//printf("%d |%d | %c\n", currentPointX, currentPointY, directionState);

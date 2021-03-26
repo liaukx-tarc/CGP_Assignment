@@ -15,7 +15,7 @@ DirectInput* DirectInput::getInstance()
 	return sInstance;
 }
 
-void DirectInput::releaseInsrance()
+void DirectInput::releaseInstance()
 {
 	delete sInstance;
 	sInstance = NULL;

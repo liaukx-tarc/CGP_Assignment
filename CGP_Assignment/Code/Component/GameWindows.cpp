@@ -15,7 +15,7 @@ GameWindows* GameWindows::getInstance()
 	return sInstance;
 }
 
-void GameWindows::releaseInsrance()
+void GameWindows::releaseInstance()
 {
 	delete sInstance;
 	sInstance = NULL;

@@ -18,7 +18,7 @@ GameStateManager* GameStateManager::getInstance()
 	return sInstance;
 }
 
-void GameStateManager::releaseInsrance()
+void GameStateManager::releaseInstance()
 {
 	delete sInstance;
 	sInstance = NULL;

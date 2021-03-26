@@ -17,7 +17,7 @@ private:
 
 public:
 	static Graphic* getInstance();
-	static void releaseInsrance();
+	static void releaseInstance();
 
 	D3DPRESENT_PARAMETERS d3dPP;
 	IDirect3DDevice9 * d3dDevice;

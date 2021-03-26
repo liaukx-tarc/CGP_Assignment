@@ -22,7 +22,7 @@ private:
 public:
 	//Singleton
 	static GameWindows * getInstance();
-	static void releaseInsrance();
+	static void releaseInstance();
 
 	//windows variable
 	HWND g_hWnd;

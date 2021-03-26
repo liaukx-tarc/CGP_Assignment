@@ -19,7 +19,7 @@ TowerBuilding* TowerBuilding::getInstance()
 	return sInstance;
 }
 
-void TowerBuilding::releaseInsrance()
+void TowerBuilding::releaseInstance()
 {
 	delete sInstance;
 	sInstance = NULL;
@@ -140,7 +140,7 @@ void TowerBuilding::update()
 	if (isBuilding)
 	{
 		tileSelectX = mousePos.x / TILE_WIDTH;
-		tileSelectY = mousePos.y / TILE_HIGHT;
+		tileSelectY = mousePos.y / TILE_HEIGHT;
 
 		towerRect.top = 32 * towerSelect;
 		towerRect.left = 0;
@@ -149,7 +149,7 @@ void TowerBuilding::update()
 
 		if (DirectInput::getInstance()->mouseState.rgbButtons[0] & 0x80)
 		{
-			if (mousePos.x / TILE_WIDTH < MAX_MAP_X && mousePos.y / TILE_HIGHT < MAX_MAP_Y)
+			if (mousePos.x / TILE_WIDTH < MAX_MAP_X && mousePos.y / TILE_HEIGHT < MAX_MAP_Y)
 			{
 				if (Map::getInstance()->pathMap[tileSelectY][tileSelectX] == 0)
 				{
@@ -162,7 +162,7 @@ void TowerBuilding::update()
 						tower->damage = towerData[towerSelect]->damage;
 						tower->atkSpeed = towerData[towerSelect]->atkSpeed;
 						tower->objPosition.x = tileSelectX * TILE_WIDTH + (TILE_WIDTH / 2);
-						tower->objPosition.y = tileSelectY * TILE_WIDTH + (TILE_HIGHT / 2);
+						tower->objPosition.y = tileSelectY * TILE_WIDTH + (TILE_HEIGHT / 2);
 
 						tower->init();
 						towerList[tileSelectY][tileSelectX] = tower;
@@ -203,7 +203,7 @@ void TowerBuilding::draw()
 	}
 
 	//draw a select Box
-	if (mousePos.x / TILE_WIDTH < MAX_MAP_X && mousePos.y / TILE_HIGHT < MAX_MAP_Y)
+	if (mousePos.x / TILE_WIDTH < MAX_MAP_X && mousePos.y / TILE_HEIGHT < MAX_MAP_Y)
 	{
 		if (Map::getInstance()->pathMap[tileSelectY][tileSelectX] == 0)
 		{
@@ -214,8 +214,8 @@ void TowerBuilding::draw()
 				sprite->SetTransform(&mat);
 
 				sprite->Draw(selectBoxTeture, &selectBoxRect,
-					&D3DXVECTOR3((TILE_WIDTH / 2) * Map::getInstance()->tileScaling.x, (TILE_HIGHT / 2) * Map::getInstance()->tileScaling.y, 0),
-					&D3DXVECTOR3((tileSelectX * TILE_WIDTH + (TILE_WIDTH / 2)) * Map::getInstance()->tileScaling.x, (tileSelectY * TILE_HIGHT + (TILE_HIGHT / 2)) * Map::getInstance()->tileScaling.y, 0),
+					&D3DXVECTOR3((TILE_WIDTH / 2) * Map::getInstance()->tileScaling.x, (TILE_HEIGHT / 2) * Map::getInstance()->tileScaling.y, 0),
+					&D3DXVECTOR3((tileSelectX * TILE_WIDTH + (TILE_WIDTH / 2)) * Map::getInstance()->tileScaling.x, (tileSelectY * TILE_HEIGHT + (TILE_HEIGHT / 2)) * Map::getInstance()->tileScaling.y, 0),
 					D3DCOLOR_XRGB(255, 255, 255));
 
 				scaling.x = scaling.y = 3.0f;

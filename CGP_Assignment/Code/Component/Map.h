@@ -8,7 +8,7 @@
 
 #define MAX_MAP_Y 18
 #define MAX_MAP_X 42
-#define TILE_HIGHT 60
+#define TILE_HEIGHT 60
 #define TILE_WIDTH 60
 #define MAX_START 4
 #define MAX_END 4
@@ -24,7 +24,7 @@ private:
 
 public:
 	static Map* getInstance();
-	static void releaseInsrance();
+	static void releaseInstance();
 
 	RECT tileRect;
 	LPDIRECT3DTEXTURE9 tile;
