@@ -11,7 +11,7 @@ private:
 
 public:
 	static Physics* getInstance();
-	static void releaseInsrance();
+	static void releaseInstance();
 };
 
 #endif // !DIRECT_INPUT

@@ -16,7 +16,7 @@ private:
 
 public:
 	static EnemyController* getInstance();
-	static void releaseInsrance();
+	static void releaseInstance();
 
 	HRESULT hr[3];
 

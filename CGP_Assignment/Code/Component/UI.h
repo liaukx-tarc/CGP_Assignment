@@ -35,7 +35,7 @@ public:
 
 	RECT towerRect[MAX_TOWER_TYPE];
 
-	int towerTexMove[MAX_TOWER_TYPE];
+	int towerTextMove[MAX_TOWER_TYPE];
 	int function;
 	bool isFunction;
 

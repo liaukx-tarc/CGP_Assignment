@@ -13,7 +13,7 @@ Physics* Physics::getInstance()
 	return sInstance;
 }
 
-void Physics::releaseInsrance()
+void Physics::releaseInstance()
 {
 	delete sInstance;
 	sInstance = NULL;

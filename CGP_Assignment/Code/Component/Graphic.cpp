@@ -15,7 +15,7 @@ Graphic* Graphic::getInstance()
 	return sInstance;
 }
 
-void Graphic::releaseInsrance()
+void Graphic::releaseInstance()
 {
 	delete sInstance;
 	sInstance = NULL;

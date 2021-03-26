@@ -13,7 +13,7 @@ private:
 
 public:
 	static DirectInput* getInstance();
-	static void releaseInsrance();
+	static void releaseInstance();
 
 	LPDIRECTINPUT8 dInput;
 
