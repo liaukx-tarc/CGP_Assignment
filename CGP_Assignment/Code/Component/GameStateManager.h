@@ -17,7 +17,7 @@ private:
 
 public:
 	static GameStateManager* getInstance();
-	static void releaseInsrance();
+	static void releaseInstance();
 
 	G_Timer * g_Timer;
 

@@ -22,10 +22,10 @@ int main()	//App and Console
 	}
 
 	//delete the class and clear
-	DirectInput::getInstance()->releaseInsrance();
-	GameWindows::getInstance()->releaseInsrance();
-	Graphic::getInstance()->releaseInsrance();
-	GameStateManager::getInstance()->releaseInsrance();
+	DirectInput::getInstance()->releaseInstance();
+	GameWindows::getInstance()->releaseInstance();
+	Graphic::getInstance()->releaseInstance();
+	GameStateManager::getInstance()->releaseInstance();
 
 	return 0;
 }

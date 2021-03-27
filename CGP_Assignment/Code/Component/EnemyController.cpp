@@ -21,7 +21,7 @@ EnemyController* EnemyController::getInstance()
 	return sInstance;
 }
 
-void EnemyController::releaseInsrance()
+void EnemyController::releaseInstance()
 {
 	delete sInstance;
 	sInstance = NULL;

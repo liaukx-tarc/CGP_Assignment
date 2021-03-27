@@ -18,7 +18,7 @@ Map* Map::getInstance()
 	return sInstance;
 }
 
-void Map::releaseInsrance()
+void Map::releaseInstance()
 {
 	delete sInstance;
 	sInstance = NULL;
@@ -172,11 +172,11 @@ void Map::drawMap()
 				tileRow = map[y][x] / 12;
 				tileCol = map[y][x] % 12;
 
-				clipWindow.top = tileRow * TILE_HIGHT;
+				clipWindow.top = tileRow * TILE_HEIGHT;
 
 				clipWindow.left = (tileCol - 1) * TILE_WIDTH;
 
-				clipWindow.bottom = clipWindow.top + TILE_HIGHT;
+				clipWindow.bottom = clipWindow.top + TILE_HEIGHT;
 
 				clipWindow.right = clipWindow.left + TILE_WIDTH;
 
@@ -184,7 +184,7 @@ void Map::drawMap()
 
 				pos.x = x * TILE_WIDTH;
 
-				pos.y = y * TILE_HIGHT;
+				pos.y = y * TILE_HEIGHT;
 
 				pos.z = 0.0f;
 

@@ -91,10 +91,10 @@ void TestLevel::draw()
 
 void TestLevel::release()
 {
-	Map::getInstance()->releaseInsrance();
+	Map::getInstance()->releaseInstance();
 	EnemyController::getInstance()->release();
-	EnemyController::getInstance()->releaseInsrance();
+	EnemyController::getInstance()->releaseInstance();
 	TowerBuilding::getInstance()->release();
-	TowerBuilding::getInstance()->releaseInsrance();
+	TowerBuilding::getInstance()->releaseInstance();
 	ui->release();
 }
