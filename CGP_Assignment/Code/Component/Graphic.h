@@ -3,8 +3,8 @@
 #include <d3d9.h>
 #include <d3dx9.h>
 
-#define BUFFER_WIDTH 2520
-#define BUFFER_HEIGHT 1418
+#define BUFFER_WIDTH 1920
+#define BUFFER_HEIGHT 1080
 
 class Graphic
 {
