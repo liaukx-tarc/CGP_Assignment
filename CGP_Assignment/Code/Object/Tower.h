@@ -7,6 +7,7 @@
 #include "../Object/GameObject.h"
 #include "Character.h"
 #include "../Component/EnemyController.h"
+#include "../Component/Physics.h"
 
 class Tower : public GameObject
 {
@@ -40,6 +41,8 @@ public:
 	float distanceX;
 	float distanceY;
 	float distance;
+	bool isFire;
+	int fireCD;
 };
 
 #endif // !TOWER

@@ -52,7 +52,7 @@ void TowerBuilding::init()
 {
 	hr[0] = D3DXCreateSprite(Graphic::getInstance()->d3dDevice, &sprite);
 	hr[1] = D3DXCreateTextureFromFile(Graphic::getInstance()->d3dDevice, "resource/tower.png", &towerTexture);
-	hr[1] = D3DXCreateTextureFromFile(Graphic::getInstance()->d3dDevice, "resource/selectBox.png", &selectBoxTeture);
+	hr[2] = D3DXCreateTextureFromFile(Graphic::getInstance()->d3dDevice, "resource/selectBox.png", &selectBoxTeture);
 
 	for (int i = 0; i < sizeof(hr); i++)
 	{
