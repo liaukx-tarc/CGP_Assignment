@@ -22,6 +22,8 @@ public:
 	void update();
 	void draw();
 	void release();
+
+	int maxHealth, health, wave, coin;
 };
 
 #endif

@@ -130,10 +130,15 @@
     <ResourceCompile Include="CGP_Assignment.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="resource\BlurBackground.png" />
     <Image Include="resource\Boss_Sheet.png" />
     <Image Include="resource\BruhBackground.png" />
+    <Image Include="resource\bullet.png" />
     <Image Include="resource\Button.png" />
     <Image Include="resource\Button2.png" />
+    <Image Include="resource\coin.png" />
+    <Image Include="resource\Cursor.png" />
+    <Image Include="resource\Heart.png" />
     <Image Include="resource\MainMenuBack.png" />
     <Image Include="resource\MenuBack.png" />
     <Image Include="resource\Minion_Sheet.png" />
