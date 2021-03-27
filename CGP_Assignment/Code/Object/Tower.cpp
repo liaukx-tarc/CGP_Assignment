@@ -36,6 +36,9 @@ void Tower::init()
 	towerRect.left = spriteSize.x * towerFrame;
 	towerRect.bottom = towerRect.top + spriteSize.y;
 	towerRect.right = towerRect.left + spriteSize.x;
+
+	isFire = false;
+	fireCD = 0;
 }
 
 void Tower::fixUpdate()
@@ -58,6 +61,14 @@ void Tower::fixUpdate()
 void Tower::update()
 {
 	inRange(EnemyController::getInstance()->enemyList);
+	if (isFire)
+	{
+		fireCD -= 1;
+		if (fireCD <= 0)
+		{
+			isFire = false;
+		}
+	}
 }
 
 void Tower::draw()
@@ -71,16 +82,22 @@ void Tower::release()
 }
 void Tower::inRange(std::vector<Character*>enemy)
 {
-
-	for (int i = 0; i < enemy.size(); i++)
+	if (!isFire)
 	{
-		distanceX = objPosition.x - enemy[i]->objPosition.x;
-		distanceY = objPosition.y - enemy[i]->objPosition.y;
-		distance = sqrt((distanceX*distanceX) + (distanceY*distanceY));
-
-		if (rangeRadius + enemy[i]->hitboxRadius > distance)
+		for (int i = 0; i < enemy.size(); i++)
 		{
-			printf("%d in range\n", i);
+			distanceX = objPosition.x - enemy[i]->objPosition.x;
+			distanceY = objPosition.y - enemy[i]->objPosition.y;
+			distance = sqrt((distanceX*distanceX) + (distanceY*distanceY));
+
+			if (rangeRadius + enemy[i]->hitboxRadius > distance)
+			{
+				printf("%d in range\n", i);
+				isFire = true;
+				fireCD = 50;
+				Physics::getInstance()->projectile(objPosition, enemy[i]->objPosition);
+				break;
+			}
 		}
 	}
 }

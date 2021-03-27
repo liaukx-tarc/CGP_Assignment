@@ -6,6 +6,7 @@
 #include "../Component/GameWindows.h"
 #include "../Component/GameStateManager.h"
 #include "../Component/UI.h"
+#include "../Component/Physics.h"
 
 TestLevel::TestLevel()
 {
@@ -34,6 +35,7 @@ void TestLevel::init()
 	EnemyController::getInstance()->init();
 
 	TowerBuilding::getInstance()->init();
+	Physics::getInstance()->init();
 
 	ui = new Ui;
 	ui->init();
@@ -63,6 +65,7 @@ void TestLevel::update()
 
 		TowerBuilding::getInstance()->update();
 		EnemyController::getInstance()->update();
+		Physics::getInstance()->update();
 	}
 
 	else
@@ -83,6 +86,8 @@ void TestLevel::draw()
 
 	TowerBuilding::getInstance()->draw();	
 
+	Physics::getInstance()->draw();
+
 	if (GameStateManager::getInstance()->isPause)
 	{
 		ui->pauseMenu();
@@ -96,5 +101,7 @@ void TestLevel::release()
 	EnemyController::getInstance()->releaseInstance();
 	TowerBuilding::getInstance()->release();
 	TowerBuilding::getInstance()->releaseInstance();
+	Physics::getInstance()->release();
+	Physics::getInstance()->releaseInstance();
 	ui->release();
 }
