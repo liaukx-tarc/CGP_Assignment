@@ -95,7 +95,7 @@ void Tower::inRange(std::vector<Character*>enemy)
 				printf("%d in range\n", i);
 				isFire = true;
 				fireCD = 50;
-				Physics::getInstance()->projectile(objPosition, enemy[i]->objPosition);
+				Physics::getInstance()->projectile(objPosition, i,towerNo);
 				break;
 			}
 		}
