@@ -13,7 +13,7 @@ public:
 	Ui();
 	~Ui();
 
-	HRESULT hr[11];
+	HRESULT hr[13];
 
 	void init();
 	void fixUpdate();
@@ -25,7 +25,6 @@ public:
 	LPD3DXFONT buttonFont;
 	D3DXVECTOR2 scaling;
 	D3DXMATRIX mat;
-	
 
 	//UI
 	LPDIRECT3DTEXTURE9 backgroundTexture;
@@ -47,6 +46,22 @@ public:
 
 	LPD3DXFONT menuFont;
 	LPD3DXFONT menuButtonFont;
+	
+	LPDIRECT3DTEXTURE9 heartTexture;
+	RECT heartRect[2];
+	RECT heartTextRect;
+	D3DXVECTOR3 heartPos;
+	std::string heartText;
+
+	RECT waveTextRect;
+	std::string waveText;
+
+	LPDIRECT3DTEXTURE9 coinTexture;
+	RECT coinTextRect;
+	RECT coinRect;
+	D3DXVECTOR3 coinPos;
+	std::string coinText;
+
 	RECT menuRect;
 	RECT menuTextRect;
 	RECT confrimRect[2];
@@ -57,6 +72,8 @@ public:
 	void backDraw();
 	void pauseMenu();
 	void pauseFunction();
+
+	void stateUpdate(int maxHeart, int heart, int wave, int coin);
 };
 
 #endif //!MAIN_MENU

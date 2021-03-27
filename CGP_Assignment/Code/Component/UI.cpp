@@ -53,13 +53,57 @@ void Ui::init()
 		DEFAULT_CHARSET, OUT_TT_ONLY_PRECIS, DEFAULT_QUALITY,
 		DEFAULT_PITCH | FF_DONTCARE, "Pixel", &menuFont);
 
-	for (int i = 0; i < 11; i++)
+	hr[11] = D3DXCreateTextureFromFile(Graphic::getInstance()->d3dDevice, "resource/Heart.png", &heartTexture);
+
+	hr[12] = D3DXCreateTextureFromFile(Graphic::getInstance()->d3dDevice, "resource/coin.png", &coinTexture);
+
+	for (int i = 0; i < 13; i++)
 	{
 		if (FAILED(hr[i]))
 		{
 			PostQuitMessage(0);
 		}
 	}
+
+	//UI Element
+	//Health
+	heartRect[0].top = heartRect[0].left = 0;
+	heartRect[0].bottom = 56;
+	heartRect[0].right = 63;
+
+	heartRect[1].top = 0;
+	heartRect[1].left = 64;
+	heartRect[1].bottom = 56;
+	heartRect[1].right = 119;
+
+	heartPos.x = 50;
+	heartPos.y = 50;
+	heartPos.z = 0;
+
+	heartTextRect.top = heartPos.y - 10;
+	heartTextRect.left = heartPos.x + heartRect[0].right /2 + 20;
+	heartTextRect.bottom = heartTextRect.top + 25;
+	heartTextRect.right = heartTextRect.left + 100;
+
+	//Wave
+	waveTextRect.top =  40;
+	waveTextRect.left = BUFFER_WIDTH / 2 - 60;
+	waveTextRect.bottom = waveTextRect.top + 25;
+	waveTextRect.right = waveTextRect.left + 200;
+
+	//Coin
+	coinRect.top = coinRect.left = 0;
+	coinRect.bottom = 64;
+	coinRect.right = 64;
+
+	coinPos.x = 250;
+	coinPos.y = 50;
+	coinPos.z = 0;
+
+	coinTextRect.top = coinPos.y - 10;
+	coinTextRect.left = coinPos.x + coinRect.right / 2 + 20;
+	coinTextRect.bottom = coinTextRect.top + 25;
+	coinTextRect.right = coinTextRect.left + 100;
 
 	//Button TowerRect
 	for (int i = 0; i < MAX_TOWER_TYPE; i++)
@@ -382,6 +426,24 @@ void Ui::draw()
 {
 	sprite->Begin(D3DXSPRITE_ALPHABLEND);
 
+	//UI element
+	sprite->Draw(heartTexture, &heartRect[0],
+		&D3DXVECTOR3(63 / 2, 56 / 2, 0), &heartPos, D3DCOLOR_XRGB(255, 255, 255));
+
+	sprite->Draw(heartTexture, &heartRect[1],
+		&D3DXVECTOR3(55 / 2, 56 / 2 - heartRect[1].top, 0), &heartPos, D3DCOLOR_XRGB(255, 255, 255));
+
+	menuButtonFont->DrawText(sprite, heartText.c_str(), -1, &heartTextRect, 0, D3DCOLOR_XRGB(255, 255, 255));
+	
+	//Wave
+	menuButtonFont->DrawText(sprite, waveText.c_str(), -1, &waveTextRect, 0, D3DCOLOR_XRGB(255, 255, 255));
+
+	//Coin
+	sprite->Draw(coinTexture, &coinRect,
+		&D3DXVECTOR3(64 / 2, 64 / 2, 0), &coinPos, D3DCOLOR_XRGB(255, 255, 255));
+
+	menuButtonFont->DrawText(sprite, coinText.c_str(), -1, &coinTextRect, 0, D3DCOLOR_XRGB(255, 255, 255));
+
 	for (int i = 0; i < UI_BUTTON_NUM; i++)
 	{
 		sprite->Draw(buttonTexture, &buttonList[i]->buttonRect,
@@ -447,6 +509,9 @@ void Ui::release()
 	menuFont->Release();
 	menuFont = NULL;
 
+	heartTexture->Release();
+	heartTexture = NULL;
+
 	for (int i = 0; i < buttonList.size(); i++)
 	{
 		buttonList[i]->release();
@@ -454,7 +519,7 @@ void Ui::release()
 		buttonList[i] = NULL;
 	}
 
-	buttonList.erase(buttonList.begin(), buttonList.begin() + buttonList.size());
+	buttonList.clear();
 
 	RemoveFontResourceEx("resource\pixel.ttf", FR_PRIVATE, 0);
 }
@@ -675,4 +740,21 @@ void Ui::pauseFunction()
 
 		isFunction = false;
 	}
+}
+
+void Ui::stateUpdate(int maxHeart, int heart, int wave, int coin)
+{
+	heartRect[1].top = heartRect[1].bottom - heartRect[1].bottom * (heart + 1) / (maxHeart + 1);
+	
+	heartText.clear();
+	heartText.append(std::to_string(heart));
+	heartText.append("/");
+	heartText.append(std::to_string(maxHeart));
+
+	waveText.clear();
+	waveText.append("Wave ");
+	waveText.append(std::to_string(wave));
+
+	coinText.clear();
+	coinText.append(std::to_string(coin));
 }

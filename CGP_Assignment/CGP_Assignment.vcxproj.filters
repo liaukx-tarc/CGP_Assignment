@@ -83,6 +83,21 @@
     <Image Include="resource\Yes_No.png">
       <Filter>Resource Files\Picture</Filter>
     </Image>
+    <Image Include="resource\BlurBackground.png">
+      <Filter>Resource Files\Picture</Filter>
+    </Image>
+    <Image Include="resource\bullet.png">
+      <Filter>Resource Files\Picture</Filter>
+    </Image>
+    <Image Include="resource\Cursor.png">
+      <Filter>Resource Files\Picture</Filter>
+    </Image>
+    <Image Include="resource\Heart.png">
+      <Filter>Resource Files\Picture</Filter>
+    </Image>
+    <Image Include="resource\coin.png">
+      <Filter>Resource Files\Picture</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="resource\Arrow.ani">

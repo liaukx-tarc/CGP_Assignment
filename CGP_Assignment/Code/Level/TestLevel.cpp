@@ -10,7 +10,7 @@
 
 TestLevel::TestLevel()
 {
-	
+
 }
 
 TestLevel::~TestLevel()
@@ -22,6 +22,12 @@ Ui * ui;
 
 void TestLevel::init()
 {
+	//level data
+	maxHealth = 20;
+	health = maxHealth;
+	coin = 170;
+	wave = 1;
+
 	//load map
 	std::string name = "data/Test_Level.txt";
 
@@ -54,6 +60,17 @@ void TestLevel::fixUpdate()
 
 void TestLevel::update()
 {
+	if (GameWindows::getInstance()->keyIn == VK_UP)
+	{
+		health--;
+		EnemyController::getInstance()->isNextWave = true;
+		coin--;
+	}
+
+	wave = EnemyController::getInstance()->currentWave + 1;
+
+	ui->stateUpdate(maxHealth, health, wave, coin);
+
 	if (!GameStateManager::getInstance()->isPause)
 	{
 		ui->update();
