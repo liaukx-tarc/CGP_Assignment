@@ -32,15 +32,15 @@ void MainMenu::init()
 
 	hr[3] = AddFontResourceEx("resource/pixel.ttf", FR_PRIVATE, 0);
 
-	hr[4] = D3DXCreateFont(Graphic::getInstance()->d3dDevice, 35, 0, 0, 1, false,
+	hr[4] = D3DXCreateFont(Graphic::getInstance()->d3dDevice, 25, 0, 0, 1, false,
 		DEFAULT_CHARSET, OUT_TT_ONLY_PRECIS, DEFAULT_QUALITY,
 		DEFAULT_PITCH | FF_DONTCARE, "Pixel", &font);
 
-	hr[5] = D3DXCreateFont(Graphic::getInstance()->d3dDevice, 150, 0, 0, FW_BOLD, false,
+	hr[5] = D3DXCreateFont(Graphic::getInstance()->d3dDevice, 100, 0, 0, FW_BOLD, false,
 		DEFAULT_CHARSET, OUT_TT_ONLY_PRECIS, DEFAULT_QUALITY,
 		DEFAULT_PITCH | FF_DONTCARE, "Pixel", &title);
 
-	hr[6] = D3DXCreateFont(Graphic::getInstance()->d3dDevice, 30, 0, 0, 0, false,
+	hr[6] = D3DXCreateFont(Graphic::getInstance()->d3dDevice, 25, 0, 0, 0, false,
 		DEFAULT_CHARSET, OUT_TT_ONLY_PRECIS, DEFAULT_QUALITY,
 		DEFAULT_PITCH | FF_DONTCARE, "Arial", &madeBy);
 
@@ -54,40 +54,40 @@ void MainMenu::init()
 
 	//Background
 	backgroundRect.top = backgroundRect.left = 0;
-	backgroundRect.bottom = 1418;
-	backgroundRect.right = 2520;
+	backgroundRect.bottom = 1080;
+	backgroundRect.right = 1920;
 
 	//Title
-	titleRect1.top = 200;
-	titleRect1.left = 950;
+	titleRect1.top = 100;
+	titleRect1.left = 750;
 	titleRect1.bottom = titleRect1.top + 200;
 	titleRect1.right = titleRect1.left + 2000;
 
-	titleRect2.top = 400;
-	titleRect2.left = 850;
+	titleRect2.top = 250;
+	titleRect2.left = 690;
 	titleRect2.bottom = titleRect2.top + 200;
 	titleRect2.right = titleRect2.left + 2000;
 
 	//Made by
-	madeByRect.top = 1230;
-	madeByRect.left = 1075;
+	madeByRect.top = 900;
+	madeByRect.left = 805;
 	madeByRect.bottom = madeByRect.top + 100;
 	madeByRect.right = madeByRect.left + 2000;
 	
 	//Start Button
 	Button * button = new Button;
-	button->position.x = 1250;
-	button->position.y = 720;
-	button->size.x = 345;
-	button->size.y = 122;
+	button->position.x = BUFFER_WIDTH / 2;
+	button->position.y = 500;
+	button->size.x = 259;
+	button->size.y = 84;
 
 	button->r = 0;
 	button->g = 200;
 	button->b = 255;
 	
 	button->word = "START";
-	button->textRect.top = (button->position.y - 25);
-	button->textRect.left = (button->position.x - 60);
+	button->textRect.top = button->position.y - 15;
+	button->textRect.left = button->position.x - 45;
 	button->textRect.bottom = button->textRect.top + 40;
 	button->textRect.right = button->textRect.left + 200;
 	
@@ -96,18 +96,18 @@ void MainMenu::init()
 	
 	//Quit Button
 	button = new Button;
-	button->position.x = 1250;
-	button->position.y = 880;
-	button->size.x = 345;
-	button->size.y = 122;
+	button->position.x = BUFFER_WIDTH / 2;
+	button->position.y = 630;
+	button->size.x = 259;
+	button->size.y = 84;
 
 	button->r = 255;
 	button->g = 0;
 	button->b = 0;
 	
 	button->word = "QUIT";
-	button->textRect.top = button->position.y - 28;
-	button->textRect.left = button->position.x - 45;
+	button->textRect.top = button->position.y - 15;
+	button->textRect.left = button->position.x - 35;
 	button->textRect.bottom = button->textRect.top + 40;
 	button->textRect.right = button->textRect.left + 100;
 	
