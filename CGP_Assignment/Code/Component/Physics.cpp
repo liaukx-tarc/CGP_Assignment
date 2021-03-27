@@ -42,37 +42,40 @@ void Physics::init()
 			PostQuitMessage(0);
 		}
 	}
-	projectileRect.top = 0;
-	projectileRect.left = 0;
-	projectileRect.bottom = projectileRect.top + 32;
-	projectileRect.right = projectileRect.left + 32;
+	for (int i = 0; i < 4; i++)
+	{
+		projectileRect[i].top = 0;
+		projectileRect[i].left = 32 * i;
+		projectileRect[i].bottom = projectileRect[i].top + 32;
+		projectileRect[i].right = projectileRect[i].left + 32;
+	}
 
 	isComplete = true;
 	timer = 0;
 	tDistance = 0;
-	cDistance = 0;
 }
 
 void Physics::update()
 {
 	for (int i = 0; i < projectilePositionList.size(); i++)
 	{
-		totalDistance = enemyPositionList[i] - towerPositionList[i];
+		enemy = EnemyController::getInstance()->enemyList;
+		enemyPosition = enemy[enemyCountList[i]]->objPosition;
+		totalDistance = enemyPosition - projectilePositionList[i];
 		tDistance = sqrt((totalDistance.x*totalDistance.x) + (totalDistance.y*totalDistance.y));
-		printf("%.2f %.2f\n", tDistance, cDistance);
+		printf("%.2f %.2f\n", tDistance);
 		if (!isComplete)
 		{
-			projectilePositionList[i].x += totalDistance.x * 0.05;
-			projectilePositionList[i].y += totalDistance.y * 0.05;
-			cDistance += tDistance * 0.05;
+			projectilePositionList[i].x += totalDistance.x / tDistance * 10;
+			projectilePositionList[i].y += totalDistance.y / tDistance * 10;
 		}
-		if (cDistance > tDistance)
+		if (tDistance <= 5)
 		{
 			isComplete = true;
-			cDistance = 0;
 			projectilePositionList.erase(projectilePositionList.begin() + i);
-			enemyPositionList.erase(enemyPositionList.begin() + i);
+			enemyCountList.erase(enemyCountList.begin() + i);
 			towerPositionList.erase(towerPositionList.begin() + i);
+			tower.erase(tower.begin() + i);
 		}
 		else
 		{
@@ -81,14 +84,14 @@ void Physics::update()
 	}
 }
 
-void Physics::projectile(D3DXVECTOR3 towerPosition, D3DXVECTOR3 enemyPosition)
+void Physics::projectile(D3DXVECTOR3 towerPosition, int enemyCount, int towerNo)
 {
-	/*towerPosition.x -= 5;*/
 	towerPositionList.push_back(towerPosition);
-	enemyPositionList.push_back(enemyPosition);
+	enemyCountList.push_back(enemyCount);
 	projectilePosition.x = towerPosition.x;
-	projectilePosition.y = towerPosition.y /*- 5*/;
+	projectilePosition.y = towerPosition.y - 5;
 	projectilePositionList.push_back(projectilePosition);
+	tower.push_back(towerNo);
 }
 
 void Physics::draw()
@@ -97,12 +100,11 @@ void Physics::draw()
 	for (int i = 0; i < projectilePositionList.size(); i++)
 	{
 		printf("%.2f %.2f %.2f\n", towerPositionList[i].x, towerPositionList[i].y, towerPositionList[i].z);
-		printf("%.2f %.2f %.2f\n", enemyPositionList[i].x, enemyPositionList[i].y, enemyPositionList[i].z);
 		printf("%.2f %.2f %.2f\n", projectilePositionList[i].x, projectilePositionList[i].y, projectilePositionList[i].z);
 		drawPosition.x = projectilePositionList[i].x / 2.0f;
-		drawPosition.y = projectilePositionList[i].y / 2.2f;
+		drawPosition.y = projectilePositionList[i].y / 2.1f;
 		drawPosition.z = 0;
-		sprite->Draw(projectileTexture, &projectileRect, &D3DXVECTOR3(16, 16, 0), &drawPosition, D3DCOLOR_XRGB(255, 255, 255));
+		sprite->Draw(projectileTexture, &projectileRect[tower[i]], &D3DXVECTOR3(16, 16, 0), &drawPosition, D3DCOLOR_XRGB(255, 255, 255));
 		scaling.x = scaling.y = 2.0f;
 		D3DXMatrixTransformation2D(&mat, NULL, 0.0, &scaling, NULL, NULL, NULL);
 		sprite->SetTransform(&mat);
