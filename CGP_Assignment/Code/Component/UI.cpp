@@ -64,10 +64,10 @@ void Ui::init()
 	//Button TowerRect
 	for (int i = 0; i < MAX_TOWER_TYPE; i++)
 	{
-		towerRect[i].top = 32 * i;
-		towerRect[i].left = 32 * 3;
-		towerRect[i].bottom = towerRect[i].top + 32;
-		towerRect[i].right = towerRect[i].left + 32;
+		towerRect[i].top = 96 * i;
+		towerRect[i].left = 96 * 3;
+		towerRect[i].bottom = towerRect[i].top + 96;
+		towerRect[i].right = towerRect[i].left + 96;
 
 		towerTextMove[i] = 0;
 	}
@@ -392,14 +392,14 @@ void Ui::draw()
 		//draw tower on button
 		if (i < MAX_TOWER_TYPE)
 		{
-			scaling.x = scaling.y = 5.0f;
+			scaling.x = scaling.y = 1.5f;
 			D3DXMatrixTransformation2D(&mat, NULL, 0.0, &scaling, NULL, NULL, NULL);
 			sprite->SetTransform(&mat);
 
 			sprite->Draw(TowerBuilding::getInstance()->towerTexture, &towerRect[i],
-				&D3DXVECTOR3(32/2, 32*3/4, 0),
+				&D3DXVECTOR3(96 / 2, 96 * 3 / 4, 0),
 				&D3DXVECTOR3(buttonList[i]->position.x / scaling.x, (buttonList[i]->position.y + towerTextMove[i]) / scaling.y, 0),
-				D3DCOLOR_XRGB(255, 255, 255));;
+				D3DCOLOR_XRGB(255, 255, 255));
 
 			scaling.x = scaling.y = 1.0f;
 			D3DXMatrixTransformation2D(&mat, NULL, 0.0, &scaling, NULL, NULL, NULL);
