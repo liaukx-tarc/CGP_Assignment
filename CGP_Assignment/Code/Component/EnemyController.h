@@ -31,9 +31,6 @@ public:
 	LPDIRECT3DTEXTURE9 bossTexture;
 
 	LPD3DXSPRITE sprite;
-	D3DXMATRIX mat;
-	D3DXVECTOR2 charScaling;
-	D3DXVECTOR3 drawPosition;
 
 	int enemyNum;
 	std::vector<Character*> enemyList;

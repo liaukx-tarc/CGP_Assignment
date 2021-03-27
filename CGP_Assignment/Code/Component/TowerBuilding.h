@@ -31,8 +31,6 @@ public:
 
 	//sprite
 	LPD3DXSPRITE sprite;
-	D3DXMATRIX mat;
-	D3DXVECTOR2 scaling;
 
 	LPDIRECT3DTEXTURE9 towerTexture;
 	RECT towerRect;

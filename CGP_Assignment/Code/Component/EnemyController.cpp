@@ -61,10 +61,6 @@ void EnemyController::init()
 		}
 	}
 
-	charScaling.x = charScaling.y = 3.0f;
-
-	D3DXMatrixTransformation2D(&mat, NULL, 0.0, &charScaling, NULL, NULL, NULL);
-
 	FILE *fp;
 	fp = fopen("data/enemyData.txt", "rb");
 
@@ -169,17 +165,12 @@ void EnemyController::update()
 void EnemyController::draw()
 {
 	sprite->Begin(D3DXSPRITE_ALPHABLEND);
-	sprite->SetTransform(&mat);
 	//draw enemy
 	for (int i = 0; i < enemyList.size(); i++)
 	{
-		drawPosition.x = enemyList[i]->objPosition.x * Map::getInstance()->tileScaling.x / charScaling.x;
-		drawPosition.y = enemyList[i]->objPosition.y * Map::getInstance()->tileScaling.y / charScaling.y;
-		drawPosition.z = enemyList[i]->objPosition.z;
-
 		sprite->Draw(minionTexture, &enemyList[i]->charRect,
 			&D3DXVECTOR3(enemyList[i]->spriteSize.x / 2, enemyList[i]->spriteSize.y / 2, 0), //set the charecter with center point
-			&drawPosition, D3DCOLOR_XRGB(255, 255, 255));
+			&enemyList[i]->objPosition, D3DCOLOR_XRGB(255, 255, 255));
 	}
 
 	sprite->End();

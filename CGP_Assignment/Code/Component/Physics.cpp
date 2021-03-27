@@ -87,7 +87,7 @@ void Physics::projectile(D3DXVECTOR3 towerPosition, D3DXVECTOR3 enemyPosition)
 	towerPositionList.push_back(towerPosition);
 	enemyPositionList.push_back(enemyPosition);
 	projectilePosition.x = towerPosition.x;
-	projectilePosition.y = towerPosition.y - 5;
+	projectilePosition.y = towerPosition.y /*- 5*/;
 	projectilePositionList.push_back(projectilePosition);
 }
 

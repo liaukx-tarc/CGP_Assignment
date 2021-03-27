@@ -29,8 +29,6 @@ public:
 	RECT tileRect;
 	LPDIRECT3DTEXTURE9 tile;
 	LPD3DXSPRITE sprite;
-	D3DXMATRIX mat;
-	D3DXVECTOR2 tileScaling;
 
 	//tile map
 	int map[MAX_MAP_Y][MAX_MAP_X];

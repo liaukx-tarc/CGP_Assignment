@@ -142,10 +142,10 @@ void TowerBuilding::update()
 		tileSelectX = mousePos.x / TILE_WIDTH;
 		tileSelectY = mousePos.y / TILE_HEIGHT;
 
-		towerRect.top = 32 * towerSelect;
+		towerRect.top = 96 * towerSelect;
 		towerRect.left = 0;
-		towerRect.bottom = towerRect.top + 32;
-		towerRect.right = 32;
+		towerRect.bottom = towerRect.top + 96;
+		towerRect.right = 96;
 
 		if (DirectInput::getInstance()->mouseState.rgbButtons[0] & 0x80)
 		{
@@ -197,7 +197,9 @@ void TowerBuilding::draw()
 		{
 			if (towerList[a][b] != NULL)
 			{
-				sprite->Draw(towerTexture, &towerList[a][b]->towerRect, &D3DXVECTOR3(towerList[a][b]->spriteSize.x / 2, towerList[a][b]->spriteSize.y * 3 / 4, 0), &D3DXVECTOR3(towerList[a][b]->objPosition.x / scaling.x, towerList[a][b]->objPosition.y / scaling.y, 0), D3DCOLOR_XRGB(255, 255, 255));
+				sprite->Draw(towerTexture, &towerList[a][b]->towerRect, &D3DXVECTOR3(towerList[a][b]->spriteSize.x / 2, towerList[a][b]->spriteSize.y * 3 / 4, 0), 
+					&D3DXVECTOR3(towerList[a][b]->objPosition.x, towerList[a][b]->objPosition.y, 0), 
+					D3DCOLOR_XRGB(255, 255, 255));
 			}
 		}
 	}
@@ -209,26 +211,18 @@ void TowerBuilding::draw()
 		{
 			if (isBuilding && towerList[tileSelectY][tileSelectX] == NULL)
 			{
-				scaling.x = scaling.y = 1.0f;
-				D3DXMatrixTransformation2D(&mat, NULL, 0.0, &scaling, NULL, NULL, NULL);
-				sprite->SetTransform(&mat);
-
 				sprite->Draw(selectBoxTeture, &selectBoxRect,
-					&D3DXVECTOR3((TILE_WIDTH / 2) * Map::getInstance()->tileScaling.x, (TILE_HEIGHT / 2) * Map::getInstance()->tileScaling.y, 0),
-					&D3DXVECTOR3((tileSelectX * TILE_WIDTH + (TILE_WIDTH / 2)) * Map::getInstance()->tileScaling.x, (tileSelectY * TILE_HEIGHT + (TILE_HEIGHT / 2)) * Map::getInstance()->tileScaling.y, 0),
+					&D3DXVECTOR3(TILE_WIDTH / 2, TILE_HEIGHT / 2, 0),
+					&D3DXVECTOR3(tileSelectX * TILE_WIDTH + (TILE_WIDTH / 2), tileSelectY * TILE_HEIGHT + (TILE_HEIGHT / 2) , 0),
 					D3DCOLOR_XRGB(255, 255, 255));
-
-				scaling.x = scaling.y = 3.0f;
-				D3DXMatrixTransformation2D(&mat, NULL, 0.0, &scaling, NULL, NULL, NULL);
-				sprite->SetTransform(&mat);
 			}
 		}
 	}
 	
 	if (isBuilding)
 	{
-		sprite->Draw(towerTexture, &towerRect, &D3DXVECTOR3(32 / 2, 32 * 3 / 4, 0),
-			&D3DXVECTOR3(mousePos.x / scaling.x, mousePos.y / scaling.y, 0),
+		sprite->Draw(towerTexture, &towerRect, &D3DXVECTOR3( 96 / 2, 96 *3 / 4, 0),
+			&D3DXVECTOR3(mousePos.x, mousePos.y, 0),
 			D3DCOLOR_XRGB(255, 255, 255));
 	}
 	

@@ -34,10 +34,10 @@ Character::~Character()
 
 void Character::init()
 {
-	spriteSize.x = 20;
-	spriteSize.y = 30;
+	spriteSize.x = 60;
+	spriteSize.y = 90;
 
-	charRect.top = 30 * charNo;
+	charRect.top = spriteSize.y * charNo;
 	charRect.left = 0;
 	charRect.bottom = charRect.top + spriteSize.y;
 	charRect.right = charRect.right + spriteSize.x;
@@ -62,7 +62,7 @@ void Character::init()
 	currentPointX = objPosition.x / TILE_WIDTH;
 	currentPointY = objPosition.y / TILE_HEIGHT;
 
-	hitboxRadius = 30;
+	hitboxRadius = spriteSize.y;
 }
 
 void Character::draw()
@@ -81,9 +81,9 @@ void Character::fixUpdate()
 		charFrame %= frameNum;
 	}
 
-	charRect.top = 30 * charNo;
+	charRect.top = spriteSize.y * charNo;
 	charRect.bottom = charRect.top + spriteSize.y;
-	charRect.left = 20 * (charFrame + (charState * 4));
+	charRect.left = spriteSize.x * (charFrame + (charState * 4));
 	charRect.right = charRect.left + spriteSize.x;
 }
 
