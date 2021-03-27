@@ -6,8 +6,8 @@
 #define MAX_ENEMY_ONEWAVE	50
 #define MAX_WAVE			10
 
-#define MAX_MAP_Y 18
-#define MAX_MAP_X 42
+#define MAX_MAP_Y 12
+#define MAX_MAP_X 32
 #define TILE_HEIGHT 60
 #define TILE_WIDTH 60
 #define MAX_START 4

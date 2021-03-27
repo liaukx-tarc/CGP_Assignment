@@ -35,7 +35,7 @@ void Ui::init()
 	
 	hr[3] = AddFontResourceEx("resource/pixel.ttf", FR_PRIVATE, 0);
 
-	hr[4] = D3DXCreateFont(Graphic::getInstance()->d3dDevice, 20, 0, 0, 1, false,
+	hr[4] = D3DXCreateFont(Graphic::getInstance()->d3dDevice, 15, 0, 0, 1, false,
 		DEFAULT_CHARSET, OUT_TT_ONLY_PRECIS, DEFAULT_QUALITY,
 		DEFAULT_PITCH | FF_DONTCARE, "Pixel", &buttonFont);
 
@@ -45,7 +45,7 @@ void Ui::init()
 	
 	hr[8] = D3DXCreateTextureFromFile(Graphic::getInstance()->d3dDevice, "resource/Button.png", &menuButtonTexture);
 	
-	hr[9] = D3DXCreateFont(Graphic::getInstance()->d3dDevice, 35, 0, 0, 1, false,
+	hr[9] = D3DXCreateFont(Graphic::getInstance()->d3dDevice, 25, 0, 0, 1, false,
 		DEFAULT_CHARSET, OUT_TT_ONLY_PRECIS, DEFAULT_QUALITY,
 		DEFAULT_PITCH | FF_DONTCARE, "Pixel", &menuButtonFont);
 
@@ -74,18 +74,18 @@ void Ui::init()
 
 	//Wind Tower Button
 	Button * button = new Button;
-	button->position.x = 140;
-	button->position.y = 1250;
-	button->size.x = 240;
-	button->size.y = 300;
+	button->position.x = 120;
+	button->position.y = 900;
+	button->size.x = 180;
+	button->size.y = 225;
 
 	button->r = 204;
 	button->g = 112;
 	button->b = 0;
 
 	button->word = "Wind Tower";
-	button->textRect.top = button->position.y + 90;
-	button->textRect.left = button->position.x - 75;
+	button->textRect.top = button->position.y + 70;
+	button->textRect.left = button->position.x - 55;
 	button->textRect.bottom = button->textRect.top + 40;
 	button->textRect.right = button->textRect.left + 200;
 
@@ -94,18 +94,18 @@ void Ui::init()
 
 	//Thunder Tower Button
 	button = new Button;
-	button->position.x = 400;
-	button->position.y = 1250;
-	button->size.x = 240;
-	button->size.y = 300;
+	button->position.x = 335;
+	button->position.y = 900;
+	button->size.x = 180;
+	button->size.y = 225;
 
 	button->r = 204;
 	button->g = 112;
 	button->b = 0;
 
 	button->word = "Thunder Tower";
-	button->textRect.top = button->position.y + 90;
-	button->textRect.left = button->position.x - 105;
+	button->textRect.top = button->position.y + 70;
+	button->textRect.left = button->position.x - 78;
 	button->textRect.bottom = button->textRect.top + 40;
 	button->textRect.right = button->textRect.left + 250;
 
@@ -114,18 +114,18 @@ void Ui::init()
 
 	//Ice Tower Button
 	button = new Button;
-	button->position.x = 660;
-	button->position.y = 1250;
-	button->size.x = 240;
-	button->size.y = 300;
+	button->position.x = 550;
+	button->position.y = 900;
+	button->size.x = 180;
+	button->size.y = 225;
 
 	button->r = 204;
 	button->g = 112;
 	button->b = 0;
 
 	button->word = "Ice Tower";
-	button->textRect.top = button->position.y + 90;
-	button->textRect.left = button->position.x - 65;
+	button->textRect.top = button->position.y + 70;
+	button->textRect.left = button->position.x - 50;
 	button->textRect.bottom = button->textRect.top + 40;
 	button->textRect.right = button->textRect.left + 200;
 
@@ -134,18 +134,18 @@ void Ui::init()
 
 	//Fire Tower Button
 	button = new Button;
-	button->position.x = 920;
-	button->position.y = 1250;
-	button->size.x = 240;
-	button->size.y = 300;
+	button->position.x = 765;
+	button->position.y = 900;
+	button->size.x = 180;
+	button->size.y = 225;
 
 	button->r = 204;
 	button->g = 112;
 	button->b = 0;
 
 	button->word = "Fire Tower";
-	button->textRect.top = button->position.y + 90;
-	button->textRect.left = button->position.x - 70;
+	button->textRect.top = button->position.y + 70;
+	button->textRect.left = button->position.x - 55;
 	button->textRect.bottom = button->textRect.top + 40;
 	button->textRect.right = button->textRect.left + 200;
 
@@ -157,12 +157,12 @@ void Ui::init()
 
 	//Menu Background
 	menuRect.top = menuRect.left = 0;
-	menuRect.bottom = 753;
-	menuRect.right = 1024;
+	menuRect.bottom = 576;
+	menuRect.right = 768;
 
 	//Menu Font
 	menuTextRect.top = (BUFFER_HEIGHT / 2) - (menuRect.bottom / 2) - 40;
-	menuTextRect.left = BUFFER_WIDTH / 2 - 150;
+	menuTextRect.left = BUFFER_WIDTH / 2 - 160;
 	menuTextRect.bottom = menuTextRect.top + 100;
 	menuTextRect.right = menuTextRect.left + 400;
 
@@ -170,17 +170,17 @@ void Ui::init()
 	//Resume Button
 	button = new Button;
 	button->position.x = BUFFER_WIDTH / 2;
-	button->position.y = (BUFFER_HEIGHT / 2) - (menuRect.bottom / 2) + 180;
-	button->size.x = 345;
-	button->size.y = 122;
+	button->position.y = (BUFFER_HEIGHT / 2) - (menuRect.bottom / 2) + 150;
+	button->size.x = 259;
+	button->size.y = 84;
 
 	button->r = 175;
 	button->g = 210;
 	button->b = 0;
 
 	button->word = "Resume";
-	button->textRect.top = button->position.y - 25;
-	button->textRect.left = button->position.x - 85;
+	button->textRect.top = button->position.y - 15;
+	button->textRect.left = button->position.x - 60;
 	button->textRect.bottom = button->textRect.top + 40;
 	button->textRect.right = button->textRect.left + 200;
 
@@ -190,17 +190,17 @@ void Ui::init()
 	//Restart Button
 	button = new Button;
 	button->position.x = BUFFER_WIDTH / 2;
-	button->position.y = (BUFFER_HEIGHT / 2) - (menuRect.bottom / 2) + 330;
-	button->size.x = 345;
-	button->size.y = 122;
+	button->position.y = (BUFFER_HEIGHT / 2) - (menuRect.bottom / 2) + 280;
+	button->size.x = 259;
+	button->size.y = 84;
 
 	button->r = 0;
 	button->g = 47;
 	button->b = 255;
 
 	button->word = "Restart";
-	button->textRect.top = button->position.y - 25;
-	button->textRect.left = button->position.x - 90;
+	button->textRect.top = button->position.y - 15;
+	button->textRect.left = button->position.x - 65;
 	button->textRect.bottom = button->textRect.top + 40;
 	button->textRect.right = button->textRect.left + 300;
 
@@ -210,17 +210,17 @@ void Ui::init()
 	//Main Menu Button
 	button = new Button;
 	button->position.x = BUFFER_WIDTH / 2;
-	button->position.y = (BUFFER_HEIGHT / 2) - (menuRect.bottom / 2) + 480;
-	button->size.x = 345;
-	button->size.y = 122;
+	button->position.y = (BUFFER_HEIGHT / 2) - (menuRect.bottom / 2) + 410;
+	button->size.x = 259;
+	button->size.y = 84;
 
 	button->r = 255;
 	button->g = 47;
 	button->b = 0;
 
 	button->word = "Main Menu";
-	button->textRect.top = button->position.y - 25;
-	button->textRect.left = button->position.x - 120;
+	button->textRect.top = button->position.y - 15;
+	button->textRect.left = button->position.x - 85;
 	button->textRect.bottom = button->textRect.top + 40;
 	button->textRect.right = button->textRect.left + 300;
 
@@ -229,21 +229,21 @@ void Ui::init()
 
 	//Confirm Text Rect
 	confrimRect[0].top = BUFFER_HEIGHT / 2 - 20;
-	confrimRect[0].left = BUFFER_WIDTH / 2 - 80;
+	confrimRect[0].left = BUFFER_WIDTH / 2 - 65;
 	confrimRect[0].bottom = confrimRect[0].top + 40;
 	confrimRect[0].right = confrimRect[0].left + 400;
 
 	confrimRect[1].top = BUFFER_HEIGHT / 2 - 20;
-	confrimRect[1].left = BUFFER_WIDTH / 2 - 110;
+	confrimRect[1].left = BUFFER_WIDTH / 2 - 85;
 	confrimRect[1].bottom = confrimRect[1].top + 40;
 	confrimRect[1].right = confrimRect[1].left + 400;
 
 	//Yes Button
 	button = new Button;
-	button->position.x = BUFFER_WIDTH / 2 - 120;
-	button->position.y = (BUFFER_HEIGHT / 2) + 180;
-	button->size.x = 138;
-	button->size.y = 140;
+	button->position.x = BUFFER_WIDTH / 2 - 80;
+	button->position.y = (BUFFER_HEIGHT / 2) + 140;
+	button->size.x = 64;
+	button->size.y = 64;
 
 	button->r = 255;
 	button->g = 255;
@@ -254,10 +254,10 @@ void Ui::init()
 
 	//No Button
 	button = new Button;
-	button->position.x = BUFFER_WIDTH / 2 + 120;
-	button->position.y = (BUFFER_HEIGHT / 2) + 180;
-	button->size.x = 138;
-	button->size.y = 140;
+	button->position.x = BUFFER_WIDTH / 2 + 80;
+	button->position.y = (BUFFER_HEIGHT / 2) + 140;
+	button->size.x = 64;
+	button->size.y = 64;
 
 	button->r = 255;
 	button->g = 255;
@@ -266,7 +266,7 @@ void Ui::init()
 	button->init();
 
 	button->buttonRect.top = button->size.y;
-	button->buttonRect.bottom = button->buttonRect.top + 133;
+	button->buttonRect.bottom = button->buttonRect.top + 64;
 
 	buttonList.push_back(button);
 }
@@ -481,7 +481,7 @@ void Ui::pauseMenu()
 		sprite->Draw(menuBack, &menuRect,
 			&D3DXVECTOR3(menuRect.right / 2, menuRect.bottom / 2, 0),
 			&D3DXVECTOR3(BUFFER_WIDTH / 2, BUFFER_HEIGHT / 2, 0),
-			D3DCOLOR_XRGB(255, 255, 255));
+			D3DCOLOR_XRGB(225, 122, 0));
 
 		menuFont->DrawText(sprite, "MENU", -1, &menuTextRect, 0, D3DCOLOR_XRGB(255, 255, 255));
 
@@ -508,7 +508,7 @@ void Ui::pauseMenu()
 		sprite->Draw(menuBack, &menuRect,
 			&D3DXVECTOR3(menuRect.right / 2, menuRect.bottom / 2, 0),
 			&D3DXVECTOR3(BUFFER_WIDTH / scaling.x / 2, BUFFER_HEIGHT / scaling.y / 2, 0),
-			D3DCOLOR_XRGB(255, 255, 255));
+			D3DCOLOR_XRGB(225, 122, 0));
 
 		scaling.x = scaling.y = 1.0f;
 		D3DXMatrixTransformation2D(&mat, NULL, 0.0, &scaling, NULL, NULL, NULL);
