@@ -57,10 +57,6 @@ void Map::createMap()
 	tileRect.left = tileRect.top = 0;
 	tileRect.right = 60;
 	tileRect.bottom = 60;
-
-	tileScaling.x = tileScaling.y = 1.0f;
-
-	D3DXMatrixTransformation2D(&mat, NULL, 0.0, &tileScaling, NULL, NULL, NULL);
 }
 
 void Map::loadMap(char * name) 
@@ -159,7 +155,6 @@ void Map::loadMap(char * name)
 void Map::drawMap()
 {
 	sprite->Begin(D3DXSPRITE_ALPHABLEND);
-	sprite->SetTransform(&mat);
 
 	//Draw the map 
 	for (int y = 0; y < MAX_MAP_Y; y++) 
