@@ -63,8 +63,15 @@ void TestLevel::update()
 	if (GameWindows::getInstance()->keyIn == VK_UP)
 	{
 		health--;
-		EnemyController::getInstance()->isNextWave = true;
 		coin--;
+	}
+
+	if (GameWindows::getInstance()->keyIn == VK_DOWN)
+	{
+		for (int i = 0; i < EnemyController::getInstance()->enemyList.size(); i++)
+		{
+			EnemyController::getInstance()->isNextWave = true;
+		}
 	}
 
 	if (GameWindows::getInstance()->keyIn == VK_ESCAPE)

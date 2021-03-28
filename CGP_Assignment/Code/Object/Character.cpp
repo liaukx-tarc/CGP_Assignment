@@ -63,6 +63,8 @@ void Character::init()
 	currentPointY = objPosition.y / TILE_HEIGHT;
 
 	hitboxRadius = spriteSize.y;
+
+	r = b = g = 255;
 }
 
 void Character::draw()

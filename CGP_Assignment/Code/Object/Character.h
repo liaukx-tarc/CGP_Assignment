@@ -21,6 +21,8 @@ public:
 	int charNo;				//The No. of character in the sheet
 	int frameNum;			//The character's animation have how many frame
 
+	int r, g, b;
+
 	int pathRoute[MAX_MAP_Y][MAX_MAP_X]; // get path from map
 	D3DXVECTOR2 startPoint;
 	D3DXVECTOR2 endPoint;
