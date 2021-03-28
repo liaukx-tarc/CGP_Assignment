@@ -86,17 +86,20 @@ void Tower::inRange(std::vector<Character*>enemy)
 	{
 		for (int i = 0; i < enemy.size(); i++)
 		{
-			distanceX = objPosition.x - enemy[i]->objPosition.x;
-			distanceY = objPosition.y - enemy[i]->objPosition.y;
-			distance = sqrt((distanceX*distanceX) + (distanceY*distanceY));
-
-			if (rangeRadius + enemy[i]->hitboxRadius > distance)
+			if (!enemy[i]->isDead)
 			{
-				printf("%d in range\n", i);
-				isFire = true;
-				fireCD = 50;
-				Physics::getInstance()->projectile(objPosition, i,towerNo);
-				break;
+				distanceX = objPosition.x - enemy[i]->objPosition.x;
+				distanceY = objPosition.y - enemy[i]->objPosition.y;
+				distance = sqrt((distanceX*distanceX) + (distanceY*distanceY));
+
+				if (rangeRadius + enemy[i]->hitboxRadius > distance)
+				{
+					printf("%d in range\n", i);
+					isFire = true;
+					fireCD = 50;
+					Physics::getInstance()->projectile(objPosition, i, towerNo);
+					break;
+				}
 			}
 		}
 	}

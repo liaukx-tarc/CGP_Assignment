@@ -25,6 +25,7 @@ Character::Character()
 	frameTimer = 0;
 	health = 0;
 	hitboxRadius = 0;
+	isDead = false;
 }
 
 Character::~Character()
@@ -65,6 +66,8 @@ void Character::init()
 	hitboxRadius = spriteSize.y;
 
 	r = b = g = 255;
+
+	health = 20;
 }
 
 void Character::draw()

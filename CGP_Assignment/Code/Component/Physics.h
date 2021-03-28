@@ -30,7 +30,6 @@ public:
 	D3DXVECTOR2 scaling;
 	RECT projectileRect[4];
 	D3DXVECTOR3 totalDistance;
-	D3DXVECTOR3 currentDistance;
 	float tDistance;
 	D3DXVECTOR3 projectilePosition;
 	D3DXVECTOR3 enemyPosition;
