@@ -71,7 +71,52 @@ void Physics::update()
 		if (tDistance <= 5)
 		{
 			isComplete = true;
-			enemy[enemyCountList[i]]->health -= 5;
+			switch (tower[i])
+			{
+			case 0:
+				enemy[enemyCountList[i]]->health -= 2;
+				enemy[enemyCountList[i]]->r = 123;
+				enemy[enemyCountList[i]]->g = 125;
+				enemy[enemyCountList[i]]->b = 110;
+				switch(enemy[enemyCountList[i]]->directionState)
+				{
+				case 'l':
+					enemy[enemyCountList[i]]->objPosition.x += 10;
+					break;
+				case 'r':
+					enemy[enemyCountList[i]]->objPosition.x -= 10;
+					break;
+				case 't':
+					enemy[enemyCountList[i]]->objPosition.y += 10;
+					break;
+				case 'b':
+					enemy[enemyCountList[i]]->objPosition.y -= 10;
+					break;
+					
+				}
+				break;
+			case 1:
+				enemy[enemyCountList[i]]->health -= 3;
+				enemy[enemyCountList[i]]->r = 207;
+				enemy[enemyCountList[i]]->g = 180;
+				enemy[enemyCountList[i]]->b = 17;
+				break;
+			case 2:
+				enemy[enemyCountList[i]]->health -= 2;
+				enemy[enemyCountList[i]]->r = 10;
+				enemy[enemyCountList[i]]->g = 150;
+				enemy[enemyCountList[i]]->b = 245;
+				enemy[enemyCountList[i]]->isSlow = true;
+				break;
+			case 3:
+				enemy[enemyCountList[i]]->health -= 5;
+				enemy[enemyCountList[i]]->r = 252;
+				enemy[enemyCountList[i]]->g = 100;
+				enemy[enemyCountList[i]]->b = 100;
+				break;
+			}
+			enemy[enemyCountList[i]]->isHit = true;
+
 			printf("%.2f\n", enemy[enemyCountList[i]]->health);
 			projectilePositionList.erase(projectilePositionList.begin() + i);
 			enemyCountList.erase(enemyCountList.begin() + i);
