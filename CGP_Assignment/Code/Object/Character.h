@@ -50,6 +50,7 @@ public:
 
 	float health;
 	float charSpeed;	//The movement speed of the character in 1 time
+	bool isDead;
 	
 	float hitboxRadius;
 

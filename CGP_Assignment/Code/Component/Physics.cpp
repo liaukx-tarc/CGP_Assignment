@@ -63,7 +63,6 @@ void Physics::update()
 		enemyPosition = enemy[enemyCountList[i]]->objPosition;
 		totalDistance = enemyPosition - projectilePositionList[i];
 		tDistance = sqrt((totalDistance.x*totalDistance.x) + (totalDistance.y*totalDistance.y));
-		printf("%.2f %.2f\n", tDistance);
 		if (!isComplete)
 		{
 			projectilePositionList[i].x += totalDistance.x / tDistance * 10;
@@ -72,6 +71,8 @@ void Physics::update()
 		if (tDistance <= 5)
 		{
 			isComplete = true;
+			enemy[enemyCountList[i]]->health -= 5;
+			printf("%.2f\n", enemy[enemyCountList[i]]->health);
 			projectilePositionList.erase(projectilePositionList.begin() + i);
 			enemyCountList.erase(enemyCountList.begin() + i);
 			towerPositionList.erase(towerPositionList.begin() + i);
@@ -99,8 +100,6 @@ void Physics::draw()
 	sprite->Begin(D3DXSPRITE_ALPHABLEND);
 	for (int i = 0; i < projectilePositionList.size(); i++)
 	{
-		printf("%.2f %.2f %.2f\n", towerPositionList[i].x, towerPositionList[i].y, towerPositionList[i].z);
-		printf("%.2f %.2f %.2f\n", projectilePositionList[i].x, projectilePositionList[i].y, projectilePositionList[i].z);
 		drawPosition.x = projectilePositionList[i].x / 2.0f;
 		drawPosition.y = projectilePositionList[i].y / 2.1f;
 		drawPosition.z = 0;

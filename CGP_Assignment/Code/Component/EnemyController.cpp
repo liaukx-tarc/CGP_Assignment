@@ -132,7 +132,10 @@ void EnemyController::fixUpdate()
 	//fix update the enemy
 	for (int i = 0; i < enemyList.size(); i++)
 	{
-		enemyList[i]->fixUpdate();
+		if (!enemyList[i]->isDead)
+		{
+			enemyList[i]->fixUpdate();
+		}
 	}
 }
 
@@ -158,7 +161,17 @@ void EnemyController::update()
 	//update the enemy
 	for (int i = 0; i < enemyList.size(); i++)
 	{
-		enemyList[i]->update();
+		if (!enemyList[i]->isDead)
+		{
+			if (enemyList[i]->health <= 0)
+			{
+				enemyList[i]->isDead = true;
+			}
+			else
+			{
+				enemyList[i]->update();
+			}
+		}
 	}
 }
 
@@ -168,9 +181,12 @@ void EnemyController::draw()
 	//draw enemy
 	for (int i = 0; i < enemyList.size(); i++)
 	{
-		sprite->Draw(minionTexture, &enemyList[i]->charRect,
-			&D3DXVECTOR3(enemyList[i]->spriteSize.x / 2, enemyList[i]->spriteSize.y / 2, 0), //set the charecter with center point
-			&enemyList[i]->objPosition, D3DCOLOR_XRGB(enemyList[i]->r, enemyList[i]->g, enemyList[i]->b));
+		if (!enemyList[i]->isDead)
+		{
+			sprite->Draw(minionTexture, &enemyList[i]->charRect,
+				&D3DXVECTOR3(enemyList[i]->spriteSize.x / 2, enemyList[i]->spriteSize.y / 2, 0), //set the charecter with center point
+				&enemyList[i]->objPosition, D3DCOLOR_XRGB(enemyList[i]->r, enemyList[i]->g, enemyList[i]->b));
+		}
 	}
 
 	sprite->End();
