@@ -170,7 +170,7 @@ void EnemyController::draw()
 	{
 		sprite->Draw(minionTexture, &enemyList[i]->charRect,
 			&D3DXVECTOR3(enemyList[i]->spriteSize.x / 2, enemyList[i]->spriteSize.y / 2, 0), //set the charecter with center point
-			&enemyList[i]->objPosition, D3DCOLOR_XRGB(255, 255, 255));
+			&enemyList[i]->objPosition, D3DCOLOR_XRGB(enemyList[i]->r, enemyList[i]->g, enemyList[i]->b));
 	}
 
 	sprite->End();
