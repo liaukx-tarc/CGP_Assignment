@@ -71,6 +71,8 @@ void TestLevel::update()
 	{
 		if (!ui->isMenu)
 		{
+			ui->buttonList[PAUSE]->buttonRect.top = 0;
+			ui->buttonList[PAUSE]->buttonRect.bottom = ui->buttonList[PAUSE]->size.y;
 			GameStateManager::getInstance()->isPause = true;
 			ui->isMenu = true;
 		}

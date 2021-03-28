@@ -7,6 +7,23 @@
 #include "../Object/Button.h"
 #include "TowerBuilding.h"
 
+#define TOWER_BUTTON_NUM	4
+#define FUNC_BUTTON_NUM		6
+#define MENU_BUTTON_NUM		9
+#define CONFIRM_BUTTON_NUM	11
+
+#define TOWER1		0
+#define TOWER2		1
+#define TOWER3		2
+#define TOWER4		3
+#define PAUSE		4
+#define SETTING		5
+#define RESUME		6
+#define RESTART		7
+#define MAIN_MENU	8
+#define YES			9
+#define NO			10
+
 class Ui
 {
 public:
@@ -34,6 +51,7 @@ public:
 	std::vector<Button*> buttonList;
 
 	RECT towerRect[MAX_TOWER_TYPE];
+	RECT pauseButtonRect[2];
 
 	int towerTextMove[MAX_TOWER_TYPE];
 	int function;
