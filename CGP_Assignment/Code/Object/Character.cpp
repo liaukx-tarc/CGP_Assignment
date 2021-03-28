@@ -19,13 +19,16 @@ Character::Character()
 	charFrame = 0;
 	charNo = 0;
 	charSpeed = 0;
+	speedFactor = 0;
 	charState = 0;
 	frameNum = 0;
 	frameRate = 0;
 	frameTimer = 0;
 	health = 0;
 	hitboxRadius = 0;
-	isDead = false;
+	isDead = false; 
+	isSlow = false;
+	isHit = false;
 }
 
 Character::~Character()
@@ -59,11 +62,13 @@ void Character::init()
 				endPoint.y = y;
 			}
 		}
-	}
+	};
 	currentPointX = objPosition.x / TILE_WIDTH;
 	currentPointY = objPosition.y / TILE_HEIGHT;
-
+	speedFactor = 0.1f;
+	slowTimer = 100;
 	hitboxRadius = spriteSize.y;
+	hitTimer = 10;
 
 	r = b = g = 255;
 
@@ -95,6 +100,31 @@ void Character::fixUpdate()
 void Character::update()
 {
 	move(charDirection);
+	if (isSlow)
+	{
+		speedFactor = 0.05f;
+		slowTimer -= 1;
+		if (slowTimer < 0)
+		{
+			isSlow = false;
+			slowTimer = 100;
+		}
+	}
+	else
+	{
+		speedFactor = 0.1f;
+	}
+
+	if (isHit)
+	{
+		hitTimer -= 1;
+		if (hitTimer < 0)
+		{
+			isHit = false;
+			r = b = g = 255;
+			hitTimer = 10;
+		}
+	}
 }
 
 void Character::release()
@@ -229,8 +259,8 @@ void Character::move(D3DXVECTOR2 direction)
 	}
 
 	charState = 1; //move
-	objPosition.x += direction.x * (0.1f * charSpeed);
-	objPosition.y += direction.y * (0.1f * charSpeed);
+	objPosition.x += direction.x * (speedFactor * charSpeed);
+	objPosition.y += direction.y * (speedFactor * charSpeed);
 	
 	if (directionState == 'l' || directionState == 't')
 	{

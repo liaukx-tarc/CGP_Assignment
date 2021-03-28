@@ -50,6 +50,11 @@ public:
 
 	float health;
 	float charSpeed;	//The movement speed of the character in 1 time
+	float speedFactor;
+	bool isSlow;
+	int slowTimer;
+	bool isHit;
+	int hitTimer;
 	bool isDead;
 	
 	float hitboxRadius;
