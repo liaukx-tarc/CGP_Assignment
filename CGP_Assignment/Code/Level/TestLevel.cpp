@@ -66,14 +66,6 @@ void TestLevel::update()
 		coin--;
 	}
 
-	if (GameWindows::getInstance()->keyIn == VK_DOWN)
-	{
-		for (int i = 0; i < EnemyController::getInstance()->enemyList.size(); i++)
-		{
-			EnemyController::getInstance()->isNextWave = true;
-		}
-	}
-
 	if (GameWindows::getInstance()->keyIn == VK_ESCAPE)
 	{
 		if (!ui->isMenu)

@@ -125,6 +125,8 @@ void EnemyController::init()
 	Spawner * spawner = new Spawner;
 	spawner->init();
 	spawnerList.push_back(spawner);
+
+	dieEnemyNum = 0;
 }
 
 void EnemyController::fixUpdate()
@@ -141,6 +143,12 @@ void EnemyController::fixUpdate()
 
 void EnemyController::update()
 {
+	if (dieEnemyNum == totalSpawn[currentWave] && currentWave != waveNum - 1)
+	{
+		isNextWave = true;
+		dieEnemyNum = 0;
+	}
+
 	//go to next wave
 	if (isNextWave)
 	{
@@ -166,6 +174,7 @@ void EnemyController::update()
 			if (enemyList[i]->health <= 0)
 			{
 				enemyList[i]->isDead = true;
+				dieEnemyNum++;
 			}
 			else
 			{
