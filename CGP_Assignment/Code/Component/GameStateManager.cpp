@@ -57,15 +57,6 @@ GameStateManager::~GameStateManager()
 
 void GameStateManager::update()
 {
-	//Pause Funtion
-	if (currentState != 0) //Not Main Menu
-	{
-		if (GameWindows::getInstance()->keyIn == VK_ESCAPE)
-		{
-			isPause = !isPause;
-		}
-	}
-
 	stateList[currentState]->update();
 
 	framesToUpdate = g_Timer->framesToUpdate();

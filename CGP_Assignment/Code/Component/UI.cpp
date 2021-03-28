@@ -5,17 +5,21 @@
 #include "DirectInput.h"
 #include "Map.h"
 
-#define UI_BUTTON_NUM		4
-#define MENU_BUTTON_NUM		7
-#define CONFIRM_BUTTON_NUM	9
+#define TOWER_BUTTON_NUM	4
+#define FUNC_BUTTON_NUM		5
+#define MENU_BUTTON_NUM		8
+#define CONFIRM_BUTTON_NUM	10
 
 #define TOWER1		0
 #define TOWER2		1
 #define TOWER3		2
 #define TOWER4		3
-#define RESUME		4
-#define RESTART		5
-#define MAIN_MENU	6
+#define Pause		4
+#define RESUME		5
+#define RESTART		6
+#define MAIN_MENU	7
+#define YES			8
+#define NO			9
 
 Ui::Ui()
 {
@@ -56,8 +60,10 @@ void Ui::init()
 	hr[11] = D3DXCreateTextureFromFile(Graphic::getInstance()->d3dDevice, "resource/Heart.png", &heartTexture);
 
 	hr[12] = D3DXCreateTextureFromFile(Graphic::getInstance()->d3dDevice, "resource/coin.png", &coinTexture);
+	
+	hr[13] = D3DXCreateTextureFromFile(Graphic::getInstance()->d3dDevice, "resource/Button3.png", &funcButtonTexture);
 
-	for (int i = 0; i < 13; i++)
+	for (int i = 0; i < 14; i++)
 	{
 		if (FAILED(hr[i]))
 		{
@@ -196,8 +202,23 @@ void Ui::init()
 	button->init();
 	buttonList.push_back(button);
 
+	//Pause Button
+	button = new Button;
+	button->position.x = 1750;
+	button->position.y = 60;
+	button->size.x = 64;
+	button->size.y = 63;
+
+	button->r = 255;
+	button->g = 255;
+	button->b = 255;
+
+	button->init();
+	buttonList.push_back(button);
+
 	//Menu
 	isConfirming = false;
+	isMenu = false;
 
 	//Menu Background
 	menuRect.top = menuRect.left = 0;
@@ -327,98 +348,114 @@ void Ui::update()
 		isConfirming = false;
 	}
 
-	if (DirectInput::getInstance()->mouseState.rgbButtons[0] & 0x80)
+	if (!isMenu)
 	{
-		for (int i = 0; i < UI_BUTTON_NUM; i++)
+		if (DirectInput::getInstance()->mouseState.rgbButtons[0] & 0x80)
 		{
-			buttonList[i]->update();
-
-			if (buttonList[i]->isClick && !buttonList[i]->isAni)
+			for (int i = 0; i < FUNC_BUTTON_NUM; i++)
 			{
-				buttonList[i]->frame = 1;
-				buttonList[i]->textRect.top += 8;
-				buttonList[i]->textRect.bottom += 8;
-				buttonList[i]->isAni = true;
+				buttonList[i]->update();
 
-				if (i < MAX_TOWER_TYPE)
+				if (buttonList[i]->isClick && !buttonList[i]->isAni)
 				{
-					towerTextMove[i] = 8;
+					buttonList[i]->frame = 1;
+					buttonList[i]->textRect.top += 8;
+					buttonList[i]->textRect.bottom += 8;
+					buttonList[i]->isAni = true;
+
+					if (i < MAX_TOWER_TYPE)
+					{
+						towerTextMove[i] = 8;
+					}
+				}
+
+				else if (!buttonList[i]->isClick && buttonList[i]->isAni)
+				{
+					buttonList[i]->frame = 0;
+					buttonList[i]->update();
+					buttonList[i]->textRect.top -= 8;
+					buttonList[i]->textRect.bottom -= 8;
+					buttonList[i]->isAni = false;
+
+					if (i < MAX_TOWER_TYPE)
+					{
+						towerTextMove[i] = 0;
+					}
 				}
 			}
+		}
 
-			else if (!buttonList[i]->isClick && buttonList[i]->isAni)
+		else if (!(DirectInput::getInstance()->mouseState.rgbButtons[0] & 0x80))
+		{
+			for (int i = 0; i < FUNC_BUTTON_NUM; i++)
 			{
 				buttonList[i]->frame = 0;
-				buttonList[i]->update();
-				buttonList[i]->textRect.top -= 8;
-				buttonList[i]->textRect.bottom -= 8;
-				buttonList[i]->isAni = false;
 
-				if (i < MAX_TOWER_TYPE)
+				if (buttonList[i]->isAni)
 				{
-					towerTextMove[i] = 0;
+					buttonList[i]->update();
+					buttonList[i]->textRect.top -= 8;
+					buttonList[i]->textRect.bottom -= 8;
+					buttonList[i]->isAni = false;
+
+					if (i < MAX_TOWER_TYPE)
+					{
+						towerTextMove[i] = 0;
+					}
+				}
+
+				if (buttonList[i]->isClick)
+				{
+					function = i;
+					isFunction = true;
+					buttonList[i]->isClick = false;
 				}
 			}
 		}
-	}
 
-	else if (!(DirectInput::getInstance()->mouseState.rgbButtons[0] & 0x80))
-	{
-		for (int i = 0; i < UI_BUTTON_NUM; i++)
+		if (isFunction)
 		{
-			buttonList[i]->frame = 0;
-
-			if (buttonList[i]->isAni)
+			if (!GameStateManager::getInstance()->isPause)
 			{
-				buttonList[i]->update();
-				buttonList[i]->textRect.top -= 8;
-				buttonList[i]->textRect.bottom -= 8;
-				buttonList[i]->isAni = false;
-
-				if (i < MAX_TOWER_TYPE)
+				switch (function)
 				{
-					towerTextMove[i] = 0;
+				case TOWER1:
+					TowerBuilding::getInstance()->isBuilding = true;
+					TowerBuilding::getInstance()->towerSelect = 0;
+					break;
+
+				case TOWER2:
+					TowerBuilding::getInstance()->isBuilding = true;
+					TowerBuilding::getInstance()->towerSelect = 1;
+					break;
+
+				case TOWER3:
+					TowerBuilding::getInstance()->isBuilding = true;
+					TowerBuilding::getInstance()->towerSelect = 2;
+					break;
+
+				case TOWER4:
+					TowerBuilding::getInstance()->isBuilding = true;
+					TowerBuilding::getInstance()->towerSelect = 3;
+					break;
+
+				default:
+					break;
 				}
 			}
 
-			if (buttonList[i]->isClick)
+			switch (function)
 			{
-				function = i;
-				isFunction = true;
-				buttonList[i]->isClick = false;
+			case Pause:
+				GameStateManager::getInstance()->isPause = !GameStateManager::getInstance()->isPause;
+				break;
+
+			default:
+				break;
 			}
+
+			isFunction = false;
 		}
-	}
-
-	if (isFunction)
-	{
-		switch (function)
-		{
-		case TOWER1:
-			TowerBuilding::getInstance()->isBuilding = true;
-			TowerBuilding::getInstance()->towerSelect = 0;
-			break;
-
-		case TOWER2:
-			TowerBuilding::getInstance()->isBuilding = true;
-			TowerBuilding::getInstance()->towerSelect = 1;
-			break;
-
-		case TOWER3:
-			TowerBuilding::getInstance()->isBuilding = true;
-			TowerBuilding::getInstance()->towerSelect = 2;
-			break;
-
-		case TOWER4:
-			TowerBuilding::getInstance()->isBuilding = true;
-			TowerBuilding::getInstance()->towerSelect = 3;
-			break;
-
-		default:
-			break;
-		}
-
-		isFunction = false;
 	}
 }
 
@@ -444,7 +481,7 @@ void Ui::draw()
 
 	menuButtonFont->DrawText(sprite, coinText.c_str(), -1, &coinTextRect, 0, D3DCOLOR_XRGB(255, 255, 255));
 
-	for (int i = 0; i < UI_BUTTON_NUM; i++)
+	for (int i = 0; i < TOWER_BUTTON_NUM; i++)
 	{
 		sprite->Draw(buttonTexture, &buttonList[i]->buttonRect,
 			&D3DXVECTOR3(buttonList[i]->size.x / 2, buttonList[i]->size.y / 2, 0),
@@ -472,6 +509,19 @@ void Ui::draw()
 		{
 			buttonFont->DrawText(sprite, buttonList[i]->word.c_str(), -1, &buttonList[i]->textRect, 0, D3DCOLOR_XRGB(255, 255, 255));
 		}
+	}
+
+	if (GameStateManager::getInstance()->isPause && !isMenu)
+	{
+		sprite->Draw(blurBackground, NULL, NULL, NULL, D3DCOLOR_XRGB(255, 255, 255));
+	}
+
+	for (int i = TOWER_BUTTON_NUM; i < FUNC_BUTTON_NUM; i++)
+	{
+		sprite->Draw(funcButtonTexture, &buttonList[i]->buttonRect,
+			&D3DXVECTOR3(buttonList[i]->size.x / 2, buttonList[i]->size.y / 2, 0),
+			&D3DXVECTOR3(buttonList[i]->position.x, buttonList[i]->position.y, 0),
+			D3DCOLOR_XRGB(buttonList[i]->r, buttonList[i]->g, buttonList[i]->b));
 	}
 
 	sprite->End();
@@ -512,6 +562,9 @@ void Ui::release()
 	heartTexture->Release();
 	heartTexture = NULL;
 
+	funcButtonTexture->Release();
+	funcButtonTexture = NULL;
+
 	for (int i = 0; i < buttonList.size(); i++)
 	{
 		buttonList[i]->release();
@@ -550,7 +603,7 @@ void Ui::pauseMenu()
 
 		menuFont->DrawText(sprite, "MENU", -1, &menuTextRect, 0, D3DCOLOR_XRGB(255, 255, 255));
 
-		for (int i = UI_BUTTON_NUM; i < MENU_BUTTON_NUM; i++)
+		for (int i = FUNC_BUTTON_NUM; i < MENU_BUTTON_NUM; i++)
 		{
 			sprite->Draw(menuButtonTexture, &buttonList[i]->buttonRect,
 				&D3DXVECTOR3(buttonList[i]->size.x / 2, buttonList[i]->size.y / 2, 0),
@@ -579,7 +632,7 @@ void Ui::pauseMenu()
 		D3DXMatrixTransformation2D(&mat, NULL, 0.0, &scaling, NULL, NULL, NULL);
 		sprite->SetTransform(&mat);
 
-		menuButtonFont->DrawText(sprite, cfmWord.c_str(), -1, &confrimRect[function - 5], 0, D3DCOLOR_XRGB(255, 255, 255));
+		menuButtonFont->DrawText(sprite, cfmWord.c_str(), -1, &confrimRect[function - (FUNC_BUTTON_NUM + 1)], 0, D3DCOLOR_XRGB(255, 255, 255));
 	
 		for (int i = MENU_BUTTON_NUM; i < CONFIRM_BUTTON_NUM; i++)
 		{
@@ -595,12 +648,11 @@ void Ui::pauseMenu()
 
 void Ui::pauseFunction()
 {
-	
 	if (DirectInput::getInstance()->mouseState.rgbButtons[0] & 0x80)
 	{
 		if (!isConfirming)
 		{
-			for (int i = UI_BUTTON_NUM; i < MENU_BUTTON_NUM; i++)
+			for (int i = FUNC_BUTTON_NUM; i < MENU_BUTTON_NUM; i++)
 			{
 				buttonList[i]->update();
 
@@ -653,7 +705,7 @@ void Ui::pauseFunction()
 	{
 		if (!isConfirming)
 		{
-			for (int i = UI_BUTTON_NUM; i < MENU_BUTTON_NUM; i++)
+			for (int i = FUNC_BUTTON_NUM; i < MENU_BUTTON_NUM; i++)
 			{
 				buttonList[i]->frame = 0;
 
@@ -690,7 +742,7 @@ void Ui::pauseFunction()
 
 				if (buttonList[i]->isClick)
 				{
-					if (i == 7)
+					if (i == YES)
 					{
 						if (function == RESTART)
 						{
@@ -706,7 +758,7 @@ void Ui::pauseFunction()
 						}
 					}
 					
-					else if (i == 8)
+					else if (i == NO)
 					{
 						buttonList[i]->isClick = false;
 						isConfirming = false;
@@ -722,16 +774,17 @@ void Ui::pauseFunction()
 		{
 		case RESUME:
 			GameStateManager::getInstance()->isPause = false;
+			isMenu = false;
 			break;
 
 		case RESTART:
 			isConfirming = true;
-			cfmWord = buttonList[5]->word;
+			cfmWord = buttonList[RESTART]->word;
 			break;
 
 		case MAIN_MENU:
 			isConfirming = true;
-			cfmWord = buttonList[6]->word;
+			cfmWord = buttonList[MAIN_MENU]->word;
 			break;
 
 		default:

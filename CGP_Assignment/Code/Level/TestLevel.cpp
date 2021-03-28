@@ -67,25 +67,35 @@ void TestLevel::update()
 		coin--;
 	}
 
+	if (GameWindows::getInstance()->keyIn == VK_ESCAPE)
+	{
+		if (!ui->isMenu)
+		{
+			GameStateManager::getInstance()->isPause = true;
+			ui->isMenu = true;
+		}
+
+		else
+		{
+			GameStateManager::getInstance()->isPause =false;
+			ui->isMenu = false;
+		}	
+	}
+
 	wave = EnemyController::getInstance()->currentWave + 1;
 
 	ui->stateUpdate(maxHealth, health, wave, coin);
 
+	ui->update();
+
 	if (!GameStateManager::getInstance()->isPause)
 	{
-		ui->update();
-
-		if (GameWindows::getInstance()->keyIn == VK_DOWN)
-		{
-			EnemyController::getInstance()->isNextWave = true;
-		}
-
 		TowerBuilding::getInstance()->update();
 		EnemyController::getInstance()->update();
 		Physics::getInstance()->update();
 	}
 
-	else
+	else if(ui->isMenu)
 	{
 		ui->pauseFunction();
 	}
@@ -99,13 +109,13 @@ void TestLevel::draw()
 
 	EnemyController::getInstance()->draw();
 
-	ui->draw();
-
 	TowerBuilding::getInstance()->draw();	
 
 	Physics::getInstance()->draw();
 
-	if (GameStateManager::getInstance()->isPause)
+	ui->draw();
+
+	if (ui->isMenu)
 	{
 		ui->pauseMenu();
 	}
