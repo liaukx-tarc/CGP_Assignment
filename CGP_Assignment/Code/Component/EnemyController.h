@@ -33,6 +33,7 @@ public:
 	LPD3DXSPRITE sprite;
 
 	int enemyNum;
+	int dieEnemyNum;
 	std::vector<Character*> enemyList;
 
 	//Enemy Data
