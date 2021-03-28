@@ -5,22 +5,6 @@
 #include "DirectInput.h"
 #include "Map.h"
 
-#define TOWER_BUTTON_NUM	4
-#define FUNC_BUTTON_NUM		5
-#define MENU_BUTTON_NUM		8
-#define CONFIRM_BUTTON_NUM	10
-
-#define TOWER1		0
-#define TOWER2		1
-#define TOWER3		2
-#define TOWER4		3
-#define Pause		4
-#define RESUME		5
-#define RESTART		6
-#define MAIN_MENU	7
-#define YES			8
-#define NO			9
-
 Ui::Ui()
 {
 
@@ -214,6 +198,24 @@ void Ui::init()
 	button->b = 255;
 
 	button->init();
+	buttonList.push_back(button);
+
+	//Setting Button
+	button = new Button;
+	button->position.x = 1850;
+	button->position.y = 60;
+	button->size.x = 64;
+	button->size.y = 63;
+
+	button->r = 255;
+	button->g = 255;
+	button->b = 255;
+
+	button->init();
+
+	button->buttonRect.top = 2 * button->size.y;
+	button->buttonRect.bottom = button->buttonRect.top + button->size.y;
+
 	buttonList.push_back(button);
 
 	//Menu
@@ -446,8 +448,26 @@ void Ui::update()
 
 			switch (function)
 			{
-			case Pause:
+			case PAUSE:
 				GameStateManager::getInstance()->isPause = !GameStateManager::getInstance()->isPause;
+				if (GameStateManager::getInstance()->isPause)
+				{
+					buttonList[PAUSE]->buttonRect.top = buttonList[PAUSE]->size.y;
+				}
+
+				else
+				{
+					buttonList[PAUSE]->buttonRect.top = 0;
+				}
+
+				buttonList[PAUSE]->buttonRect.bottom = buttonList[PAUSE]->buttonRect.top + buttonList[PAUSE]->size.y;
+				break;
+
+			case SETTING:
+				buttonList[PAUSE]->buttonRect.top = 0;
+				buttonList[PAUSE]->buttonRect.bottom = buttonList[PAUSE]->size.y;
+				GameStateManager::getInstance()->isPause = true;
+				isMenu = true;
 				break;
 
 			default:
