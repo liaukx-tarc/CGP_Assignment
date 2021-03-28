@@ -13,7 +13,7 @@ public:
 	Ui();
 	~Ui();
 
-	HRESULT hr[13];
+	HRESULT hr[14];
 
 	void init();
 	void fixUpdate();
@@ -29,6 +29,7 @@ public:
 	//UI
 	LPDIRECT3DTEXTURE9 backgroundTexture;
 	LPDIRECT3DTEXTURE9 buttonTexture;
+	LPDIRECT3DTEXTURE9 funcButtonTexture;
 
 	std::vector<Button*> buttonList;
 
@@ -47,6 +48,7 @@ public:
 	LPD3DXFONT menuFont;
 	LPD3DXFONT menuButtonFont;
 	
+	//UI Element
 	LPDIRECT3DTEXTURE9 heartTexture;
 	RECT heartRect[2];
 	RECT heartTextRect;
@@ -66,7 +68,7 @@ public:
 	RECT menuTextRect;
 	RECT confrimRect[2];
 
-	bool isConfirming;
+	bool isConfirming, isMenu;
 	std::string cfmWord;
 
 	void backDraw();
