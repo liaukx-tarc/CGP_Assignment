@@ -146,7 +146,7 @@ void EnemyController::fixUpdate()
 	}
 }
 
-void EnemyController::update(int &coin)
+void EnemyController::update(int &coin, bool &isEnd, bool &isWin)
 {
 	if (dieEnemyNum == totalSpawn[currentWave] && currentWave != waveNum - 1)
 	{
@@ -154,6 +154,11 @@ void EnemyController::update(int &coin)
 		dieEnemyNum = 0;
 	}
 
+	else if (dieEnemyNum == totalSpawn[currentWave])
+	{
+		isEnd = true;
+		isWin = true;
+	}
 	//go to next wave
 	if (isNextWave)
 	{
