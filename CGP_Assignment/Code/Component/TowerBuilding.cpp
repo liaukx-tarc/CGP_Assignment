@@ -83,17 +83,18 @@ void TowerBuilding::init()
 	for (int i = 0; i < MAX_TOWER_TYPE; i++)
 	{
 		Tower * tower = new Tower;
-		int damage, atkSpeed;
+		int damage, atkSpeed, price;
 
-		fscanf(fp, "%d|%d\n", &damage, &atkSpeed);
+		fscanf(fp, "%d|%d|%d\n", &damage, &atkSpeed, &price);
 
 		tower->damage = damage;
 		tower->atkSpeed = atkSpeed;
+		tower->price = price;
 
 		towerData.push_back(tower);
 
 		//Testing
-		printf("%d|%d\n", damage, atkSpeed);
+		printf("%d|%d|%d\n", damage, atkSpeed, price);
 	}
 
 	/* Close the file afterwards */
@@ -132,7 +133,7 @@ void TowerBuilding::fixUpdate()
 //testing variable
 int count = 0;
 
-void TowerBuilding::update()
+void TowerBuilding::update(int &coin)
 {
 	mousePos = GameWindows::getInstance()->mousePos;
 
@@ -161,11 +162,14 @@ void TowerBuilding::update()
 						tower->towerNo = towerSelect;
 						tower->damage = towerData[towerSelect]->damage;
 						tower->atkSpeed = towerData[towerSelect]->atkSpeed;
+						tower->price = towerData[towerSelect]->price;
 						tower->objPosition.x = tileSelectX * TILE_WIDTH + (TILE_WIDTH / 2);
 						tower->objPosition.y = tileSelectY * TILE_WIDTH + (TILE_HEIGHT / 2);
 
 						tower->init();
 						towerList[tileSelectY][tileSelectX] = tower;
+
+						coin -= towerData[towerSelect]->price;
 
 						isBuilding = false;
 						printf("Is Built\n");

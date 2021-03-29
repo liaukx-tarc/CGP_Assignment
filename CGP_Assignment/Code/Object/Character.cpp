@@ -19,6 +19,7 @@ Character::Character()
 	charFrame = 0;
 	charNo = 0;
 	charSpeed = 0;
+	coin = 0;
 	speedFactor = 0;
 	charState = 0;
 	frameNum = 0;
@@ -71,8 +72,6 @@ void Character::init()
 	hitTimer = 10;
 
 	r = b = g = 255;
-
-	health = 20;
 }
 
 void Character::draw()
@@ -273,6 +272,4 @@ void Character::move(D3DXVECTOR2 direction)
 		currentPointX = (objPosition.x - 29) / TILE_WIDTH;
 		currentPointY = (objPosition.y - 29) / TILE_HEIGHT;
 	}
-
-	//printf("%d |%d | %c\n", currentPointX, currentPointY, directionState);
 }

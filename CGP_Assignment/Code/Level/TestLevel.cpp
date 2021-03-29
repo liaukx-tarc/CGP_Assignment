@@ -22,12 +22,6 @@ Ui * ui;
 
 void TestLevel::init()
 {
-	//level data
-	maxHealth = 20;
-	health = maxHealth;
-	coin = 170;
-	wave = 1;
-
 	//load map
 	std::string name = "data/Test_Level.txt";
 
@@ -36,8 +30,11 @@ void TestLevel::init()
 	levelFile[name.size()] = '\0';
 
 	Map::getInstance()->createMap();
-	Map::getInstance()->loadMap(levelFile);
+	Map::getInstance()->loadMap(levelFile, maxHealth, coin);
 	
+	health = maxHealth;
+	wave = 1;
+
 	EnemyController::getInstance()->init();
 
 	TowerBuilding::getInstance()->init();
@@ -60,11 +57,6 @@ void TestLevel::fixUpdate()
 
 void TestLevel::update()
 {
-	if (GameWindows::getInstance()->keyIn == VK_UP)
-	{
-		health--;
-		coin--;
-	}
 
 	if (GameWindows::getInstance()->keyIn == VK_ESCAPE)
 	{
@@ -87,12 +79,12 @@ void TestLevel::update()
 
 	ui->stateUpdate(maxHealth, health, wave, coin);
 
-	ui->update();
+	ui->update(coin);
 
 	if (!GameStateManager::getInstance()->isPause)
 	{
-		TowerBuilding::getInstance()->update();
-		EnemyController::getInstance()->update();
+		TowerBuilding::getInstance()->update(coin);
+		EnemyController::getInstance()->update(coin);
 		Physics::getInstance()->update();
 	}
 
@@ -125,11 +117,15 @@ void TestLevel::draw()
 void TestLevel::release()
 {
 	Map::getInstance()->releaseInstance();
+
 	EnemyController::getInstance()->release();
 	EnemyController::getInstance()->releaseInstance();
+
 	TowerBuilding::getInstance()->release();
 	TowerBuilding::getInstance()->releaseInstance();
+
 	Physics::getInstance()->release();
 	Physics::getInstance()->releaseInstance();
+
 	ui->release();
 }

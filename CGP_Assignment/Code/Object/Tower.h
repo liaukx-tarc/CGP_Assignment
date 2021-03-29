@@ -37,6 +37,7 @@ public:
 
 	float damage;			//Tower attack damage
 	float atkSpeed;			//Tower attack speed
+	int price;
 	float rangeRadius;
 	float distanceX;
 	float distanceY;
