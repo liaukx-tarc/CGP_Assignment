@@ -61,12 +61,15 @@ void GameStateManager::update()
 
 	framesToUpdate = g_Timer->framesToUpdate();
 
-	for (int i = 0; i < framesToUpdate; i++)
+	if (currentState == preState)
 	{
-		stateList[currentState]->fixUpdate();
+		for (int i = 0; i < framesToUpdate; i++)
+		{
+			stateList[currentState]->fixUpdate();
+		}
 	}
-
-	if (currentState != preState)
+	
+	else
 	{
 		isPause = false;
 		stateList[currentState]->init();

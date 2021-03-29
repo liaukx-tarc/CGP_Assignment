@@ -7,7 +7,7 @@
 
 Ui::Ui()
 {
-
+	
 }
 
 Ui::~Ui()
@@ -55,6 +55,8 @@ void Ui::init()
 		}
 	}
 
+	aniTimer = 0;
+
 	//UI Element
 	//Health
 	heartRect[0].top = heartRect[0].left = 0;
@@ -95,15 +97,9 @@ void Ui::init()
 	coinTextRect.bottom = coinTextRect.top + 25;
 	coinTextRect.right = coinTextRect.left + 100;
 
-	//Button TowerRect
-	for (int i = 0; i < MAX_TOWER_TYPE; i++)
+	for (int i = 0; i < 3; i++)
 	{
-		towerRect[i].top = 96 * i;
-		towerRect[i].left = 96 * 3;
-		towerRect[i].bottom = towerRect[i].top + 96;
-		towerRect[i].right = towerRect[i].left + 96;
-
-		towerTextMove[i] = 0;
+		coinColor[i] = 255;
 	}
 
 	//Wind Tower Button
@@ -185,6 +181,27 @@ void Ui::init()
 
 	button->init();
 	buttonList.push_back(button);
+
+	//Button TowerRect & Tower Price
+	for (int i = 0; i < MAX_TOWER_TYPE; i++)
+	{
+		towerRect[i].top = 96 * i;
+		towerRect[i].left = 96 * 3;
+		towerRect[i].bottom = towerRect[i].top + 96;
+		towerRect[i].right = towerRect[i].left + 96;
+
+		towerTextMove[i] = 0;
+
+		towerPrice[i] = std::to_string(TowerBuilding::getInstance()->towerData[i]->price);
+	
+		towerPriceText[i].top = buttonList[i]->position.y - 85;
+		towerPriceText[i].left = buttonList[i]->position.x + 10;
+		towerPriceText[i].bottom = towerPriceText[i].top + 50;
+		towerPriceText[i].right = towerPriceText[i].left + 200;
+
+		coinPosition[i].x = towerPriceText[i].left - 30;
+		coinPosition[i].y = towerPriceText[i].top + 5;
+	}
 
 	//Pause Button
 	button = new Button;
@@ -340,10 +357,22 @@ void Ui::init()
 
 void Ui::fixUpdate()
 {
+	aniTimer += 0.05f;
 
+	if (aniTimer >= 1)
+	{
+		if (noCoin)
+		{
+			buttonList[wrongTowerNum]->g = 122;
+			coinColor[1] = 255;
+			coinColor[2] = 255;
+			noCoin = false;
+		}
+		aniTimer = 0;
+	}
 }
 
-void Ui::update()
+void Ui::update(int coin)
 {
 	if (GameWindows::getInstance()->keyIn == VK_ESCAPE)
 	{
@@ -368,6 +397,9 @@ void Ui::update()
 					if (i < MAX_TOWER_TYPE)
 					{
 						towerTextMove[i] = 8;
+						towerPriceText[i].top += 8;
+						towerPriceText[i].bottom += 8;
+						coinPosition[i].y += 8;
 					}
 				}
 
@@ -382,6 +414,9 @@ void Ui::update()
 					if (i < MAX_TOWER_TYPE)
 					{
 						towerTextMove[i] = 0;
+						towerPriceText[i].top -= 8;
+						towerPriceText[i].bottom -= 8;
+						coinPosition[i].y -= 8;
 					}
 				}
 			}
@@ -403,6 +438,9 @@ void Ui::update()
 					if (i < MAX_TOWER_TYPE)
 					{
 						towerTextMove[i] = 0;
+						towerPriceText[i].top -= 8;
+						towerPriceText[i].bottom -= 8;
+						coinPosition[i].y -= 8;
 					}
 				}
 
@@ -419,30 +457,48 @@ void Ui::update()
 		{
 			if (!GameStateManager::getInstance()->isPause)
 			{
-				switch (function)
+				if (function < TOWER_BUTTON_NUM && coin - TowerBuilding::getInstance()->towerData[function]->price >= 0)
 				{
-				case TOWER1:
-					TowerBuilding::getInstance()->isBuilding = true;
-					TowerBuilding::getInstance()->towerSelect = 0;
-					break;
+					switch (function)
+					{
+					case TOWER1:
+						TowerBuilding::getInstance()->isBuilding = true;
+						TowerBuilding::getInstance()->towerSelect = 0;
+						break;
 
-				case TOWER2:
-					TowerBuilding::getInstance()->isBuilding = true;
-					TowerBuilding::getInstance()->towerSelect = 1;
-					break;
+					case TOWER2:
+						TowerBuilding::getInstance()->isBuilding = true;
+						TowerBuilding::getInstance()->towerSelect = 1;
+						break;
 
-				case TOWER3:
-					TowerBuilding::getInstance()->isBuilding = true;
-					TowerBuilding::getInstance()->towerSelect = 2;
-					break;
+					case TOWER3:
+						TowerBuilding::getInstance()->isBuilding = true;
+						TowerBuilding::getInstance()->towerSelect = 2;
+						break;
 
-				case TOWER4:
-					TowerBuilding::getInstance()->isBuilding = true;
-					TowerBuilding::getInstance()->towerSelect = 3;
-					break;
+					case TOWER4:
+						TowerBuilding::getInstance()->isBuilding = true;
+						TowerBuilding::getInstance()->towerSelect = 3;
+						break;
 
-				default:
-					break;
+					default:
+						break;
+					}
+				}
+				
+				else
+				{
+					if (function < 4)
+					{
+						buttonList[function]->g = 0;
+						buttonList[function]->b = 0;
+						wrongTowerNum = function;
+						noCoin = true;
+
+						coinColor[1] = 0;
+						coinColor[2] = 0;
+					}	
+					isFunction = false;
 				}
 			}
 
@@ -499,7 +555,7 @@ void Ui::draw()
 	sprite->Draw(coinTexture, &coinRect,
 		&D3DXVECTOR3(64 / 2, 64 / 2, 0), &coinPos, D3DCOLOR_XRGB(255, 255, 255));
 
-	menuButtonFont->DrawText(sprite, coinText.c_str(), -1, &coinTextRect, 0, D3DCOLOR_XRGB(255, 255, 255));
+	menuButtonFont->DrawText(sprite, coinText.c_str(), -1, &coinTextRect, 0, D3DCOLOR_XRGB(coinColor[0], coinColor[1], coinColor[2]));
 
 	for (int i = 0; i < TOWER_BUTTON_NUM; i++)
 	{
@@ -511,18 +567,23 @@ void Ui::draw()
 		//draw tower on button
 		if (i < MAX_TOWER_TYPE)
 		{
-			scaling.x = scaling.y = 1.5f;
+			sprite->Draw(TowerBuilding::getInstance()->towerTexture, &towerRect[i],
+				&D3DXVECTOR3(96 / 2, 96 * 3 / 5, 0),
+				&D3DXVECTOR3(buttonList[i]->position.x, buttonList[i]->position.y + towerTextMove[i], 0),
+				D3DCOLOR_XRGB(255, 255, 255));
+
+			scaling.x = scaling.y = 0.5f;
 			D3DXMatrixTransformation2D(&mat, NULL, 0.0, &scaling, NULL, NULL, NULL);
 			sprite->SetTransform(&mat);
 
-			sprite->Draw(TowerBuilding::getInstance()->towerTexture, &towerRect[i],
-				&D3DXVECTOR3(96 / 2, 96 * 3 / 4, 0),
-				&D3DXVECTOR3(buttonList[i]->position.x / scaling.x, (buttonList[i]->position.y + towerTextMove[i]) / scaling.y, 0),
-				D3DCOLOR_XRGB(255, 255, 255));
-
+			sprite->Draw(coinTexture, &coinRect, &D3DXVECTOR3(coinRect.right / 2, coinRect.bottom / 2, 0),
+				&D3DXVECTOR3(coinPosition[i].x / scaling.x, coinPosition[i].y / scaling.y, 0), D3DCOLOR_XRGB(255, 255, 255));
+		
 			scaling.x = scaling.y = 1.0f;
 			D3DXMatrixTransformation2D(&mat, NULL, 0.0, &scaling, NULL, NULL, NULL);
 			sprite->SetTransform(&mat);
+
+			buttonFont->DrawText(sprite, towerPrice[i].c_str(), -1, &towerPriceText[i], 0, D3DCOLOR_XRGB(255, 255, 255));
 		}
 
 		if (buttonList[i]->word != "")

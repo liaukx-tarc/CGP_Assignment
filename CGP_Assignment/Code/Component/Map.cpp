@@ -59,7 +59,7 @@ void Map::createMap()
 	tileRect.bottom = 60;
 }
 
-void Map::loadMap(char * name) 
+void Map::loadMap(char * name, int &maxHealth, int &coin)
 {
 	FILE *fp;
 	fp = fopen(name, "rb");
@@ -73,6 +73,8 @@ void Map::loadMap(char * name)
 	}
 
 	/* Read the data from the file into the map */
+
+	fscanf(fp, "%d,%d", &maxHealth, &coin); //map healt and coin
 
 	for (int y = 0; y < MAX_MAP_Y; y++) 
 	{

@@ -34,7 +34,7 @@ public:
 
 	void init();
 	void fixUpdate();
-	void update();
+	void update(int coin);
 	void draw();
 	void release();
 
@@ -42,6 +42,8 @@ public:
 	LPD3DXFONT buttonFont;
 	D3DXVECTOR2 scaling;
 	D3DXMATRIX mat;
+
+	float aniTimer;
 
 	//UI
 	LPDIRECT3DTEXTURE9 backgroundTexture;
@@ -52,6 +54,13 @@ public:
 
 	RECT towerRect[MAX_TOWER_TYPE];
 	RECT pauseButtonRect[2];
+	
+	D3DXVECTOR2 coinPosition[4];
+	std::string towerPrice[4];
+	RECT towerPriceText[4];
+
+	bool noCoin;
+	int wrongTowerNum;
 
 	int towerTextMove[MAX_TOWER_TYPE];
 	int function;
@@ -81,6 +90,7 @@ public:
 	RECT coinRect;
 	D3DXVECTOR3 coinPos;
 	std::string coinText;
+	int coinColor[3];
 
 	RECT menuRect;
 	RECT menuTextRect;

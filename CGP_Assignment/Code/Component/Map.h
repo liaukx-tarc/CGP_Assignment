@@ -44,7 +44,7 @@ public:
 
 	void createMap();
 
-	void loadMap(char * name);
+	void loadMap(char * name, int &maxHealth, int &coin);
 	void drawMap();
 };
 #endif // !MAP

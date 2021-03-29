@@ -76,18 +76,20 @@ void EnemyController::init()
 	for (int i = 0; i < MAX_ENEMY_TYPE; i++)
 	{
 		Character * enemy = new Character;
-		int sizeX, sizeY, aniSpeed, charSpeed, health;
+		int sizeX, sizeY, aniSpeed, charSpeed, health, coin;
 
 		fscanf(fp, "%d", &health);
 		fscanf(fp, "|%d,%d", &sizeX, &sizeY);
 		fscanf(fp, "|%d", &aniSpeed);
-		fscanf(fp, "|%d\n", &charSpeed);
+		fscanf(fp, "|%d", &charSpeed);
+		fscanf(fp, "|%d\n", &coin);
 
 		enemy->health = health;
 		enemy->objSize.x = sizeX;
 		enemy->objSize.y = sizeY;
 		enemy->animationSpeed = aniSpeed;
 		enemy->charSpeed = charSpeed;
+		enemy->coin = coin;
 		enemy->charNo = i;
 
 		enemyData.push_back(enemy);
@@ -96,7 +98,8 @@ void EnemyController::init()
 		printf("%.2f", enemyData[i]->health);
 		printf("|%.2f,%.2f", enemyData[i]->objSize.x, enemyData[i]->objSize.y);
 		printf("|%.2f", enemyData[i]->animationSpeed);
-		printf("|%.2f\n", enemyData[i]->charSpeed);
+		printf("|%.2f", enemyData[i]->charSpeed);
+		printf("|%.2f\n", enemyData[i]->coin);
 	}
 
 	/* Close the file afterwards */
@@ -111,10 +114,12 @@ void EnemyController::init()
 			{
 				Character * enemy = new Character;
 
+				enemy->health = enemyData[enemyWave[a][b] - 1]->health;
 				enemy->objSize = enemyData[enemyWave[a][b] - 1]->objSize;
 				enemy->animationSpeed = enemyData[enemyWave[a][b] - 1]->animationSpeed;
 				enemy->charSpeed = enemyData[enemyWave[a][b] - 1]->charSpeed;
 				enemy->charNo = enemyData[enemyWave[a][b] - 1]->charNo;
+				enemy->coin = enemyData[enemyWave[a][b] - 1]->coin;
 				spawnList.push_back(enemy);
 
 				totalSpawn[a]++;
@@ -141,7 +146,7 @@ void EnemyController::fixUpdate()
 	}
 }
 
-void EnemyController::update()
+void EnemyController::update(int &coin)
 {
 	if (dieEnemyNum == totalSpawn[currentWave] && currentWave != waveNum - 1)
 	{
@@ -175,6 +180,9 @@ void EnemyController::update()
 			{
 				enemyList[i]->isDead = true;
 				dieEnemyNum++;
+
+				//coin add
+				coin += enemyList[i]->coin;
 			}
 			else
 			{
@@ -211,6 +219,8 @@ void EnemyController::release()
 		enemyData[i] = NULL;
 	}
 
+	enemyData.clear();
+
 	//release enemy
 	for (int i = 0; i < enemyList.size(); i++)
 	{
@@ -219,13 +229,15 @@ void EnemyController::release()
 		enemyList[i] = NULL;
 	}
 	
+	enemyList.clear();
+
 	for (int i = 0; i < spawnerList.size(); i++)
 	{
 		delete spawnerList[i];
 		spawnerList[i] = NULL;
 	}
 
-	spawnerList.erase(spawnerList.begin(), spawnerList.begin() + spawnerList.size());
+	spawnerList.clear();
 
 	sprite->Release();
 	sprite = NULL;

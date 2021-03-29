@@ -22,7 +22,7 @@ public:
 
 	void init();
 	void fixUpdate();
-	void update();
+	void update(int &coin);
 	void draw();
 	void release();
 
