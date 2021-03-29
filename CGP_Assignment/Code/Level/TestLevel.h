@@ -16,6 +16,8 @@ public:
 	~TestLevel();
 
 	char * levelFile;
+	bool isWin;
+	bool isEnd;
 
 	void init();
 	void fixUpdate();

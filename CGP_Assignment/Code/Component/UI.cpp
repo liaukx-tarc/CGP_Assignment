@@ -47,7 +47,11 @@ void Ui::init()
 	
 	hr[13] = D3DXCreateTextureFromFile(Graphic::getInstance()->d3dDevice, "resource/Button3.png", &funcButtonTexture);
 
-	for (int i = 0; i < 14; i++)
+	hr[14] = D3DXCreateFont(Graphic::getInstance()->d3dDevice, 120, 0, 0, FW_BOLD, false,
+		DEFAULT_CHARSET, OUT_TT_ONLY_PRECIS, DEFAULT_QUALITY,
+		DEFAULT_PITCH | FF_DONTCARE, "Pixel", &winLoseFont);
+
+	for (int i = 0; i < 15; i++)
 	{
 		if (FAILED(hr[i]))
 		{
@@ -353,6 +357,78 @@ void Ui::init()
 	button->buttonRect.bottom = button->buttonRect.top + 64;
 
 	buttonList.push_back(button);
+
+	//Win Screen
+	winRect.top = BUFFER_HEIGHT / 2 - 150;
+	winRect.left = BUFFER_WIDTH / 2 - 150;
+	winRect.bottom = winRect.top + 120;
+	winRect.right = winRect.left + 300;
+
+	//Restart Button
+	button = new Button;
+	button->position.x = BUFFER_WIDTH / 2 - 150;
+	button->position.y = (BUFFER_HEIGHT / 2) - (menuRect.bottom / 2) + 400;
+	button->size.x = 259;
+	button->size.y = 84;
+
+	button->r = 0;
+	button->g = 47;
+	button->b = 255;
+
+	button->word = "Next Lext";
+	button->textRect.top = button->position.y - 15;
+	button->textRect.left = button->position.x - 85;
+	button->textRect.bottom = button->textRect.top + 40;
+	button->textRect.right = button->textRect.left + 300;
+
+	button->init();
+	buttonList.push_back(button);
+
+	//Main Menu Button
+	button = new Button;
+	button->position.x = BUFFER_WIDTH / 2 + 150;
+	button->position.y = (BUFFER_HEIGHT / 2) - (menuRect.bottom / 2) + 400;
+	button->size.x = 259;
+	button->size.y = 84;
+
+	button->r = 255;
+	button->g = 47;
+	button->b = 0;
+
+	button->word = "Main Menu";
+	button->textRect.top = button->position.y - 15;
+	button->textRect.left = button->position.x - 85;
+	button->textRect.bottom = button->textRect.top + 40;
+	button->textRect.right = button->textRect.left + 300;
+
+	button->init();
+	buttonList.push_back(button);
+
+	//Lose Screen
+	loseRect.top = BUFFER_HEIGHT / 2 - 150;
+	loseRect.left = BUFFER_WIDTH / 2 - 280;
+	loseRect.bottom = loseRect.top + 120;
+	loseRect.right = loseRect.left + 600;
+
+	//Restart Button
+	button = new Button;
+	button->position.x = BUFFER_WIDTH / 2 - 150;
+	button->position.y = (BUFFER_HEIGHT / 2) - (menuRect.bottom / 2) + 400;
+	button->size.x = 259;
+	button->size.y = 84;
+
+	button->r = 0;
+	button->g = 47;
+	button->b = 255;
+
+	button->word = "Restart";
+	button->textRect.top = button->position.y - 15;
+	button->textRect.left = button->position.x - 65;
+	button->textRect.bottom = button->textRect.top + 40;
+	button->textRect.right = button->textRect.left + 300;
+
+	button->init();
+	buttonList.push_back(button);
 }
 
 void Ui::fixUpdate()
@@ -646,6 +722,9 @@ void Ui::release()
 	funcButtonTexture->Release();
 	funcButtonTexture = NULL;
 
+	winLoseFont->Release();
+	winLoseFont = NULL;
+
 	for (int i = 0; i < buttonList.size(); i++)
 	{
 		buttonList[i]->release();
@@ -669,64 +748,6 @@ void Ui::backDraw()
 }
 
 //Menu
-void Ui::pauseMenu()
-{
-	sprite->Begin(D3DXSPRITE_ALPHABLEND);
-	
-	sprite->Draw(blurBackground, NULL, NULL, NULL, D3DCOLOR_XRGB(255, 255, 255));
-
-	if (!isConfirming)
-	{
-		sprite->Draw(menuBack, &menuRect,
-			&D3DXVECTOR3(menuRect.right / 2, menuRect.bottom / 2, 0),
-			&D3DXVECTOR3(BUFFER_WIDTH / 2, BUFFER_HEIGHT / 2, 0),
-			D3DCOLOR_XRGB(225, 122, 0));
-
-		menuFont->DrawText(sprite, "MENU", -1, &menuTextRect, 0, D3DCOLOR_XRGB(255, 255, 255));
-
-		for (int i = FUNC_BUTTON_NUM; i < MENU_BUTTON_NUM; i++)
-		{
-			sprite->Draw(menuButtonTexture, &buttonList[i]->buttonRect,
-				&D3DXVECTOR3(buttonList[i]->size.x / 2, buttonList[i]->size.y / 2, 0),
-				&D3DXVECTOR3(buttonList[i]->position.x, buttonList[i]->position.y, 0),
-				D3DCOLOR_XRGB(buttonList[i]->r, buttonList[i]->g, buttonList[i]->b));
-
-			if (buttonList[i]->word != "")
-			{
-				menuButtonFont->DrawText(sprite, buttonList[i]->word.c_str(), -1, &buttonList[i]->textRect, 0, D3DCOLOR_XRGB(255, 255, 255));
-			}
-		}
-	}
-	
-	else
-	{
-		scaling.x = scaling.y = 0.5f;
-		D3DXMatrixTransformation2D(&mat, NULL, 0.0, &scaling, NULL, NULL, NULL);
-		sprite->SetTransform(&mat);
-
-		sprite->Draw(menuBack, &menuRect,
-			&D3DXVECTOR3(menuRect.right / 2, menuRect.bottom / 2, 0),
-			&D3DXVECTOR3(BUFFER_WIDTH / scaling.x / 2, BUFFER_HEIGHT / scaling.y / 2, 0),
-			D3DCOLOR_XRGB(225, 122, 0));
-
-		scaling.x = scaling.y = 1.0f;
-		D3DXMatrixTransformation2D(&mat, NULL, 0.0, &scaling, NULL, NULL, NULL);
-		sprite->SetTransform(&mat);
-
-		menuButtonFont->DrawText(sprite, cfmWord.c_str(), -1, &confrimRect[function - (FUNC_BUTTON_NUM + 1)], 0, D3DCOLOR_XRGB(255, 255, 255));
-	
-		for (int i = MENU_BUTTON_NUM; i < CONFIRM_BUTTON_NUM; i++)
-		{
-			sprite->Draw(yes_No, &buttonList[i]->buttonRect,
-				&D3DXVECTOR3(buttonList[i]->size.x / 2, buttonList[i]->size.y / 2, 0),
-				&D3DXVECTOR3(buttonList[i]->position.x, buttonList[i]->position.y, 0),
-				D3DCOLOR_XRGB(buttonList[i]->r, buttonList[i]->g, buttonList[i]->b));
-		}
-	}
-
-	sprite->End();
-}
-
 void Ui::pauseFunction()
 {
 	if (DirectInput::getInstance()->mouseState.rgbButtons[0] & 0x80)
@@ -838,7 +859,7 @@ void Ui::pauseFunction()
 							GameStateManager::getInstance()->currentState = 0;
 						}
 					}
-					
+
 					else if (i == NO)
 					{
 						buttonList[i]->isClick = false;
@@ -876,6 +897,65 @@ void Ui::pauseFunction()
 	}
 }
 
+void Ui::pauseMenu()
+{
+	sprite->Begin(D3DXSPRITE_ALPHABLEND);
+	
+	sprite->Draw(blurBackground, NULL, NULL, NULL, D3DCOLOR_XRGB(255, 255, 255));
+
+	if (!isConfirming)
+	{
+		sprite->Draw(menuBack, &menuRect,
+			&D3DXVECTOR3(menuRect.right / 2, menuRect.bottom / 2, 0),
+			&D3DXVECTOR3(BUFFER_WIDTH / 2, BUFFER_HEIGHT / 2, 0),
+			D3DCOLOR_XRGB(225, 122, 0));
+
+		menuFont->DrawText(sprite, "MENU", -1, &menuTextRect, 0, D3DCOLOR_XRGB(255, 255, 255));
+
+		for (int i = FUNC_BUTTON_NUM; i < MENU_BUTTON_NUM; i++)
+		{
+			sprite->Draw(menuButtonTexture, &buttonList[i]->buttonRect,
+				&D3DXVECTOR3(buttonList[i]->size.x / 2, buttonList[i]->size.y / 2, 0),
+				&D3DXVECTOR3(buttonList[i]->position.x, buttonList[i]->position.y, 0),
+				D3DCOLOR_XRGB(buttonList[i]->r, buttonList[i]->g, buttonList[i]->b));
+
+			if (buttonList[i]->word != "")
+			{
+				menuButtonFont->DrawText(sprite, buttonList[i]->word.c_str(), -1, &buttonList[i]->textRect, 0, D3DCOLOR_XRGB(255, 255, 255));
+			}
+		}
+	}
+	
+	else
+	{
+		scaling.x = scaling.y = 0.5f;
+		D3DXMatrixTransformation2D(&mat, NULL, 0.0, &scaling, NULL, NULL, NULL);
+		sprite->SetTransform(&mat);
+
+		sprite->Draw(menuBack, &menuRect,
+			&D3DXVECTOR3(menuRect.right / 2, menuRect.bottom / 2, 0),
+			&D3DXVECTOR3(BUFFER_WIDTH / scaling.x / 2, BUFFER_HEIGHT / scaling.y / 2, 0),
+			D3DCOLOR_XRGB(225, 122, 0));
+
+		scaling.x = scaling.y = 1.0f;
+		D3DXMatrixTransformation2D(&mat, NULL, 0.0, &scaling, NULL, NULL, NULL);
+		sprite->SetTransform(&mat);
+
+		menuButtonFont->DrawText(sprite, cfmWord.c_str(), -1, &confrimRect[function - (FUNC_BUTTON_NUM + 1)], 0, D3DCOLOR_XRGB(255, 255, 255));
+	
+		for (int i = MENU_BUTTON_NUM; i < CONFIRM_BUTTON_NUM; i++)
+		{
+			sprite->Draw(yes_No, &buttonList[i]->buttonRect,
+				&D3DXVECTOR3(buttonList[i]->size.x / 2, buttonList[i]->size.y / 2, 0),
+				&D3DXVECTOR3(buttonList[i]->position.x, buttonList[i]->position.y, 0),
+				D3DCOLOR_XRGB(buttonList[i]->r, buttonList[i]->g, buttonList[i]->b));
+		}
+	}
+
+	sprite->End();
+}
+
+
 void Ui::stateUpdate(int maxHeart, int heart, int wave, int coin)
 {
 	heartRect[1].top = heartRect[1].bottom - heartRect[1].bottom * (heart + 1) / (maxHeart + 1);
@@ -891,4 +971,281 @@ void Ui::stateUpdate(int maxHeart, int heart, int wave, int coin)
 
 	coinText.clear();
 	coinText.append(std::to_string(coin));
+}
+
+void Ui::winLoseFunction(bool isWin)
+{
+	if (DirectInput::getInstance()->mouseState.rgbButtons[0] & 0x80)
+	{
+		if (!isConfirming)
+		{
+			if (isWin)
+			{
+				for (int i = CONFIRM_BUTTON_NUM; i < WIN_BUTTON_NUM; i++)
+				{
+					buttonList[i]->update();
+
+					if (buttonList[i]->isClick && !buttonList[i]->isAni)
+					{
+						buttonList[i]->frame = 1;
+						buttonList[i]->textRect.top += 8;
+						buttonList[i]->textRect.bottom += 8;
+						buttonList[i]->isAni = true;
+					}
+
+					else if (!buttonList[i]->isClick && buttonList[i]->isAni)
+					{
+						buttonList[i]->frame = 0;
+						buttonList[i]->update();
+						buttonList[i]->textRect.top -= 8;
+						buttonList[i]->textRect.bottom -= 8;
+						buttonList[i]->isAni = false;
+					}
+				}
+			}
+			
+
+			else
+			{
+				for (int i = WIN_BUTTON_NUM - 1; i < LOSE_BUTTON_NUM; i++)
+				{
+					buttonList[i]->update();
+
+					if (buttonList[i]->isClick && !buttonList[i]->isAni)
+					{
+						buttonList[i]->frame = 1;
+						buttonList[i]->textRect.top += 8;
+						buttonList[i]->textRect.bottom += 8;
+						buttonList[i]->isAni = true;
+					}
+
+					else if (!buttonList[i]->isClick && buttonList[i]->isAni)
+					{
+						buttonList[i]->frame = 0;
+						buttonList[i]->update();
+						buttonList[i]->textRect.top -= 8;
+						buttonList[i]->textRect.bottom -= 8;
+						buttonList[i]->isAni = false;
+					}
+				}
+			}
+		}
+
+		else
+		{
+			for (int i = MENU_BUTTON_NUM; i < CONFIRM_BUTTON_NUM; i++)
+			{
+				buttonList[i]->update();
+
+				if (buttonList[i]->isClick && !buttonList[i]->isAni)
+				{
+					buttonList[i]->frame = 1;
+					buttonList[i]->textRect.top += 8;
+					buttonList[i]->textRect.bottom += 8;
+					buttonList[i]->isAni = true;
+				}
+
+				else if (!buttonList[i]->isClick && buttonList[i]->isAni)
+				{
+					buttonList[i]->frame = 0;
+					buttonList[i]->update();
+					buttonList[i]->textRect.top -= 8;
+					buttonList[i]->textRect.bottom -= 8;
+					buttonList[i]->isAni = false;
+				}
+			}
+		}
+	}
+
+	else if (!(DirectInput::getInstance()->mouseState.rgbButtons[0] & 0x80))
+	{
+		if (!isConfirming)
+		{
+			if (isWin)
+			{
+				for (int i = CONFIRM_BUTTON_NUM; i < WIN_BUTTON_NUM; i++)
+				{
+					buttonList[i]->frame = 0;
+
+					if (buttonList[i]->isAni)
+					{
+						buttonList[i]->update();
+						buttonList[i]->textRect.top -= 8;
+						buttonList[i]->textRect.bottom -= 8;
+						buttonList[i]->isAni = false;
+					}
+
+					if (buttonList[i]->isClick)
+					{
+						function = i;
+						isFunction = true;
+						buttonList[i]->isClick = false;
+					}
+				}
+			}
+			
+			else
+			{
+				for (int i = WIN_BUTTON_NUM - 1; i < LOSE_BUTTON_NUM; i++)
+				{
+					buttonList[i]->frame = 0;
+
+					if (buttonList[i]->isAni)
+					{
+						buttonList[i]->update();
+						buttonList[i]->textRect.top -= 8;
+						buttonList[i]->textRect.bottom -= 8;
+						buttonList[i]->isAni = false;
+					}
+
+					if (buttonList[i]->isClick)
+					{
+						function = i;
+						isFunction = true;
+						buttonList[i]->isClick = false;
+					}
+				}
+			}
+		}
+
+		else
+		{
+			for (int i = MENU_BUTTON_NUM; i < CONFIRM_BUTTON_NUM; i++)
+			{
+				buttonList[i]->frame = 0;
+
+				if (buttonList[i]->isAni)
+				{
+					buttonList[i]->update();
+					buttonList[i]->textRect.top -= 8;
+					buttonList[i]->textRect.bottom -= 8;
+					buttonList[i]->isAni = false;
+				}
+
+				if (buttonList[i]->isClick)
+				{
+					if (i == YES)
+					{
+						if (function == WIN_LOSE_MENU)
+						{
+							buttonList[i]->isClick = false;
+							GameStateManager::getInstance()->currentState = 0;
+						}
+					}
+
+					else if (i == NO)
+					{
+						buttonList[i]->isClick = false;
+						isConfirming = false;
+					}
+				}
+			}
+		}
+	}
+
+	if (isFunction)
+	{
+		switch (function)
+		{
+		case NEXT_LEVEL:
+			if (GameStateManager::getInstance()->currentState < 1)
+			{
+				GameStateManager::getInstance()->currentState++;
+			}
+
+			else
+			{
+				GameStateManager::getInstance()->currentState = 0;
+			}
+			break;
+
+		case WIN_LOSE_MENU:
+			isConfirming = true;
+			cfmWord = buttonList[MAIN_MENU]->word;
+			break;
+
+		case LOSE_RESTART:
+			GameStateManager::getInstance()->restart();
+			break;
+
+		default:
+			break;
+		}
+
+		isFunction = false;
+	}
+}
+
+void Ui::winLoseDraw(bool isWin)
+{
+	sprite->Begin(D3DXSPRITE_ALPHABLEND);
+
+	sprite->Draw(blurBackground, NULL, NULL, NULL, D3DCOLOR_XRGB(255, 255, 255));
+
+	if (!isConfirming)
+	{
+		if (isWin)
+		{
+			winLoseFont->DrawText(sprite, "WIN", -1, &winRect, 0, D3DCOLOR_XRGB(255, 255, 255));
+
+			for (int i = CONFIRM_BUTTON_NUM; i < WIN_BUTTON_NUM; i++)
+			{
+				sprite->Draw(menuButtonTexture, &buttonList[i]->buttonRect,
+					&D3DXVECTOR3(buttonList[i]->size.x / 2, buttonList[i]->size.y / 2, 0),
+					&D3DXVECTOR3(buttonList[i]->position.x, buttonList[i]->position.y, 0),
+					D3DCOLOR_XRGB(buttonList[i]->r, buttonList[i]->g, buttonList[i]->b));
+
+				if (buttonList[i]->word != "")
+				{
+					menuButtonFont->DrawText(sprite, buttonList[i]->word.c_str(), -1, &buttonList[i]->textRect, 0, D3DCOLOR_XRGB(255, 255, 255));
+				}
+			}
+		}
+
+		else
+		{
+			winLoseFont->DrawText(sprite, "DEFEAT", -1, &loseRect, 0, D3DCOLOR_XRGB(255, 255, 255));
+
+			for (int i = WIN_BUTTON_NUM - 1; i < LOSE_BUTTON_NUM; i++)
+			{
+				sprite->Draw(menuButtonTexture, &buttonList[i]->buttonRect,
+					&D3DXVECTOR3(buttonList[i]->size.x / 2, buttonList[i]->size.y / 2, 0),
+					&D3DXVECTOR3(buttonList[i]->position.x, buttonList[i]->position.y, 0),
+					D3DCOLOR_XRGB(buttonList[i]->r, buttonList[i]->g, buttonList[i]->b));
+
+				if (buttonList[i]->word != "")
+				{
+					menuButtonFont->DrawText(sprite, buttonList[i]->word.c_str(), -1, &buttonList[i]->textRect, 0, D3DCOLOR_XRGB(255, 255, 255));
+				}
+			}
+		}
+	}
+
+	else
+	{
+		scaling.x = scaling.y = 0.5f;
+		D3DXMatrixTransformation2D(&mat, NULL, 0.0, &scaling, NULL, NULL, NULL);
+		sprite->SetTransform(&mat);
+
+		sprite->Draw(menuBack, &menuRect,
+			&D3DXVECTOR3(menuRect.right / 2, menuRect.bottom / 2, 0),
+			&D3DXVECTOR3(BUFFER_WIDTH / scaling.x / 2, BUFFER_HEIGHT / scaling.y / 2, 0),
+			D3DCOLOR_XRGB(225, 122, 0));
+
+		scaling.x = scaling.y = 1.0f;
+		D3DXMatrixTransformation2D(&mat, NULL, 0.0, &scaling, NULL, NULL, NULL);
+		sprite->SetTransform(&mat);
+
+		menuButtonFont->DrawText(sprite, cfmWord.c_str(), -1, &confrimRect[1], 0, D3DCOLOR_XRGB(255, 255, 255));
+
+		for (int i = MENU_BUTTON_NUM; i < CONFIRM_BUTTON_NUM; i++)
+		{
+			sprite->Draw(yes_No, &buttonList[i]->buttonRect,
+				&D3DXVECTOR3(buttonList[i]->size.x / 2, buttonList[i]->size.y / 2, 0),
+				&D3DXVECTOR3(buttonList[i]->position.x, buttonList[i]->position.y, 0),
+				D3DCOLOR_XRGB(buttonList[i]->r, buttonList[i]->g, buttonList[i]->b));
+		}
+	}
+
+	sprite->End();
 }

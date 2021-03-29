@@ -42,55 +42,78 @@ void TestLevel::init()
 
 	ui = new Ui;
 	ui->init();
+
+	isWin = false;
+	isEnd = false;
 }
 
 void TestLevel::fixUpdate()
 {
-	if (!GameStateManager::getInstance()->isPause)
+	if (!isEnd)
 	{
-		ui->fixUpdate();
+		if (!GameStateManager::getInstance()->isPause)
+		{
+			ui->fixUpdate();
 
-		TowerBuilding::getInstance()->fixUpdate();
-		EnemyController::getInstance()->fixUpdate();
+			TowerBuilding::getInstance()->fixUpdate();
+			EnemyController::getInstance()->fixUpdate();
+		}
 	}
 }
 
 void TestLevel::update()
 {
-
-	if (GameWindows::getInstance()->keyIn == VK_ESCAPE)
+	if (!isEnd)
 	{
-		if (!ui->isMenu)
+		if (GameWindows::getInstance()->keyIn == VK_ESCAPE)
 		{
-			ui->buttonList[PAUSE]->buttonRect.top = 0;
-			ui->buttonList[PAUSE]->buttonRect.bottom = ui->buttonList[PAUSE]->size.y;
-			GameStateManager::getInstance()->isPause = true;
-			ui->isMenu = true;
+			if (!ui->isMenu)
+			{
+				ui->buttonList[PAUSE]->buttonRect.top = 0;
+				ui->buttonList[PAUSE]->buttonRect.bottom = ui->buttonList[PAUSE]->size.y;
+				GameStateManager::getInstance()->isPause = true;
+				ui->isMenu = true;
+			}
+
+			else
+			{
+				GameStateManager::getInstance()->isPause = false;
+				ui->isMenu = false;
+			}
 		}
 
-		else
+		if (GameWindows::getInstance()->keyIn == VK_LEFT)
 		{
-			GameStateManager::getInstance()->isPause =false;
-			ui->isMenu = false;
-		}	
+			health--;
+		}
+
+		wave = EnemyController::getInstance()->currentWave + 1;
+
+		ui->stateUpdate(maxHealth, health, wave, coin);
+
+		ui->update(coin);
+
+		if (!GameStateManager::getInstance()->isPause)
+		{
+			TowerBuilding::getInstance()->update(coin);
+			EnemyController::getInstance()->update(coin,isEnd ,isWin);
+			Physics::getInstance()->update();
+		}
+
+		else if (ui->isMenu)
+		{
+			ui->pauseFunction();
+		}
+
+		if (health == 0)
+		{
+			isEnd = true;
+		}
 	}
 
-	wave = EnemyController::getInstance()->currentWave + 1;
-
-	ui->stateUpdate(maxHealth, health, wave, coin);
-
-	ui->update(coin);
-
-	if (!GameStateManager::getInstance()->isPause)
+	else
 	{
-		TowerBuilding::getInstance()->update(coin);
-		EnemyController::getInstance()->update(coin);
-		Physics::getInstance()->update();
-	}
-
-	else if(ui->isMenu)
-	{
-		ui->pauseFunction();
+		ui->winLoseFunction(isWin);
 	}
 }
 
@@ -108,9 +131,17 @@ void TestLevel::draw()
 
 	ui->draw();
 
-	if (ui->isMenu)
+	if (!isEnd)
 	{
-		ui->pauseMenu();
+		if (ui->isMenu)
+		{
+			ui->pauseMenu();
+		}
+	}
+	
+	else
+	{
+		ui->winLoseDraw(isWin);
 	}
 }
 
