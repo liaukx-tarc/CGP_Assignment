@@ -144,19 +144,19 @@ void Character::move(D3DXVECTOR2 direction)
 
 	if (leftX < 0 || directionState == 'r')
 	{
-		if (pathRoute[rightY][rightX] == 1)
+		if (pathRoute[rightY][rightX] == 1 || pathRoute[rightY][rightX] == 3)
 		{
 			direction.x = 1;
 			direction.y = 0;
 			directionState = 'r';
 		}
-		else if (pathRoute[topY][topX] == 1)
+		else if (pathRoute[topY][topX] == 1 || pathRoute[topY][topX] == 3)
 		{
 			direction.x = 0;
 			direction.y = -1;
 			directionState = 't';
 		}
-		else if (pathRoute[btmY][btmX] == 1)
+		else if (pathRoute[btmY][btmX] == 1 || pathRoute[btmY][btmX] == 3)
 		{
 			direction.x = 0;
 			direction.y = 1;
@@ -165,19 +165,19 @@ void Character::move(D3DXVECTOR2 direction)
 	}
 	else if (rightX > MAX_MAP_X || directionState == 'l')
 	{
-		if (pathRoute[leftY][leftX] == 1)
+		if (pathRoute[leftY][leftX] == 1 || pathRoute[leftY][leftX] == 3)
 		{
 			direction.x = -1;
 			direction.y = 0;
 			directionState = 'l';
 		}
-		else if (pathRoute[topY][topX] == 1)
+		else if (pathRoute[topY][topX] == 1 || pathRoute[topY][topX] == 3)
 		{
 			direction.x = 0;
 			direction.y = -1;
 			directionState = 't';
 		}
-		else if (pathRoute[btmY][btmX] == 1)
+		else if (pathRoute[btmY][btmX] == 1 || pathRoute[btmY][btmX] == 3)
 		{
 			direction.x = 0;
 			direction.y = 1;
@@ -186,19 +186,19 @@ void Character::move(D3DXVECTOR2 direction)
 	}
 	else if (topY < 0 || directionState == 'b')
 	{
-		if (pathRoute[btmY][btmX] == 1)
+		if (pathRoute[btmY][btmX] == 1 || pathRoute[btmY][btmX] == 3)
 		{
 			direction.x = 0;
 			direction.y = 1;
 			directionState = 'b';
 		}
-		else if (pathRoute[rightY][rightX] == 1)
+		else if (pathRoute[rightY][rightX] == 1 || pathRoute[rightY][rightX] == 3)
 		{
 			direction.x = 1;
 			direction.y = 0;
 			directionState = 'r';
 		}
-		else if (pathRoute[leftY][leftX] == 1)
+		else if (pathRoute[leftY][leftX] == 1 || pathRoute[leftY][leftX] == 3)
 		{
 			direction.x = -1;
 			direction.y = 0;
@@ -207,20 +207,20 @@ void Character::move(D3DXVECTOR2 direction)
 	}
 	else if (btmY > MAX_MAP_Y || directionState == 't')
 	{
-		if (pathRoute[topY][topX] == 1)
+		if (pathRoute[topY][topX] == 1 || pathRoute[topY][topX] == 3)
 		{
 			direction.x = 0;
 			direction.y = -1;
 			directionState = 't';
 		}
 
-		else if (pathRoute[rightY][rightX] == 1)
+		else if (pathRoute[rightY][rightX] == 1 || pathRoute[rightY][rightX] == 3)
 		{
 			direction.x = 1;
 			direction.y = 0;
 			directionState = 'r';
 		}
-		else if (pathRoute[leftY][leftX] == 1)
+		else if (pathRoute[leftY][leftX] == 1 || pathRoute[leftY][leftX] == 3)
 		{
 			direction.x = -1;
 			direction.y = 0;
@@ -230,26 +230,26 @@ void Character::move(D3DXVECTOR2 direction)
 
 	else
 	{
-		if (pathRoute[topY][topX] == 1)
+		if (pathRoute[topY][topX] == 1 || pathRoute[topY][topX] == 3)
 		{
 			direction.x = 0;
 			direction.y = -1;
 			directionState = 't';
 		}
 
-		else if (pathRoute[rightY][rightX] == 1)
+		else if (pathRoute[rightY][rightX] == 1 || pathRoute[rightY][rightX] == 3)
 		{
 			direction.x = 1;
 			direction.y = 0;
 			directionState = 'r';
 		}
-		else if (pathRoute[leftY][leftX] == 1)
+		else if (pathRoute[leftY][leftX] == 1 || pathRoute[leftY][leftX] == 3)
 		{
 			direction.x = -1;
 			direction.y = 0;
 			directionState = 'l';
 		}
-		else if (pathRoute[btmY][btmX] == 1)
+		else if (pathRoute[btmY][btmX] == 1 || pathRoute[btmY][btmX] == 3)
 		{
 			direction.x = 0;
 			direction.y = 1;

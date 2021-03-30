@@ -45,6 +45,19 @@ void TestLevel::init()
 
 	isWin = false;
 	isEnd = false;
+
+	for (int i = 0; i < MAX_MAP_Y; i++)
+	{
+		for (int j = 0; j < MAX_MAP_X; j++)
+		{
+			if (Map::getInstance()->pathMap[i][j] == 3)
+			{
+				crystalPos.x = j * TILE_WIDTH;
+				crystalPos.y = i * TILE_HEIGHT;
+				printf("%.2f,%.2f\n", crystalPos.x, crystalPos.y);
+			}
+		}
+	}
 }
 
 void TestLevel::fixUpdate()
@@ -54,6 +67,8 @@ void TestLevel::fixUpdate()
 		if (!GameStateManager::getInstance()->isPause)
 		{
 			ui->fixUpdate();
+
+			Map::getInstance()->fixUpdate();
 
 			TowerBuilding::getInstance()->fixUpdate();
 			EnemyController::getInstance()->fixUpdate();
@@ -71,6 +86,7 @@ void TestLevel::update()
 			{
 				ui->buttonList[PAUSE]->buttonRect.top = 0;
 				ui->buttonList[PAUSE]->buttonRect.bottom = ui->buttonList[PAUSE]->size.y;
+				TowerBuilding::getInstance()->isBuilding = false;
 				GameStateManager::getInstance()->isPause = true;
 				ui->isMenu = true;
 			}
@@ -82,9 +98,43 @@ void TestLevel::update()
 			}
 		}
 
-		if (GameWindows::getInstance()->keyIn == VK_LEFT)
+		for (int i = 0; i < EnemyController::getInstance()->enemyList.size(); i++)
 		{
-			health--;
+			if (!EnemyController::getInstance()->enemyList[i]->isDead)
+			{
+				if (EnemyController::getInstance()->enemyList[i]->objPosition.x > crystalPos.x &&
+					EnemyController::getInstance()->enemyList[i]->objPosition.x < crystalPos.x + TILE_WIDTH &&
+					EnemyController::getInstance()->enemyList[i]->objPosition.y > crystalPos.y &&
+					EnemyController::getInstance()->enemyList[i]->objPosition.y < crystalPos.y + TILE_HEIGHT)
+				{
+					if (health > 0)
+					{
+						health--;
+						Map::getInstance()->crystalColor[0] = 0;
+						Map::getInstance()->crystalColor[1] = 0;
+					}
+
+					if (health == 0)
+					{
+						Map::getInstance()->crystalState = 2;
+						Map::getInstance()->crystalFrame = 0;
+						Map::getInstance()->maxFrame = 7;
+					}
+
+					else if (health <= maxHealth / 2)
+					{
+						Map::getInstance()->crystalState = 1;
+					}
+
+					EnemyController::getInstance()->enemyList[i]->isDead = true;
+					EnemyController::getInstance()->dieEnemyNum++;
+				}
+			}
+		}
+
+		if (Map::getInstance()->crystalFrame == 6)
+		{
+			isEnd = true;
 		}
 
 		wave = EnemyController::getInstance()->currentWave + 1;
@@ -103,11 +153,6 @@ void TestLevel::update()
 		else if (ui->isMenu)
 		{
 			ui->pauseFunction();
-		}
-
-		if (health == 0)
-		{
-			isEnd = true;
 		}
 	}
 

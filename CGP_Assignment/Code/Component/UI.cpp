@@ -375,9 +375,9 @@ void Ui::init()
 	button->g = 47;
 	button->b = 255;
 
-	button->word = "Next Lext";
+	button->word = "Next Level";
 	button->textRect.top = button->position.y - 15;
-	button->textRect.left = button->position.x - 85;
+	button->textRect.left = button->position.x - 95;
 	button->textRect.bottom = button->textRect.top + 40;
 	button->textRect.right = button->textRect.left + 300;
 
@@ -585,6 +585,7 @@ void Ui::update(int coin)
 				if (GameStateManager::getInstance()->isPause)
 				{
 					buttonList[PAUSE]->buttonRect.top = buttonList[PAUSE]->size.y;
+					TowerBuilding::getInstance()->isBuilding = false;
 				}
 
 				else
@@ -598,6 +599,7 @@ void Ui::update(int coin)
 			case SETTING:
 				buttonList[PAUSE]->buttonRect.top = 0;
 				buttonList[PAUSE]->buttonRect.bottom = buttonList[PAUSE]->size.y;
+				TowerBuilding::getInstance()->isBuilding = false;
 				GameStateManager::getInstance()->isPause = true;
 				isMenu = true;
 				break;

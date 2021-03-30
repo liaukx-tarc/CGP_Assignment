@@ -136,7 +136,9 @@
     <Image Include="resource\bullet.png" />
     <Image Include="resource\Button.png" />
     <Image Include="resource\Button2.png" />
+    <Image Include="resource\button3.png" />
     <Image Include="resource\coin.png" />
+    <Image Include="resource\Crystal.png" />
     <Image Include="resource\Cursor.png" />
     <Image Include="resource\Heart.png" />
     <Image Include="resource\MainMenuBack.png" />
