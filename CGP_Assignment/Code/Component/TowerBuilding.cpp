@@ -135,6 +135,11 @@ int count = 0;
 
 void TowerBuilding::update(int &coin)
 {
+	if (DirectInput::getInstance()->mouseState.rgbButtons[1] & 0x80)
+	{
+		isBuilding = false;
+	}
+
 	mousePos = GameWindows::getInstance()->mousePos;
 
 	//building function

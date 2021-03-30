@@ -42,21 +42,60 @@ Map::~Map()
 
 	tile->Release();
 	tile = NULL;
+
+	crystalTexture->Release();
+	crystalTexture = NULL;
 }
 
 void Map::createMap()
 {
-	hr = D3DXCreateSprite(Graphic::getInstance()->d3dDevice, &sprite);
-	hr = D3DXCreateTextureFromFile(Graphic::getInstance()->d3dDevice, "resource/TileSet.png", &tile);
+	hr[0] = D3DXCreateSprite(Graphic::getInstance()->d3dDevice, &sprite);
+	hr[1] = D3DXCreateTextureFromFile(Graphic::getInstance()->d3dDevice, "resource/TileSet.png", &tile);
 
-	if (FAILED(hr))
+	hr[2] = D3DXCreateTextureFromFile(Graphic::getInstance()->d3dDevice, "resource/Crystal.png", &crystalTexture);
+
+	for (int i = 0; i < 3; i++)
 	{
-		PostQuitMessage(0);
+		if (FAILED(hr[i]))
+		{
+			PostQuitMessage(0);
+		}
 	}
 
 	tileRect.left = tileRect.top = 0;
 	tileRect.right = 60;
 	tileRect.bottom = 60;
+
+	crystalRect.left = crystalRect.top = 0;
+	crystalRect.right = 90;
+	crystalRect.bottom = 90;
+
+	aniTimer = 0;
+
+	crystalState = 0;
+	crystalFrame = 0;
+	maxFrame = 4;
+}
+
+void Map::fixUpdate()
+{
+	aniTimer += 1.0f / 15;
+
+	if (aniTimer >= 1)
+	{
+		crystalFrame++;
+		crystalFrame %= maxFrame;
+
+		crystalRect.top = crystalState * 90;
+		crystalRect.left = crystalFrame * 90;
+		crystalRect.bottom = crystalRect.top + 90;
+		crystalRect.right = crystalRect.left + 90;
+
+		crystalColor[0] = 255;
+		crystalColor[1] = 255;
+
+		aniTimer = 0;
+	}
 }
 
 void Map::loadMap(char * name, int &maxHealth, int &coin)
@@ -152,6 +191,22 @@ void Map::loadMap(char * name, int &maxHealth, int &coin)
 			}
 		}
 	}
+
+	for (int y = 0; y < MAX_MAP_Y; y++)
+	{
+		for (int x = 0; x < MAX_MAP_X; x++)
+		{
+			if (pathMap[y][x] == 3)
+			{
+				crystalPos.x = x * TILE_WIDTH + TILE_WIDTH / 2;
+
+				crystalPos.y = y * TILE_HEIGHT + TILE_HEIGHT / 2;
+
+				crystalPos.z = 0.0f;
+
+			}
+		}
+	}
 }
 
 void Map::drawMap()
@@ -189,6 +244,8 @@ void Map::drawMap()
 			}
 		}
 	}
+
+	sprite->Draw(crystalTexture, &crystalRect, &D3DXVECTOR3(90 / 2, 90 * 3 / 4, 0), &crystalPos, D3DCOLOR_XRGB(255, crystalColor[0], crystalColor[1]));
 
 	sprite->End();
 }

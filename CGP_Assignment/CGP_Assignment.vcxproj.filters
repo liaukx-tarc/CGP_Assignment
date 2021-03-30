@@ -98,6 +98,12 @@
     <Image Include="resource\coin.png">
       <Filter>Resource Files\Picture</Filter>
     </Image>
+    <Image Include="resource\button3.png">
+      <Filter>Resource Files\Picture</Filter>
+    </Image>
+    <Image Include="resource\Crystal.png">
+      <Filter>Resource Files\Picture</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="resource\Arrow.ani">

@@ -26,6 +26,7 @@ public:
 	void release();
 
 	int maxHealth, health, wave, coin;
+	D3DXVECTOR2 crystalPos;
 };
 
 #endif

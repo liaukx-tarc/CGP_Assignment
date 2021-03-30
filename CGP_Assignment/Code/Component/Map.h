@@ -20,15 +20,27 @@ private:
 	Map();
 	~Map();
 
-	HRESULT hr;
+	HRESULT hr[3];
 
 public:
 	static Map* getInstance();
 	static void releaseInstance();
 
-	RECT tileRect;
-	LPDIRECT3DTEXTURE9 tile;
 	LPD3DXSPRITE sprite;
+
+	float aniTimer;
+
+	LPDIRECT3DTEXTURE9 tile;
+	LPDIRECT3DTEXTURE9 crystalTexture;
+
+	RECT tileRect;
+	RECT crystalRect;
+
+	D3DXVECTOR3 crystalPos;
+	int crystalState;
+	int crystalFrame;
+	int maxFrame;
+	int crystalColor[2];
 
 	//tile map
 	int map[MAX_MAP_Y][MAX_MAP_X];
@@ -43,6 +55,8 @@ public:
 	D3DXVECTOR2 startPoint[MAX_START], endPoint[MAX_END];
 
 	void createMap();
+
+	void fixUpdate();
 
 	void loadMap(char * name, int &maxHealth, int &coin);
 	void drawMap();
