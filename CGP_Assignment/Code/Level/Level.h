@@ -9,11 +9,11 @@
 #define MAX_MAP_Y 21
 #define MAX_MAP_X 38
 
-class TestLevel : public GameState
+class Level : public GameState
 {
 public:
-	TestLevel();
-	~TestLevel();
+	Level();
+	~Level();
 
 	char * levelFile;
 	bool isWin;

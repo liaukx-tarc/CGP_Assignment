@@ -475,7 +475,7 @@ void Ui::update(int coin)
 		isConfirming = false;
 	}
 
-	if (!isMenu)
+	if (!isMenu && !GameStateManager::getInstance()->isStart)
 	{
 		if (DirectInput::getInstance()->mouseState.rgbButtons[0] & 0x80)
 		{
@@ -709,7 +709,7 @@ void Ui::draw()
 		}
 	}
 
-	if (GameStateManager::getInstance()->isPause && !isMenu)
+	if (GameStateManager::getInstance()->isPause && !isMenu && !GameStateManager::getInstance()->isStart)
 	{
 		sprite->Draw(blurBackground, NULL, NULL, NULL, D3DCOLOR_XRGB(255, 255, 255));
 	}
@@ -720,6 +720,15 @@ void Ui::draw()
 			&D3DXVECTOR3(buttonList[i]->size.x / 2, buttonList[i]->size.y / 2, 0),
 			&D3DXVECTOR3(buttonList[i]->position.x, buttonList[i]->position.y, 0),
 			D3DCOLOR_XRGB(buttonList[i]->r, buttonList[i]->g, buttonList[i]->b));
+	}
+
+	if (GameStateManager::getInstance()->isStart)
+	{
+		sprite->Draw(blurBackground, NULL, NULL, NULL, D3DCOLOR_XRGB(255, 255, 255));
+
+		winLoseFont->DrawText(sprite,
+			GameStateManager::getInstance()->levelName.c_str(),
+			-1, &loseRect, 0, D3DCOLOR_XRGB(255, 255, 255));
 	}
 
 	sprite->End();
@@ -1189,7 +1198,7 @@ void Ui::winLoseFunction(bool isWin)
 		switch (function)
 		{
 		case NEXT_LEVEL:
-			if (GameStateManager::getInstance()->currentState < 1)
+			if (GameStateManager::getInstance()->currentState < MAX_LEVEL)
 			{
 				GameStateManager::getInstance()->currentState++;
 			}

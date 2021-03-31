@@ -168,7 +168,7 @@
     <ClInclude Include="Code\Component\UI.h" />
     <ClInclude Include="Code\Level\GameState.h" />
     <ClInclude Include="Code\Level\MainMenu.h" />
-    <ClInclude Include="Code\Level\TestLevel.h" />
+    <ClInclude Include="Code\Level\Level.h" />
     <ClInclude Include="Code\Object\Button.h" />
     <ClInclude Include="Code\Object\Character.h" />
     <ClInclude Include="Code\Object\GameObject.h" />
@@ -188,7 +188,7 @@
     <ClCompile Include="Code\Component\TowerBuilding.cpp" />
     <ClCompile Include="Code\Component\UI.cpp" />
     <ClCompile Include="Code\Level\MainMenu.cpp" />
-    <ClCompile Include="Code\Level\TestLevel.cpp" />
+    <ClCompile Include="Code\Level\Level.cpp" />
     <ClCompile Include="Code\main.cpp" />
     <ClCompile Include="Code\Object\Button.cpp" />
     <ClCompile Include="Code\Object\Character.cpp" />
@@ -197,7 +197,8 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="data\EnemyData.txt" />
-    <Text Include="data\Test_Level.txt" />
+    <Text Include="data\Level1.txt" />
+    <Text Include="data\Level2.txt" />
     <Text Include="data\TowerData.txt" />
   </ItemGroup>
   <ItemGroup>

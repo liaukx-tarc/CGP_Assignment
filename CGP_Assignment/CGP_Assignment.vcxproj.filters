@@ -132,9 +132,6 @@
     <ClInclude Include="Code\Component\Map.h">
       <Filter>Header Files\Component</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Level\TestLevel.h">
-      <Filter>Header Files\Level</Filter>
-    </ClInclude>
     <ClInclude Include="Code\resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -171,6 +168,9 @@
     <ClInclude Include="Code\Component\Physics.h">
       <Filter>Header Files\Component</Filter>
     </ClInclude>
+    <ClInclude Include="Code\Level\Level.h">
+      <Filter>Header Files\Level</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Component\DirectInput.cpp">
@@ -190,9 +190,6 @@
     </ClCompile>
     <ClCompile Include="Code\Component\Map.cpp">
       <Filter>Source Files\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Level\TestLevel.cpp">
-      <Filter>Source Files\Level</Filter>
     </ClCompile>
     <ClCompile Include="Code\main.cpp">
       <Filter>Source Files</Filter>
@@ -224,15 +221,21 @@
     <ClCompile Include="Code\Component\Physics.cpp">
       <Filter>Source Files\Component</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Level\Level.cpp">
+      <Filter>Source Files\Level</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="data\EnemyData.txt">
       <Filter>Resource Files\Data</Filter>
     </Text>
-    <Text Include="data\Test_Level.txt">
+    <Text Include="data\TowerData.txt">
       <Filter>Resource Files\Data</Filter>
     </Text>
-    <Text Include="data\TowerData.txt">
+    <Text Include="data\Level1.txt">
+      <Filter>Resource Files\Data</Filter>
+    </Text>
+    <Text Include="data\Level2.txt">
       <Filter>Resource Files\Data</Filter>
     </Text>
   </ItemGroup>
