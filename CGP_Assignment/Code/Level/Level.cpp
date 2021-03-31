@@ -77,6 +77,7 @@ void Level::update()
 {
 	if (!isEnd)
 	{
+		//Debuging Fast win
 		if (DirectInput::getInstance()->diKeys[DIK_LSHIFT] && DirectInput::getInstance()->diKeys[DIK_F1])
 		{
 			isEnd = true;
