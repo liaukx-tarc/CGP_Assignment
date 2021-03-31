@@ -42,10 +42,11 @@ public:
 	float frameRate;		//How many second display 1 frame
 	float frameTimer;		//The timer of each frame
 
-	//building
+	//building / Destroy
 	int tileSelectX, tileSelectY; //Selected tile
 	int towerSelect;
 	bool isBuilding;
+	bool isDestroy;
 	D3DXVECTOR2 buildPos;
 
 	std::vector<Tower*> towerData;

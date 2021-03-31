@@ -7,27 +7,28 @@
 #include "../Object/Button.h"
 #include "TowerBuilding.h"
 
-#define TOWER_BUTTON_NUM	4
-#define FUNC_BUTTON_NUM		6
-#define MENU_BUTTON_NUM		9
-#define CONFIRM_BUTTON_NUM	11
-#define WIN_BUTTON_NUM		13
-#define LOSE_BUTTON_NUM		14
+#define TOWER_BUTTON_NUM	5
+#define FUNC_BUTTON_NUM		7
+#define MENU_BUTTON_NUM		10
+#define CONFIRM_BUTTON_NUM	12
+#define WIN_BUTTON_NUM		14
+#define LOSE_BUTTON_NUM		15
 
 #define TOWER1			0
 #define TOWER2			1
 #define TOWER3			2
 #define TOWER4			3
-#define PAUSE			4
-#define SETTING			5
-#define RESUME			6
-#define RESTART			7
-#define MAIN_MENU		8
-#define YES				9
-#define NO				10
-#define NEXT_LEVEL		11
-#define WIN_LOSE_MENU	12
-#define LOSE_RESTART	13
+#define DESTROY			4
+#define PAUSE			5
+#define SETTING			6
+#define RESUME			7
+#define RESTART			8
+#define MAIN_MENU		9
+#define YES				10
+#define NO				11
+#define NEXT_LEVEL		12
+#define WIN_LOSE_MENU	13
+#define LOSE_RESTART	14
 
 class Ui
 {

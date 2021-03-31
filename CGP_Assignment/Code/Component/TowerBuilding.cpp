@@ -138,12 +138,13 @@ void TowerBuilding::update(int &coin)
 	if (DirectInput::getInstance()->mouseState.rgbButtons[1] & 0x80)
 	{
 		isBuilding = false;
+		isDestroy = false;
 	}
 
 	mousePos = GameWindows::getInstance()->mousePos;
 
 	//building function
-	if (isBuilding)
+	if (isBuilding || isDestroy)
 	{
 		tileSelectX = mousePos.x / TILE_WIDTH;
 		tileSelectY = mousePos.y / TILE_HEIGHT;
@@ -159,25 +160,40 @@ void TowerBuilding::update(int &coin)
 			{
 				if (Map::getInstance()->pathMap[tileSelectY][tileSelectX] == 0)
 				{
-					if (towerList[tileSelectY][tileSelectX] == NULL)
+					if (isBuilding)
 					{
-						Tower * tower = new Tower();
+						if (towerList[tileSelectY][tileSelectX] == NULL)
+						{
+							Tower * tower = new Tower();
 
-						//Save data
-						tower->towerNo = towerSelect;
-						tower->damage = towerData[towerSelect]->damage;
-						tower->atkSpeed = towerData[towerSelect]->atkSpeed;
-						tower->price = towerData[towerSelect]->price;
-						tower->objPosition.x = tileSelectX * TILE_WIDTH + (TILE_WIDTH / 2);
-						tower->objPosition.y = tileSelectY * TILE_WIDTH + (TILE_HEIGHT / 2);
+							//Save data
+							tower->towerNo = towerSelect;
+							tower->damage = towerData[towerSelect]->damage;
+							tower->atkSpeed = towerData[towerSelect]->atkSpeed;
+							tower->price = towerData[towerSelect]->price;
+							tower->objPosition.x = tileSelectX * TILE_WIDTH + (TILE_WIDTH / 2);
+							tower->objPosition.y = tileSelectY * TILE_WIDTH + (TILE_HEIGHT / 2);
 
-						tower->init();
-						towerList[tileSelectY][tileSelectX] = tower;
+							tower->init();
+							towerList[tileSelectY][tileSelectX] = tower;
 
-						coin -= towerData[towerSelect]->price;
+							coin -= towerData[towerSelect]->price;
 
-						isBuilding = false;
-						printf("Is Built\n");
+							isBuilding = false;
+						}
+					}
+					
+					if (isDestroy)
+					{
+						if (towerList[tileSelectY][tileSelectX] != NULL)
+						{
+							towerList[tileSelectY][tileSelectX]->release();
+							delete towerList[tileSelectY][tileSelectX];
+							towerList[tileSelectY][tileSelectX] = NULL;
+
+							coin += towerData[towerSelect]->price;
+							isDestroy = false;
+						}
 					}
 				}
 			}
@@ -223,6 +239,14 @@ void TowerBuilding::draw()
 				sprite->Draw(selectBoxTeture, &selectBoxRect,
 					&D3DXVECTOR3(TILE_WIDTH / 2, TILE_HEIGHT / 2, 0),
 					&D3DXVECTOR3(tileSelectX * TILE_WIDTH + (TILE_WIDTH / 2), tileSelectY * TILE_HEIGHT + (TILE_HEIGHT / 2) , 0),
+					D3DCOLOR_XRGB(255, 255, 255));
+			}
+
+			else if (isDestroy && towerList[tileSelectY][tileSelectX] != NULL)
+			{
+				sprite->Draw(selectBoxTeture, &selectBoxRect,
+					&D3DXVECTOR3(TILE_WIDTH / 2, TILE_HEIGHT / 2, 0),
+					&D3DXVECTOR3(tileSelectX * TILE_WIDTH + (TILE_WIDTH / 2), tileSelectY * TILE_HEIGHT + (TILE_HEIGHT / 2), 0),
 					D3DCOLOR_XRGB(255, 255, 255));
 			}
 		}

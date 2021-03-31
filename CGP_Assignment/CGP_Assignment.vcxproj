@@ -140,6 +140,7 @@
     <Image Include="resource\coin.png" />
     <Image Include="resource\Crystal.png" />
     <Image Include="resource\Cursor.png" />
+    <Image Include="resource\hammer.png" />
     <Image Include="resource\Heart.png" />
     <Image Include="resource\MainMenuBack.png" />
     <Image Include="resource\MenuBack.png" />

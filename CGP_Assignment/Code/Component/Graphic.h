@@ -13,7 +13,7 @@ private:
 	Graphic();
 	~Graphic();
 
-	HRESULT hr[3];
+	HRESULT hr[4];
 
 public:
 	static Graphic* getInstance();
@@ -29,6 +29,7 @@ public:
 	//Cursor
 	LPD3DXSPRITE sprite;
 	LPDIRECT3DTEXTURE9 cursorTexture;
+	LPDIRECT3DTEXTURE9 hammerTexture;
 	RECT cursorRect;
 
 	D3DXVECTOR2 scaling;
