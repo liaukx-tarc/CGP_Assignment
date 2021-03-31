@@ -2,7 +2,7 @@
 #include "GameWindows.h"
 
 //Level
-#include "../Level/TestLevel.h"
+#include "../Level/Level.h"
 #include "../Level/MainMenu.h"
 
 //singleton
@@ -30,6 +30,8 @@ GameStateManager::GameStateManager()
 	preState = 0;
 
 	isPause = false;
+	isStart = false;
+	timer = 0;
 
 	g_Timer = new G_Timer();
 	g_Timer->init(GAME_FPS);
@@ -38,8 +40,8 @@ GameStateManager::GameStateManager()
 	mainMenu->init();
 	stateList.push_back(mainMenu);
 
-	TestLevel* testLevel = new TestLevel();
-	stateList.push_back(testLevel);
+	Level* level = new Level();
+	stateList.push_back(level);
 }
 
 GameStateManager::~GameStateManager()
@@ -57,6 +59,19 @@ GameStateManager::~GameStateManager()
 
 void GameStateManager::update()
 {
+	//control start screen display
+	if (isStart)
+	{
+		timer += 0.01;
+
+		if (timer >= 1)
+		{
+			isStart = false;
+			isPause = false;
+			timer = 0;
+		}
+	}
+
 	stateList[currentState]->update();
 
 	framesToUpdate = g_Timer->framesToUpdate();
@@ -68,12 +83,33 @@ void GameStateManager::update()
 			stateList[currentState]->fixUpdate();
 		}
 	}
-	
+
 	else
 	{
-		isPause = false;
-		stateList[currentState]->init();
-		stateList[preState]->release();
+		switch (currentState)
+		{
+		case 1:
+			levelFileName = "data/Level1.txt";
+			levelName = "Level 1";
+
+			stateList[currentState]->init();
+			stateList[preState]->release();
+			break;
+
+		case 2:
+			levelFileName = "data/Level2.txt";
+			levelName = "Level 2";
+			currentState = 1;
+
+			restart();
+			break;
+
+		default:
+			break;
+		}
+
+		isStart = true;
+		isPause = true;
 	}
 }
 
@@ -92,6 +128,11 @@ void GameStateManager::draw()
 
 void GameStateManager::restart()
 {
+	if (currentState > 0)
+	{
+		isStart = true;
+	}
+
 	stateList[currentState]->release();
 	stateList[currentState]->init();
 	isPause = false;

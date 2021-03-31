@@ -1,4 +1,4 @@
-#include "TestLevel.h"
+#include "Level.h"
 #include "../Component/Map.h"
 #include "../Component/DirectInput.h"
 #include "../Component/EnemyController.h"
@@ -8,26 +8,23 @@
 #include "../Component/UI.h"
 #include "../Component/Physics.h"
 
-TestLevel::TestLevel()
+Level::Level()
 {
 
 }
 
-TestLevel::~TestLevel()
+Level::~Level()
 {
 	delete levelFile;
 }
 
 Ui * ui;
 
-void TestLevel::init()
+void Level::init()
 {
-	//load map
-	std::string name = "data/Test_Level.txt";
-
-	levelFile = new char[name.size() + 1];
-	std::copy(name.begin(), name.end(), levelFile);
-	levelFile[name.size()] = '\0';
+	levelFile = new char[GameStateManager::getInstance()->levelFileName.size() + 1];
+	std::copy(GameStateManager::getInstance()->levelFileName.begin(), GameStateManager::getInstance()->levelFileName.end(), levelFile);
+	levelFile[GameStateManager::getInstance()->levelFileName.size()] = '\0';
 
 	Map::getInstance()->createMap();
 	Map::getInstance()->loadMap(levelFile, maxHealth, coin);
@@ -60,7 +57,7 @@ void TestLevel::init()
 	}
 }
 
-void TestLevel::fixUpdate()
+void Level::fixUpdate()
 {
 	if (!isEnd)
 	{
@@ -76,7 +73,7 @@ void TestLevel::fixUpdate()
 	}
 }
 
-void TestLevel::update()
+void Level::update()
 {
 	if (!isEnd)
 	{
@@ -168,7 +165,7 @@ void TestLevel::update()
 	}
 }
 
-void TestLevel::draw()
+void Level::draw()
 {
 	ui->backDraw();
 
@@ -196,7 +193,7 @@ void TestLevel::draw()
 	}
 }
 
-void TestLevel::release()
+void Level::release()
 {
 	Map::getInstance()->releaseInstance();
 

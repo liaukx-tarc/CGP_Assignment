@@ -75,6 +75,9 @@ void Map::createMap()
 	crystalState = 0;
 	crystalFrame = 0;
 	maxFrame = 4;
+
+	crystalColor[0] = 255;
+	crystalColor[1] = 255;
 }
 
 void Map::fixUpdate()
