@@ -29,6 +29,8 @@ GameStateManager::GameStateManager()
 	currentState = 0;
 	preState = 0;
 
+	level = 1;
+
 	isPause = false;
 	isStart = false;
 	timer = 0;
@@ -83,33 +85,19 @@ void GameStateManager::update()
 			stateList[currentState]->fixUpdate();
 		}
 	}
-
+	
 	else
 	{
-		switch (currentState)
+		if (currentState != 0)
 		{
-		case 1:
-			levelFileName = "data/Level1.txt";
-			levelName = "Level 1";
-
+			nextLevel();
+		}
+		
+		else
+		{
 			stateList[currentState]->init();
 			stateList[preState]->release();
-			break;
-
-		case 2:
-			levelFileName = "data/Level2.txt";
-			levelName = "Level 2";
-			currentState = 1;
-
-			restart();
-			break;
-
-		default:
-			break;
 		}
-
-		isStart = true;
-		isPause = true;
 	}
 }
 
@@ -136,4 +124,33 @@ void GameStateManager::restart()
 	stateList[currentState]->release();
 	stateList[currentState]->init();
 	isPause = false;
+}
+
+void GameStateManager::nextLevel()
+{
+	switch (level)
+	{
+	case 1:
+		levelFileName = "data/Level1.txt";
+		levelName = "Level 1";
+
+		stateList[currentState]->init();
+		stateList[preState]->release();
+		break;
+
+	case 2:
+		levelFileName = "data/Level2.txt";
+		levelName = "Level 2";
+
+		restart();
+		break;
+
+	default:
+		currentState = 0;
+		level = 1;
+		break;
+	}
+
+	isStart = true;
+	isPause = true;
 }

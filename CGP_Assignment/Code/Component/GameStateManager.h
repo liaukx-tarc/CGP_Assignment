@@ -26,8 +26,10 @@ public:
 	int currentState, preState;
 	float framesToUpdate;
 	std::vector<GameState*> stateList;
+	
 	std::string levelFileName;
 	std::string levelName;
+	int level;
 
 	bool isPause;
 
@@ -38,6 +40,7 @@ public:
 	void update();
 	void draw();
 	void restart();
+	void nextLevel();
 
 };
 
