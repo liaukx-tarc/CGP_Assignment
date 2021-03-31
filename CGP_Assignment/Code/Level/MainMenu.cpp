@@ -42,7 +42,7 @@ void MainMenu::init()
 
 	hr[6] = D3DXCreateFont(Graphic::getInstance()->d3dDevice, 25, 0, 0, 0, false,
 		DEFAULT_CHARSET, OUT_TT_ONLY_PRECIS, DEFAULT_QUALITY,
-		DEFAULT_PITCH | FF_DONTCARE, "Arial", &madeBy);
+		DEFAULT_PITCH | FF_DONTCARE, "Pixel", &madeBy);
 
 	for (int i = 0; i < 7; i++)
 	{
@@ -58,26 +58,36 @@ void MainMenu::init()
 	backgroundRect.right = 1920;
 
 	//Title
-	titleRect1.top = 100;
+	titleRect1.top = 200;
 	titleRect1.left = 750;
 	titleRect1.bottom = titleRect1.top + 200;
 	titleRect1.right = titleRect1.left + 2000;
 
-	titleRect2.top = 250;
-	titleRect2.left = 690;
+	titleRect2.top = 360;
+	titleRect2.left = 680;
 	titleRect2.bottom = titleRect2.top + 200;
 	titleRect2.right = titleRect2.left + 2000;
 
+	titleRect3.top = 220;
+	titleRect3.left = 750;
+	titleRect3.bottom = titleRect3.top + 200;
+	titleRect3.right = titleRect3.left + 2000;
+
+	titleRect4.top = 380;
+	titleRect4.left = 680;
+	titleRect4.bottom = titleRect4.top + 200;
+	titleRect4.right = titleRect4.left + 2000;
+
 	//Made by
-	madeByRect.top = 900;
-	madeByRect.left = 805;
+	madeByRect.top = 1000;
+	madeByRect.left = 700;
 	madeByRect.bottom = madeByRect.top + 100;
 	madeByRect.right = madeByRect.left + 2000;
 	
 	//Start Button
 	Button * button = new Button;
 	button->position.x = BUFFER_WIDTH / 2;
-	button->position.y = 500;
+	button->position.y = 600;
 	button->size.x = 259;
 	button->size.y = 84;
 
@@ -87,7 +97,7 @@ void MainMenu::init()
 	
 	button->word = "START";
 	button->textRect.top = button->position.y - 15;
-	button->textRect.left = button->position.x - 45;
+	button->textRect.left = button->position.x - 47;
 	button->textRect.bottom = button->textRect.top + 40;
 	button->textRect.right = button->textRect.left + 200;
 	
@@ -97,7 +107,7 @@ void MainMenu::init()
 	//Quit Button
 	button = new Button;
 	button->position.x = BUFFER_WIDTH / 2;
-	button->position.y = 630;
+	button->position.y = 750;
 	button->size.x = 259;
 	button->size.y = 84;
 
@@ -200,6 +210,8 @@ void MainMenu::draw()
 	sprite->Begin(D3DXSPRITE_ALPHABLEND);
 	sprite->Draw(background, &backgroundRect, NULL, NULL, D3DCOLOR_XRGB(255, 255, 255));
 
+	title->DrawText(sprite, TITLE1, -1, &titleRect3, 0, D3DCOLOR_XRGB(0, 0, 0));
+	title->DrawText(sprite, TITLE2, -1, &titleRect4, 0, D3DCOLOR_XRGB(0, 0, 0));
 	title->DrawText(sprite, TITLE1, -1, &titleRect1, 0, D3DCOLOR_XRGB(255, 255, 255));
 	title->DrawText(sprite, TITLE2, -1, &titleRect2, 0, D3DCOLOR_XRGB(255, 255, 255));
 
