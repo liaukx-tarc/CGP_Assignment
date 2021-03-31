@@ -32,6 +32,7 @@ public:
 	LPD3DXSPRITE sprite;
 	LPD3DXFONT font;
 	LPD3DXFONT title;
+	LPD3DXFONT title2;
 	LPD3DXFONT madeBy;
 
 	LPDIRECT3DTEXTURE9 buttonTexture;
@@ -40,6 +41,8 @@ public:
 	RECT backgroundRect;
 	RECT titleRect1;
 	RECT titleRect2;
+	RECT titleRect3;
+	RECT titleRect4;
 	RECT madeByRect;
 
 	std::vector<Button*> buttonList;

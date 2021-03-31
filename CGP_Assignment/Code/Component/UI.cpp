@@ -246,11 +246,11 @@ void Ui::init()
 	//Menu Background
 	menuRect.top = menuRect.left = 0;
 	menuRect.bottom = 576;
-	menuRect.right = 768;
+	menuRect.right = 576;
 
 	//Menu Font
 	menuTextRect.top = (BUFFER_HEIGHT / 2) - (menuRect.bottom / 2) - 40;
-	menuTextRect.left = BUFFER_WIDTH / 2 - 160;
+	menuTextRect.left = BUFFER_WIDTH / 2 - 165;
 	menuTextRect.bottom = menuTextRect.top + 100;
 	menuTextRect.right = menuTextRect.left + 400;
 
@@ -258,7 +258,7 @@ void Ui::init()
 	//Resume Button
 	button = new Button;
 	button->position.x = BUFFER_WIDTH / 2;
-	button->position.y = (BUFFER_HEIGHT / 2) - (menuRect.bottom / 2) + 150;
+	button->position.y = (BUFFER_HEIGHT / 2) - (menuRect.bottom / 2) + 160;
 	button->size.x = 259;
 	button->size.y = 84;
 
@@ -278,7 +278,7 @@ void Ui::init()
 	//Restart Button
 	button = new Button;
 	button->position.x = BUFFER_WIDTH / 2;
-	button->position.y = (BUFFER_HEIGHT / 2) - (menuRect.bottom / 2) + 280;
+	button->position.y = (BUFFER_HEIGHT / 2) - (menuRect.bottom / 2) + 290;
 	button->size.x = 259;
 	button->size.y = 84;
 
@@ -298,7 +298,7 @@ void Ui::init()
 	//Main Menu Button
 	button = new Button;
 	button->position.x = BUFFER_WIDTH / 2;
-	button->position.y = (BUFFER_HEIGHT / 2) - (menuRect.bottom / 2) + 410;
+	button->position.y = (BUFFER_HEIGHT / 2) - (menuRect.bottom / 2) + 415;
 	button->size.x = 259;
 	button->size.y = 84;
 
@@ -910,7 +910,7 @@ void Ui::pauseMenu()
 		sprite->Draw(menuBack, &menuRect,
 			&D3DXVECTOR3(menuRect.right / 2, menuRect.bottom / 2, 0),
 			&D3DXVECTOR3(BUFFER_WIDTH / 2, BUFFER_HEIGHT / 2, 0),
-			D3DCOLOR_XRGB(225, 122, 0));
+			D3DCOLOR_XRGB(255, 255, 255));
 
 		menuFont->DrawText(sprite, "MENU", -1, &menuTextRect, 0, D3DCOLOR_XRGB(255, 255, 255));
 
@@ -937,7 +937,7 @@ void Ui::pauseMenu()
 		sprite->Draw(menuBack, &menuRect,
 			&D3DXVECTOR3(menuRect.right / 2, menuRect.bottom / 2, 0),
 			&D3DXVECTOR3(BUFFER_WIDTH / scaling.x / 2, BUFFER_HEIGHT / scaling.y / 2, 0),
-			D3DCOLOR_XRGB(225, 122, 0));
+			D3DCOLOR_XRGB(255, 255, 255));
 
 		scaling.x = scaling.y = 1.0f;
 		D3DXMatrixTransformation2D(&mat, NULL, 0.0, &scaling, NULL, NULL, NULL);
@@ -1232,7 +1232,7 @@ void Ui::winLoseDraw(bool isWin)
 		sprite->Draw(menuBack, &menuRect,
 			&D3DXVECTOR3(menuRect.right / 2, menuRect.bottom / 2, 0),
 			&D3DXVECTOR3(BUFFER_WIDTH / scaling.x / 2, BUFFER_HEIGHT / scaling.y / 2, 0),
-			D3DCOLOR_XRGB(225, 122, 0));
+			D3DCOLOR_XRGB(255, 255, 255));
 
 		scaling.x = scaling.y = 1.0f;
 		D3DXMatrixTransformation2D(&mat, NULL, 0.0, &scaling, NULL, NULL, NULL);
