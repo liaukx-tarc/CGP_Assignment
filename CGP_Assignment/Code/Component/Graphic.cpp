@@ -1,6 +1,7 @@
 #include "Graphic.h"
 #include "GameWindows.h"
 #include "GameStateManager.h"
+#include "TowerBuilding.h"
 
 //singleton
 Graphic* Graphic::sInstance = NULL;
@@ -58,8 +59,9 @@ void Graphic::createGraphic()
 	//cursor
 	hr[1] = D3DXCreateSprite(Graphic::getInstance()->d3dDevice, &sprite);
 	hr[2] = D3DXCreateTextureFromFile(Graphic::getInstance()->d3dDevice, "resource/Cursor.png", &cursorTexture);
+	hr[3] = D3DXCreateTextureFromFile(Graphic::getInstance()->d3dDevice, "resource/hammer.png", &hammerTexture);
 
-	for (int i = 0; i < sizeof(hr); i++)
+	for (int i = 0; i < 4; i++)
 	{
 		if (FAILED(hr[i]))
 		{
@@ -93,10 +95,22 @@ void Graphic::drawCursor()
 	sprite->Begin(D3DXSPRITE_ALPHABLEND);
 	sprite->SetTransform(&mat);
 
-	sprite->Draw(cursorTexture, &cursorRect, 
-		&D3DXVECTOR3(cursorRect.left, cursorRect.top, 0), 
-		&D3DXVECTOR3(GameWindows::getInstance()->mousePos.x / scaling.x, GameWindows::getInstance()->mousePos.y / scaling.y, 0),
-		D3DCOLOR_XRGB(255, 255, 255));
+	if (!TowerBuilding::getInstance()->isDestroy)
+	{
+		sprite->Draw(cursorTexture, &cursorRect,
+			&D3DXVECTOR3(cursorRect.left, cursorRect.top, 0),
+			&D3DXVECTOR3(GameWindows::getInstance()->mousePos.x / scaling.x, GameWindows::getInstance()->mousePos.y / scaling.y, 0),
+			D3DCOLOR_XRGB(255, 255, 255));
+	}
+
+	else
+	{
+		sprite->Draw(hammerTexture, &cursorRect,
+			&D3DXVECTOR3(cursorRect.left, cursorRect.top, 0),
+			&D3DXVECTOR3(GameWindows::getInstance()->mousePos.x / scaling.x, GameWindows::getInstance()->mousePos.y / scaling.y, 0),
+			D3DCOLOR_XRGB(255, 255, 255));
+	}
+	
 
 	sprite->End();
 }

@@ -80,6 +80,11 @@ void TestLevel::update()
 {
 	if (!isEnd)
 	{
+		if (GameWindows::getInstance()->keyIn == VK_RIGHT)
+		{
+			TowerBuilding::getInstance()->isDestroy = true;
+		}
+
 		if (GameWindows::getInstance()->keyIn == VK_ESCAPE)
 		{
 			if (!ui->isMenu)
@@ -87,6 +92,7 @@ void TestLevel::update()
 				ui->buttonList[PAUSE]->buttonRect.top = 0;
 				ui->buttonList[PAUSE]->buttonRect.bottom = ui->buttonList[PAUSE]->size.y;
 				TowerBuilding::getInstance()->isBuilding = false;
+				TowerBuilding::getInstance()->isDestroy = false;
 				GameStateManager::getInstance()->isPause = true;
 				ui->isMenu = true;
 			}

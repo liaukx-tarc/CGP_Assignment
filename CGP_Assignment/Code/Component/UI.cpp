@@ -207,6 +207,26 @@ void Ui::init()
 		coinPosition[i].y = towerPriceText[i].top + 5;
 	}
 
+	//Destroy Button
+	button = new Button;
+	button->position.x = 1750;
+	button->position.y = 800;
+	button->size.x = 259;
+	button->size.y = 84;
+
+	button->r = 204;
+	button->g = 112;
+	button->b = 0;
+
+	button->word = "Destroy";
+	button->textRect.top = button->position.y - 15;
+	button->textRect.left = button->position.x - 65;
+	button->textRect.bottom = button->textRect.top + 40;
+	button->textRect.right = button->textRect.left + 200;
+
+	button->init();
+	buttonList.push_back(button);
+
 	//Pause Button
 	button = new Button;
 	button->position.x = 1750;
@@ -533,26 +553,30 @@ void Ui::update(int coin)
 		{
 			if (!GameStateManager::getInstance()->isPause)
 			{
-				if (function < TOWER_BUTTON_NUM && coin - TowerBuilding::getInstance()->towerData[function]->price >= 0)
+				if (function < TOWER_BUTTON_NUM - 1 &&coin - TowerBuilding::getInstance()->towerData[function]->price >= 0)
 				{
 					switch (function)
 					{
 					case TOWER1:
+						TowerBuilding::getInstance()->isDestroy = false;
 						TowerBuilding::getInstance()->isBuilding = true;
 						TowerBuilding::getInstance()->towerSelect = 0;
 						break;
 
 					case TOWER2:
+						TowerBuilding::getInstance()->isDestroy = false;
 						TowerBuilding::getInstance()->isBuilding = true;
 						TowerBuilding::getInstance()->towerSelect = 1;
 						break;
 
 					case TOWER3:
+						TowerBuilding::getInstance()->isDestroy = false;
 						TowerBuilding::getInstance()->isBuilding = true;
 						TowerBuilding::getInstance()->towerSelect = 2;
 						break;
 
 					case TOWER4:
+						TowerBuilding::getInstance()->isDestroy = false;
 						TowerBuilding::getInstance()->isBuilding = true;
 						TowerBuilding::getInstance()->towerSelect = 3;
 						break;
@@ -576,6 +600,12 @@ void Ui::update(int coin)
 					}	
 					isFunction = false;
 				}
+
+				if (function == DESTROY)
+				{
+					TowerBuilding::getInstance()->isBuilding = false;
+					TowerBuilding::getInstance()->isDestroy = true;
+				}
 			}
 
 			switch (function)
@@ -586,6 +616,7 @@ void Ui::update(int coin)
 				{
 					buttonList[PAUSE]->buttonRect.top = buttonList[PAUSE]->size.y;
 					TowerBuilding::getInstance()->isBuilding = false;
+					TowerBuilding::getInstance()->isDestroy = false;
 				}
 
 				else
@@ -600,6 +631,7 @@ void Ui::update(int coin)
 				buttonList[PAUSE]->buttonRect.top = 0;
 				buttonList[PAUSE]->buttonRect.bottom = buttonList[PAUSE]->size.y;
 				TowerBuilding::getInstance()->isBuilding = false;
+				TowerBuilding::getInstance()->isDestroy = false;
 				GameStateManager::getInstance()->isPause = true;
 				isMenu = true;
 				break;
@@ -637,14 +669,14 @@ void Ui::draw()
 
 	for (int i = 0; i < TOWER_BUTTON_NUM; i++)
 	{
-		sprite->Draw(buttonTexture, &buttonList[i]->buttonRect,
-			&D3DXVECTOR3(buttonList[i]->size.x / 2, buttonList[i]->size.y / 2, 0),
-			&D3DXVECTOR3(buttonList[i]->position.x, buttonList[i]->position.y, 0),
-			D3DCOLOR_XRGB(buttonList[i]->r, buttonList[i]->g, buttonList[i]->b));
-
 		//draw tower on button
 		if (i < MAX_TOWER_TYPE)
 		{
+			sprite->Draw(buttonTexture, &buttonList[i]->buttonRect,
+				&D3DXVECTOR3(buttonList[i]->size.x / 2, buttonList[i]->size.y / 2, 0),
+				&D3DXVECTOR3(buttonList[i]->position.x, buttonList[i]->position.y, 0),
+				D3DCOLOR_XRGB(buttonList[i]->r, buttonList[i]->g, buttonList[i]->b));
+
 			sprite->Draw(TowerBuilding::getInstance()->towerTexture, &towerRect[i],
 				&D3DXVECTOR3(96 / 2, 96 * 3 / 5, 0),
 				&D3DXVECTOR3(buttonList[i]->position.x, buttonList[i]->position.y + towerTextMove[i], 0),
@@ -662,11 +694,18 @@ void Ui::draw()
 			sprite->SetTransform(&mat);
 
 			buttonFont->DrawText(sprite, towerPrice[i].c_str(), -1, &towerPriceText[i], 0, D3DCOLOR_XRGB(255, 255, 255));
+		
+			buttonFont->DrawText(sprite, buttonList[i]->word.c_str(), -1, &buttonList[i]->textRect, 0, D3DCOLOR_XRGB(255, 255, 255));
 		}
 
-		if (buttonList[i]->word != "")
+		else if(i == DESTROY)
 		{
-			buttonFont->DrawText(sprite, buttonList[i]->word.c_str(), -1, &buttonList[i]->textRect, 0, D3DCOLOR_XRGB(255, 255, 255));
+			sprite->Draw(menuButtonTexture, &buttonList[i]->buttonRect,
+				&D3DXVECTOR3(buttonList[i]->size.x / 2, buttonList[i]->size.y / 2, 0),
+				&D3DXVECTOR3(buttonList[i]->position.x, buttonList[i]->position.y, 0),
+				D3DCOLOR_XRGB(buttonList[i]->r, buttonList[i]->g, buttonList[i]->b));
+		
+			menuButtonFont->DrawText(sprite, buttonList[i]->word.c_str(), -1, &buttonList[i]->textRect, 0, D3DCOLOR_XRGB(255, 255, 255));
 		}
 	}
 
