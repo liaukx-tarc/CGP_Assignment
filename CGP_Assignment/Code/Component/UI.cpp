@@ -1198,15 +1198,8 @@ void Ui::winLoseFunction(bool isWin)
 		switch (function)
 		{
 		case NEXT_LEVEL:
-			if (GameStateManager::getInstance()->currentState < MAX_LEVEL)
-			{
-				GameStateManager::getInstance()->currentState++;
-			}
-
-			else
-			{
-				GameStateManager::getInstance()->currentState = 0;
-			}
+			GameStateManager::getInstance()->level++;
+			GameStateManager::getInstance()->nextLevel();
 			break;
 
 		case WIN_LOSE_MENU:

@@ -77,9 +77,11 @@ void Level::update()
 {
 	if (!isEnd)
 	{
-		if (GameWindows::getInstance()->keyIn == VK_RIGHT)
+		//Debuging Fast win
+		if (DirectInput::getInstance()->diKeys[DIK_LSHIFT] && DirectInput::getInstance()->diKeys[DIK_F1])
 		{
-			TowerBuilding::getInstance()->isDestroy = true;
+			isEnd = true;
+			isWin = true;
 		}
 
 		if (GameWindows::getInstance()->keyIn == VK_ESCAPE)
