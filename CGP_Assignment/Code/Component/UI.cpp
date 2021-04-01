@@ -4,6 +4,7 @@
 #include "GameStateManager.h"
 #include "DirectInput.h"
 #include "Map.h"
+#include "SoundManager.h"
 
 Ui::Ui()
 {
@@ -380,9 +381,9 @@ void Ui::init()
 
 	//Win Screen
 	winRect.top = BUFFER_HEIGHT / 2 - 150;
-	winRect.left = BUFFER_WIDTH / 2 - 150;
+	winRect.left = BUFFER_WIDTH / 2 - 300;
 	winRect.bottom = winRect.top + 120;
-	winRect.right = winRect.left + 300;
+	winRect.right = winRect.left + 600;
 
 	//Restart Button
 	button = new Button;
@@ -491,6 +492,7 @@ void Ui::update(int coin)
 					buttonList[i]->textRect.top += 8;
 					buttonList[i]->textRect.bottom += 8;
 					buttonList[i]->isAni = true;
+					SoundManager::getInstance()->sound(5);
 
 					if (i < MAX_TOWER_TYPE)
 					{
@@ -544,6 +546,7 @@ void Ui::update(int coin)
 
 				if (buttonList[i]->isClick)
 				{
+
 					function = i;
 					isFunction = true;
 					buttonList[i]->isClick = false;
@@ -600,7 +603,6 @@ void Ui::update(int coin)
 						coinColor[1] = 0;
 						coinColor[2] = 0;
 					}	
-					isFunction = false;
 				}
 
 				if (function == DESTROY)
@@ -873,6 +875,7 @@ void Ui::pauseFunction()
 
 				if (buttonList[i]->isClick)
 				{
+					SoundManager::getInstance()->sound(5);
 					function = i;
 					isFunction = true;
 					buttonList[i]->isClick = false;
@@ -1231,7 +1234,7 @@ void Ui::winLoseDraw(bool isWin)
 	{
 		if (isWin)
 		{
-			winLoseFont->DrawText(sprite, "WIN", -1, &winRect, 0, D3DCOLOR_XRGB(255, 255, 255));
+			winLoseFont->DrawText(sprite, "VICTORY", -1, &winRect, 0, D3DCOLOR_XRGB(255, 255, 255));
 
 			for (int i = CONFIRM_BUTTON_NUM; i < WIN_BUTTON_NUM; i++)
 			{

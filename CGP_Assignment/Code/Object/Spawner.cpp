@@ -27,7 +27,7 @@ void Spawner::init()
 		spawnList.push_back(EnemyController::getInstance()->spawnList[i]);
 	}
 
-	spawnSpeed = 10;
+	spawnSpeed = 15;
 }
 
 void Spawner::update()
