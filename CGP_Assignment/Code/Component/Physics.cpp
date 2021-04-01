@@ -1,5 +1,6 @@
 #include "Physics.h"
 #include "Graphic.h"
+#include "SoundManager.h"
 
 //singleton
 Physics* Physics::sInstance = NULL;
@@ -138,6 +139,7 @@ void Physics::projectile(D3DXVECTOR3 towerPosition, int enemyCount, int towerNo)
 	projectilePosition.y = towerPosition.y - 5;
 	projectilePositionList.push_back(projectilePosition);
 	tower.push_back(towerNo);
+	SoundManager::getInstance()->sound(1);
 }
 
 void Physics::draw()

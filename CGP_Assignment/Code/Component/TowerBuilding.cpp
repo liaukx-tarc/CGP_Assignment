@@ -5,6 +5,7 @@
 #include "GameWindows.h"
 #include "Graphic.h"
 #include "Map.h"
+#include "SoundManager.h"
 
 //Singleton
 TowerBuilding* TowerBuilding::sInstance = NULL;
@@ -180,6 +181,7 @@ void TowerBuilding::update(int &coin)
 							coin -= towerData[towerSelect]->price;
 
 							isBuilding = false;
+							SoundManager::getInstance()->sound(4);
 						}
 					}
 					

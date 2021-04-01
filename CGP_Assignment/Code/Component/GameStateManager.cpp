@@ -93,7 +93,7 @@ void GameStateManager::update()
 	
 	else
 	{
-		SoundManager::getInstance()->sound();
+		SoundManager::getInstance()->bgm();
 		if (currentState != 0)
 		{
 			nextLevel();
@@ -127,6 +127,7 @@ void GameStateManager::restart()
 		isStart = true;
 	}
 
+	SoundManager::getInstance()->bgm();
 	stateList[currentState]->release();
 	stateList[currentState]->init();
 	isPause = false;
@@ -134,7 +135,7 @@ void GameStateManager::restart()
 
 void GameStateManager::nextLevel()
 {
-	SoundManager::getInstance()->sound();
+	SoundManager::getInstance()->bgm();
 	switch (level)
 	{
 	case 1:

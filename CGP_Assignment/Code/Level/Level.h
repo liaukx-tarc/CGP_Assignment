@@ -18,6 +18,7 @@ public:
 	char * levelFile;
 	bool isWin;
 	bool isEnd;
+	bool isPlay;
 
 	void init();
 	void fixUpdate();
