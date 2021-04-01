@@ -5,6 +5,7 @@
 #include "../Component/TowerBuilding.h"
 #include "../Component/GameWindows.h"
 #include "../Component/GameStateManager.h"
+#include "../Component/SoundManager.h"
 #include "../Component/UI.h"
 #include "../Component/Physics.h"
 
@@ -42,6 +43,7 @@ void Level::init()
 
 	isWin = false;
 	isEnd = false;
+	isPlay = false;
 
 	for (int i = 0; i < MAX_MAP_Y; i++)
 	{
@@ -115,12 +117,14 @@ void Level::update()
 					if (health > 0)
 					{
 						health--;
+						SoundManager::getInstance()->sound(2);
 						Map::getInstance()->crystalColor[0] = 0;
 						Map::getInstance()->crystalColor[1] = 0;
 					}
 
 					if (health == 0)
 					{
+						SoundManager::getInstance()->sound(3);
 						Map::getInstance()->crystalState = 2;
 						Map::getInstance()->crystalFrame = 0;
 						Map::getInstance()->maxFrame = 7;
@@ -163,6 +167,11 @@ void Level::update()
 
 	else
 	{
+		if (!isPlay)
+		{
+			SoundManager::getInstance()->winLoseBgm(isWin);
+			isPlay = true;
+		}
 		ui->winLoseFunction(isWin);
 	}
 }
