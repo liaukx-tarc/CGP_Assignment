@@ -5,6 +5,9 @@
 #include <d3dx9.h>
 #include "../Object/Character.h"
 #include "EnemyController.h"
+//#include "TowerBuilding.h"
+#include "Graphic.h"
+#include "SoundManager.h"
 
 class Physics
 {
@@ -41,6 +44,7 @@ public:
 	std::vector<int> tower;
 	std::vector<D3DXVECTOR3> projectilePositionList;
 	int timer;
+	int towerDamage[4];
 
 };
 

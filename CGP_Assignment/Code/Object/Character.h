@@ -57,7 +57,9 @@ public:
 	bool isHit;
 	int hitTimer;
 	bool isDead;
-	
+	bool isAni;
+	float aniState;
+
 	float hitboxRadius;
 
 	void init();

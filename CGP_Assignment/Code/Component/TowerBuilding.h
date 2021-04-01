@@ -3,6 +3,11 @@
 
 #include "../Object/Tower.h"
 #include "Map.h"
+#include "DirectInput.h"
+#include "GameWindows.h"
+#include "Graphic.h"
+#include "SoundManager.h"
+#include "Physics.h"
 
 #include <d3dx9.h>
 #include <vector>

@@ -59,9 +59,9 @@ void SoundManager::init()
 	system->createSound("resource/sound/CrystalDestroy.mp3", FMOD_DEFAULT, 0, &crystalDestroy);
 	system->createSound("resource/sound/TowerBuild.mp3", FMOD_DEFAULT, 0, &towerBuild);
 	system->createSound("resource/sound/ButtonClick.mp3", FMOD_DEFAULT, 0, &buttonClick);
+	system->createSound("resource/sound/Death.mp3", FMOD_DEFAULT, 0, &monsterDeath);
 
 	channelBGM = NULL;
-	channelButtonClick = NULL;
 
 	system->playSound(mainMenuBGM, NULL, false, &channelBGM);
 	channelBGM->setVolume(0.5f);
@@ -83,7 +83,7 @@ void SoundManager::bgm()
 	else
 	{
 		system->playSound(Level1BGM, NULL, false, &channelBGM);
-		channelBGM->setVolume(0.3f);
+		channelBGM->setVolume(0.2f);
 	}
 
 }
@@ -126,16 +126,25 @@ void SoundManager::sound(int count)
 	case 5:
 		system->playSound(buttonClick, NULL, false, NULL);
 		break;
+	case 6:
+		system->playSound(monsterDeath, NULL, false, NULL);
+		break;
 	}
 }
 
 void SoundManager::release()
 {
+	channelBGM->stop();
 	mainMenuBGM->release();
 	Level1BGM->release();
 	VictoryBGM->release();
 	DefeatBGM->release();
 	shootSound->release();
+	crystalDamaged->release();
+	crystalDestroy->release();
+	towerBuild->release();
+	buttonClick->release();
+	monsterDeath->release();
 	system->release();
 }
 

@@ -43,7 +43,7 @@ public:
 	float distanceY;
 	float distance;
 	bool isFire;
-	int fireCD;
+	float fireCD;
 };
 
 #endif // !TOWER

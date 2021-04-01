@@ -1,6 +1,4 @@
 #include "Physics.h"
-#include "Graphic.h"
-#include "SoundManager.h"
 
 //singleton
 Physics* Physics::sInstance = NULL;
@@ -54,6 +52,7 @@ void Physics::init()
 	isComplete = true;
 	timer = 0;
 	tDistance = 0;
+
 }
 
 void Physics::update()
@@ -75,7 +74,7 @@ void Physics::update()
 			switch (tower[i])
 			{
 			case 0:
-				enemy[enemyCountList[i]]->health -= 2;
+				enemy[enemyCountList[i]]->health -= towerDamage[tower[i]];
 				enemy[enemyCountList[i]]->r = 123;
 				enemy[enemyCountList[i]]->g = 125;
 				enemy[enemyCountList[i]]->b = 110;
@@ -97,20 +96,20 @@ void Physics::update()
 				}
 				break;
 			case 1:
-				enemy[enemyCountList[i]]->health -= 3;
+				enemy[enemyCountList[i]]->health -= towerDamage[tower[i]];
 				enemy[enemyCountList[i]]->r = 207;
 				enemy[enemyCountList[i]]->g = 180;
 				enemy[enemyCountList[i]]->b = 17;
 				break;
 			case 2:
-				enemy[enemyCountList[i]]->health -= 2;
+				enemy[enemyCountList[i]]->health -= towerDamage[tower[i]];
 				enemy[enemyCountList[i]]->r = 10;
 				enemy[enemyCountList[i]]->g = 150;
 				enemy[enemyCountList[i]]->b = 245;
 				enemy[enemyCountList[i]]->isSlow = true;
 				break;
 			case 3:
-				enemy[enemyCountList[i]]->health -= 5;
+				enemy[enemyCountList[i]]->health -= towerDamage[tower[i]];
 				enemy[enemyCountList[i]]->r = 252;
 				enemy[enemyCountList[i]]->g = 100;
 				enemy[enemyCountList[i]]->b = 100;

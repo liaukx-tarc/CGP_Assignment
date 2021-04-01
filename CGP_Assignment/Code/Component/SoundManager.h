@@ -40,7 +40,7 @@ public:
 	FMOD::Sound *crystalDestroy;
 	FMOD::Sound *towerBuild;
 	FMOD::Sound *buttonClick;
-	FMOD::Channel *channelButtonClick;
+	FMOD::Sound *monsterDeath;
 
 };
 
