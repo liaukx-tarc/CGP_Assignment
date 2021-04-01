@@ -41,11 +41,6 @@ public:
 	FMOD::Sound *towerBuild;
 	FMOD::Sound *buttonClick;
 	FMOD::Channel *channelButtonClick;
-	bool *isPlay;
-
-
-
-
 
 };
 

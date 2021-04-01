@@ -3,6 +3,7 @@
 #include "../Component/Graphic.h"
 #include "../Component/DirectInput.h"
 #include "../Component/GameStateManager.h"
+#include "../Component/SoundManager.h"
 
 #include <d3d9.h>
 #include <stdio.h>
@@ -144,6 +145,7 @@ void MainMenu::update()
 				buttonList[i]->textRect.top += 8;
 				buttonList[i]->textRect.bottom += 8;
 				buttonList[i]->isAni = true;
+				SoundManager::getInstance()->sound(5);
 			}
 
 			if (!buttonList[i]->isClick && buttonList[i]->isAni)
