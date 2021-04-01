@@ -189,6 +189,7 @@ void MainMenu::update()
 			{
 			case START:
 				GameStateManager::getInstance()->currentState = 1;
+				GameStateManager::getInstance()->level = 1;
 				break;
 
 			case QUIT:
