@@ -1,5 +1,6 @@
 #include "GameStateManager.h"
 #include "GameWindows.h"
+#include "SoundManager.h"
 
 //Level
 #include "../Level/Level.h"
@@ -88,6 +89,7 @@ void GameStateManager::update()
 	
 	else
 	{
+		SoundManager::getInstance()->sound();
 		if (currentState != 0)
 		{
 			nextLevel();
