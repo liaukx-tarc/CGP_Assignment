@@ -64,6 +64,7 @@ void SoundManager::init()
 	channelButtonClick = NULL;
 
 	system->playSound(mainMenuBGM, NULL, false, &channelBGM);
+	channelBGM->setVolume(0.5f);
 }
 
 void SoundManager::update()
@@ -77,11 +78,14 @@ void SoundManager::bgm()
 	if (GameStateManager::getInstance()->currentState == 0)
 	{
 		system->playSound(mainMenuBGM, NULL, false, &channelBGM);
+		channelBGM->setVolume(0.5f);
 	}
 	else
 	{
 		system->playSound(Level1BGM, NULL, false, &channelBGM);
+		channelBGM->setVolume(0.3f);
 	}
+
 }
 void SoundManager::winLoseBgm(bool isWin)
 {
@@ -91,12 +95,15 @@ void SoundManager::winLoseBgm(bool isWin)
 	{
 		printf("win\n");
 		system->playSound(VictoryBGM, NULL, false, &channelBGM);
+		channelBGM->setVolume(0.3f);
 	}
 	else
 	{
 		printf("lose\n");
 		system->playSound(DefeatBGM, NULL, false, &channelBGM);
+		channelBGM->setVolume(0.3f);
 	}
+
 }
 
 void SoundManager::sound(int count)

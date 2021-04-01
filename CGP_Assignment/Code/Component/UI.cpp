@@ -818,6 +818,7 @@ void Ui::pauseFunction()
 					buttonList[i]->textRect.top += 8;
 					buttonList[i]->textRect.bottom += 8;
 					buttonList[i]->isAni = true;
+					SoundManager::getInstance()->sound(5);
 				}
 
 				else if (!buttonList[i]->isClick && buttonList[i]->isAni)
@@ -843,6 +844,7 @@ void Ui::pauseFunction()
 					buttonList[i]->textRect.top += 8;
 					buttonList[i]->textRect.bottom += 8;
 					buttonList[i]->isAni = true;
+					SoundManager::getInstance()->sound(5);
 				}
 
 				else if (!buttonList[i]->isClick && buttonList[i]->isAni)
@@ -875,7 +877,6 @@ void Ui::pauseFunction()
 
 				if (buttonList[i]->isClick)
 				{
-					SoundManager::getInstance()->sound(5);
 					function = i;
 					isFunction = true;
 					buttonList[i]->isClick = false;
@@ -899,6 +900,7 @@ void Ui::pauseFunction()
 
 				if (buttonList[i]->isClick)
 				{
+					SoundManager::getInstance()->sound(5);
 					if (i == YES)
 					{
 						if (function == RESTART)
@@ -1046,6 +1048,7 @@ void Ui::winLoseFunction(bool isWin)
 						buttonList[i]->textRect.top += 8;
 						buttonList[i]->textRect.bottom += 8;
 						buttonList[i]->isAni = true;
+						SoundManager::getInstance()->sound(5);
 					}
 
 					else if (!buttonList[i]->isClick && buttonList[i]->isAni)
@@ -1072,6 +1075,7 @@ void Ui::winLoseFunction(bool isWin)
 						buttonList[i]->textRect.top += 8;
 						buttonList[i]->textRect.bottom += 8;
 						buttonList[i]->isAni = true;
+						SoundManager::getInstance()->sound(5);
 					}
 
 					else if (!buttonList[i]->isClick && buttonList[i]->isAni)
@@ -1098,6 +1102,7 @@ void Ui::winLoseFunction(bool isWin)
 					buttonList[i]->textRect.top += 8;
 					buttonList[i]->textRect.bottom += 8;
 					buttonList[i]->isAni = true;
+					SoundManager::getInstance()->sound(5);
 				}
 
 				else if (!buttonList[i]->isClick && buttonList[i]->isAni)
