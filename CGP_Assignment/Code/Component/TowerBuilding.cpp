@@ -192,7 +192,6 @@ void TowerBuilding::update(int &coin)
 							towerList[tileSelectY][tileSelectX] = NULL;
 
 							coin += towerData[towerSelect]->price;
-							isDestroy = false;
 						}
 					}
 				}
