@@ -470,6 +470,8 @@ void Ui::fixUpdate()
 
 void Ui::update(int coin)
 {
+	GameStateManager::getInstance()->isMenu = isMenu;
+
 	if (GameWindows::getInstance()->keyIn == VK_ESCAPE)
 	{
 		isConfirming = false;
@@ -604,7 +606,7 @@ void Ui::update(int coin)
 				if (function == DESTROY)
 				{
 					TowerBuilding::getInstance()->isBuilding = false;
-					TowerBuilding::getInstance()->isDestroy = true;
+					TowerBuilding::getInstance()->isDestroy = !TowerBuilding::getInstance()->isDestroy;
 				}
 			}
 

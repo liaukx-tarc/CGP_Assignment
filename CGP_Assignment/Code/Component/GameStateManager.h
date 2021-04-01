@@ -31,7 +31,7 @@ public:
 	std::string levelName;
 	int level;
 
-	bool isPause;
+	bool isPause, isMenu;
 
 	//Start screen
 	bool isStart;

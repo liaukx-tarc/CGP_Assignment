@@ -34,6 +34,7 @@ GameStateManager::GameStateManager()
 
 	isPause = false;
 	isStart = false;
+	isMenu = false;
 	timer = 0;
 
 	g_Timer = new G_Timer();
@@ -65,14 +66,17 @@ void GameStateManager::update()
 	//control start screen display
 	if (isStart)
 	{
-		timer += 0.01;
-
-		if (timer >= 1)
+		if (!isMenu)
 		{
-			isStart = false;
-			isPause = false;
-			timer = 0;
-		}
+			timer += 0.01;
+
+			if (timer >= 1)
+			{
+				isStart = false;
+				isPause = false;
+				timer = 0;
+			}
+		}	
 	}
 
 	stateList[currentState]->update();
@@ -130,6 +134,7 @@ void GameStateManager::restart()
 
 void GameStateManager::nextLevel()
 {
+	SoundManager::getInstance()->sound();
 	switch (level)
 	{
 	case 1:
