@@ -53,11 +53,16 @@ void SoundManager::init()
 	system->createStream("resource/sound/Level1.mp3", FMOD_LOOP_NORMAL, 0, &Level1BGM);
 	system->createStream("resource/sound/Victory.mp3", FMOD_DEFAULT, 0, &VictoryBGM);
 	system->createStream("resource/sound/Defeat.mp3", FMOD_DEFAULT, 0, &DefeatBGM);
+
 	system->createSound("resource/sound/Shoot.mp3", FMOD_DEFAULT, 0, &shootSound);
 	system->createSound("resource/sound/CrystalDamaged.mp3", FMOD_DEFAULT, 0, &crystalDamaged);
 	system->createSound("resource/sound/CrystalDestroy.mp3", FMOD_DEFAULT, 0, &crystalDestroy);
 	system->createSound("resource/sound/TowerBuild.mp3", FMOD_DEFAULT, 0, &towerBuild);
+	system->createSound("resource/sound/ButtonClick.mp3", FMOD_DEFAULT, 0, &buttonClick);
+
 	channelBGM = NULL;
+	channelButtonClick = NULL;
+
 	system->playSound(mainMenuBGM, NULL, false, &channelBGM);
 }
 
@@ -110,6 +115,9 @@ void SoundManager::sound(int count)
 		break;
 	case 4:
 		system->playSound(towerBuild, NULL, false, NULL);
+		break;
+	case 5:
+		system->playSound(buttonClick, NULL, false, NULL);
 		break;
 	}
 }

@@ -25,17 +25,25 @@ public:
 	void winLoseBgm(bool isWin);
 	void sound(int count);
 	void release();
+
 	FMOD_RESULT result;
 	FMOD::System *system;
+
 	FMOD::Sound *mainMenuBGM;
 	FMOD::Sound *Level1BGM;
 	FMOD::Sound *VictoryBGM;
 	FMOD::Sound *DefeatBGM;
+	FMOD::Channel *channelBGM;
+
 	FMOD::Sound *shootSound;
 	FMOD::Sound *crystalDamaged;
 	FMOD::Sound *crystalDestroy;
 	FMOD::Sound *towerBuild;
-	FMOD::Channel *channelBGM;
+	FMOD::Sound *buttonClick;
+	FMOD::Channel *channelButtonClick;
+	bool *isPlay;
+
+
 
 
 
