@@ -5,6 +5,7 @@
 #include "Map.h"
 #include "../Object/Character.h"
 #include "../Object/Spawner.h"
+#include "SoundManager.h"
 
 #include <stdio.h>
 
@@ -52,6 +53,7 @@ void EnemyController::init()
 
 	hr[1] = D3DXCreateTextureFromFile(Graphic::getInstance()->d3dDevice, "resource/Minion_Sheet.png", &minionTexture);
 	hr[2] = D3DXCreateTextureFromFile(Graphic::getInstance()->d3dDevice, "resource/Boss_Sheet.png", &bossTexture);
+	hr[3] = D3DXCreateTextureFromFile(Graphic::getInstance()->d3dDevice, "resource/EnemyDead.png", &explosionTexture);
 
 	for (int i = 0; i < sizeof(hr); i++)
 	{
@@ -60,6 +62,17 @@ void EnemyController::init()
 			PostQuitMessage(0);
 		}
 	}
+
+	for (int i = 0; i < 4; i++)
+	{
+		explosionRect[i].top = 0;
+		explosionRect[i].left = 32 * i;
+		explosionRect[i].bottom = explosionRect[i].top + 32;
+		explosionRect[i].right = explosionRect[i].left + 32;
+	}
+
+	aniTimer = 10;
+	isComplete = false;
 
 	FILE *fp;
 	fp = fopen("data/enemyData.txt", "rb");
@@ -183,6 +196,7 @@ void EnemyController::update(int &coin, bool &isEnd, bool &isWin)
 		{
 			if (enemyList[i]->health <= 0)
 			{
+				SoundManager::getInstance()->sound(6);
 				enemyList[i]->isDead = true;
 				dieEnemyNum++;
 
@@ -208,6 +222,23 @@ void EnemyController::draw()
 			sprite->Draw(minionTexture, &enemyList[i]->charRect,
 				&D3DXVECTOR3(enemyList[i]->spriteSize.x / 2, enemyList[i]->spriteSize.y / 2, 0), //set the charecter with center point
 				&enemyList[i]->objPosition, D3DCOLOR_XRGB(enemyList[i]->r, enemyList[i]->g, enemyList[i]->b));
+		}
+		else
+		{
+			if (!enemyList[i]->isAni)
+			{
+				explosionPosition.x = enemyList[i]->objPosition.x;
+				explosionPosition.y = enemyList[i]->objPosition.y - 10;
+				sprite->Draw(explosionTexture, &explosionRect[(int)enemyList[i]->aniState], &D3DXVECTOR3(16, 16, 0),
+					&explosionPosition, D3DCOLOR_XRGB(255, 255, 255));
+
+				enemyList[i]->aniState += 0.2f;
+			
+				if (enemyList[i]->aniState > 3)
+				{
+					enemyList[i]->isAni = true;
+				}
+			}
 		}
 	}
 

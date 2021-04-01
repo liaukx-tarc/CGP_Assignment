@@ -1,11 +1,7 @@
 #pragma warning(disable : 4996)
 
 #include "TowerBuilding.h"
-#include "DirectInput.h"
-#include "GameWindows.h"
-#include "Graphic.h"
-#include "Map.h"
-#include "SoundManager.h"
+
 
 //Singleton
 TowerBuilding* TowerBuilding::sInstance = NULL;
@@ -89,6 +85,7 @@ void TowerBuilding::init()
 		fscanf(fp, "%d|%d|%d\n", &damage, &atkSpeed, &price);
 
 		tower->damage = damage;
+		Physics::getInstance()->towerDamage[i] = damage;
 		tower->atkSpeed = atkSpeed;
 		tower->price = price;
 
@@ -193,7 +190,7 @@ void TowerBuilding::update(int &coin)
 							delete towerList[tileSelectY][tileSelectX];
 							towerList[tileSelectY][tileSelectX] = NULL;
 
-							coin += towerData[towerSelect]->price;
+							coin += towerData[towerSelect]->price/2;
 						}
 					}
 				}

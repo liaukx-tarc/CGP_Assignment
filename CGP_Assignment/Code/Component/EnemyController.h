@@ -18,7 +18,7 @@ public:
 	static EnemyController* getInstance();
 	static void releaseInstance();
 
-	HRESULT hr[3];
+	HRESULT hr[4];
 
 	void init();
 	void fixUpdate();
@@ -29,6 +29,12 @@ public:
 	//enemy control
 	LPDIRECT3DTEXTURE9 minionTexture;
 	LPDIRECT3DTEXTURE9 bossTexture;
+	LPDIRECT3DTEXTURE9 explosionTexture;
+
+	RECT explosionRect[4];
+	D3DXVECTOR3 explosionPosition;
+	int aniTimer;
+	bool isComplete;
 
 	LPD3DXSPRITE sprite;
 

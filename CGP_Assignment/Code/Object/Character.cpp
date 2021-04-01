@@ -30,6 +30,8 @@ Character::Character()
 	isDead = false; 
 	isSlow = false;
 	isHit = false;
+	isAni = false;
+	aniState = 0;
 }
 
 Character::~Character()
