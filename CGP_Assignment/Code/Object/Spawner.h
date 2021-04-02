@@ -16,7 +16,6 @@ public:
 	void update();
 
 	int wave,totalSpawn, enemyNum, currentSpawnMax;
-	std::vector<Character*> spawnList;
 
 	int spawnNum, spawnSpeed;
 	float spawnTime;
