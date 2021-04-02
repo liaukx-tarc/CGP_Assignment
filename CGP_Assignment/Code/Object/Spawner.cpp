@@ -14,32 +14,36 @@ Spawner::~Spawner()
 
 void Spawner::init()
 {
+	currentSpawnMax = 0;
+
 	wave = EnemyController::getInstance()->currentWave;
+
 	for (int i = 0; i < wave; i++)
 	{
 		currentSpawnMax += EnemyController::getInstance()->totalSpawn[i];
 	}
+
 	totalSpawn = EnemyController::getInstance()->totalSpawn[wave];
-	spawnNum = 0;
+	
+	spawnNum = currentSpawnMax;
 
-	for (int i = currentSpawnMax; i < currentSpawnMax + totalSpawn ; i++)
-	{
-		spawnList.push_back(EnemyController::getInstance()->spawnList[i]);
-	}
-
+	spawnTime = 0;
 	spawnSpeed = 15;
 }
 
 void Spawner::update()
 {
 	//spawner delay
-	if (spawnNum < totalSpawn)
+	if (spawnNum < (currentSpawnMax + totalSpawn))
 	{
+		
 		spawnTime += (0.001f) * spawnSpeed;
 		if (spawnTime > 1)
 		{
 			enemyNum = EnemyController::getInstance()->enemyNum;
-			EnemyController::getInstance()->enemyList.push_back(spawnList[spawnNum]);
+			
+			EnemyController::getInstance()->enemyList.push_back(EnemyController::getInstance()->spawnList[spawnNum]);
+			
 			//tile's middle point
 			EnemyController::getInstance()->enemyList[enemyNum]->objPosition.x = (30 + (60 * Map::getInstance()->startPoint[Map::getInstance()->spawnPoint[wave]].x));
 			EnemyController::getInstance()->enemyList[enemyNum]->objPosition.y = (30 + (60 * Map::getInstance()->startPoint[Map::getInstance()->spawnPoint[wave]].y));
