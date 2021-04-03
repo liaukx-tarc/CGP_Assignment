@@ -155,7 +155,7 @@ void Level::update()
 		if (!GameStateManager::getInstance()->isPause)
 		{
 			TowerBuilding::getInstance()->update(coin);
-			EnemyController::getInstance()->update(coin,isEnd ,isWin);
+			EnemyController::getInstance()->update(coin,isEnd ,isWin, health);
 			Physics::getInstance()->update();
 		}
 

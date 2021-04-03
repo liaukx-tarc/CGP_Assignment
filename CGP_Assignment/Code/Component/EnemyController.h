@@ -22,7 +22,7 @@ public:
 
 	void init();
 	void fixUpdate();
-	void update(int &coin, bool &isEnd, bool &isWin);
+	void update(int &coin, bool &isEnd, bool &isWin, int health);
 	void draw();
 	void release();
 

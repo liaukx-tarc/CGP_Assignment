@@ -159,7 +159,7 @@ void EnemyController::fixUpdate()
 	}
 }
 
-void EnemyController::update(int &coin, bool &isEnd, bool &isWin)
+void EnemyController::update(int &coin, bool &isEnd, bool &isWin, int health)
 {
 	if (dieEnemyNum == totalSpawn[currentWave] && currentWave != waveNum - 1)
 	{
@@ -167,7 +167,7 @@ void EnemyController::update(int &coin, bool &isEnd, bool &isWin)
 		dieEnemyNum = 0;
 	}
 
-	else if (dieEnemyNum == totalSpawn[currentWave])
+	else if (health > 0 && dieEnemyNum == totalSpawn[currentWave])
 	{
 		isEnd = true;
 		isWin = true;
