@@ -116,7 +116,7 @@ void Map::loadMap(char * name, int &maxHealth, int &coin)
 
 	/* Read the data from the file into the map */
 
-	fscanf(fp, "%d,%d", &maxHealth, &coin); //map healt and coin
+	fscanf(fp, "%d,%d", &maxHealth, &coin); //map health and coin
 
 	for (int y = 0; y < MAX_MAP_Y; y++) 
 	{

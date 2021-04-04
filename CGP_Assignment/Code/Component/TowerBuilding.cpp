@@ -190,7 +190,7 @@ void TowerBuilding::update(int &coin)
 							delete towerList[tileSelectY][tileSelectX];
 							towerList[tileSelectY][tileSelectX] = NULL;
 
-							coin += towerData[towerSelect]->price/2;
+							coin += towerData[towerSelect]->price / 2;
 						}
 					}
 				}
