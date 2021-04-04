@@ -153,6 +153,13 @@ void GameStateManager::nextLevel()
 		restart();
 		break;
 
+	case 3:
+		levelFileName = "data/Level3.txt";
+		levelName = "Level 3";
+
+		restart();
+		break;
+
 	default:
 		currentState = 0;
 		level = 1;

@@ -385,7 +385,7 @@ void Ui::init()
 	winRect.bottom = winRect.top + 120;
 	winRect.right = winRect.left + 600;
 
-	//Restart Button
+	//Next Level Button
 	button = new Button;
 	button->position.x = BUFFER_WIDTH / 2 - 150;
 	button->position.y = (BUFFER_HEIGHT / 2) - (menuRect.bottom / 2) + 400;
@@ -421,6 +421,7 @@ void Ui::init()
 	button->textRect.left = button->position.x - 85;
 	button->textRect.bottom = button->textRect.top + 40;
 	button->textRect.right = button->textRect.left + 300;
+
 
 	button->init();
 	buttonList.push_back(button);
@@ -645,6 +646,10 @@ void Ui::update(int coin)
 			}
 
 			isFunction = false;
+		}
+		if (GameStateManager::getInstance()->level == 3 )
+		{
+			buttonList[13]->position.x = BUFFER_WIDTH / 2;
 		}
 	}
 }
@@ -1040,6 +1045,12 @@ void Ui::winLoseFunction(bool isWin)
 			{
 				for (int i = CONFIRM_BUTTON_NUM; i < WIN_BUTTON_NUM; i++)
 				{
+					if (GameStateManager::getInstance()->level == 3)
+					{
+						i++;
+						buttonList[i]->positionRect.left = BUFFER_WIDTH / 2 - buttonList[i]->size.x / 2;
+						buttonList[i]->positionRect.right = buttonList[i]->positionRect.left + buttonList[i]->size.x;
+					}
 					buttonList[i]->update();
 
 					if (buttonList[i]->isClick && !buttonList[i]->isAni)
@@ -1243,6 +1254,14 @@ void Ui::winLoseDraw(bool isWin)
 
 			for (int i = CONFIRM_BUTTON_NUM; i < WIN_BUTTON_NUM; i++)
 			{
+				if (GameStateManager::getInstance()->level == 3)
+				{
+					i++;
+					buttonList[i]->position.x = BUFFER_WIDTH / 2;
+					buttonList[i]->textRect.left = buttonList[i]->position.x - 85;
+					buttonList[i]->textRect.right = buttonList[i]->textRect.left + 300;
+				}
+
 				sprite->Draw(menuButtonTexture, &buttonList[i]->buttonRect,
 					&D3DXVECTOR3(buttonList[i]->size.x / 2, buttonList[i]->size.y / 2, 0),
 					&D3DXVECTOR3(buttonList[i]->position.x, buttonList[i]->position.y, 0),
