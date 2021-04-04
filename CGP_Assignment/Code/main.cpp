@@ -5,8 +5,8 @@
 #include "../Code/Component/SoundManager.h"
 #include "../Code/Component/Map.h"
 
-//int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd) //App only
-int main()	//App and Console
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd) //App only
+//int main()	//App and Console
 {
 	//create windows
 	GameWindows::getInstance()->createWindows();
