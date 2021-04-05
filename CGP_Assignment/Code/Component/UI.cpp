@@ -647,7 +647,7 @@ void Ui::update(int coin)
 
 			isFunction = false;
 		}
-		if (GameStateManager::getInstance()->level == 3 )
+		if (GameStateManager::getInstance()->level == MAX_LEVEL )
 		{
 			buttonList[13]->position.x = BUFFER_WIDTH / 2;
 		}
