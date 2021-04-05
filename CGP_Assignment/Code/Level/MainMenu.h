@@ -7,7 +7,7 @@
 #include "GameState.h"
 #include "../Object/Button.h"
 
-#define TITLE1 "TOWER"
+#define TITLE1 "DEMON"
 #define TITLE2 "DEFENSE"
 #define MADEBY "Made by Voon Meng & Kai Xian"
 
