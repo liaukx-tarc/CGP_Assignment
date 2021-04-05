@@ -647,6 +647,7 @@ void Ui::update(int coin)
 
 			isFunction = false;
 		}
+
 		if (GameStateManager::getInstance()->level == MAX_LEVEL )
 		{
 			buttonList[13]->position.x = BUFFER_WIDTH / 2;
@@ -1045,7 +1046,7 @@ void Ui::winLoseFunction(bool isWin)
 			{
 				for (int i = CONFIRM_BUTTON_NUM; i < WIN_BUTTON_NUM; i++)
 				{
-					if (GameStateManager::getInstance()->level == 3)
+					if (GameStateManager::getInstance()->level == MAX_LEVEL)
 					{
 						i++;
 						buttonList[i]->positionRect.left = BUFFER_WIDTH / 2 - buttonList[i]->size.x / 2;
@@ -1254,7 +1255,7 @@ void Ui::winLoseDraw(bool isWin)
 
 			for (int i = CONFIRM_BUTTON_NUM; i < WIN_BUTTON_NUM; i++)
 			{
-				if (GameStateManager::getInstance()->level == 3)
+				if (GameStateManager::getInstance()->level == MAX_LEVEL)
 				{
 					i++;
 					buttonList[i]->position.x = BUFFER_WIDTH / 2;
