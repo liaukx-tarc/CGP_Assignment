@@ -8,7 +8,7 @@
 #include "../Level/GameState.h"
 
 #define GAME_FPS 60
-#define MAX_LEVEL 2
+#define MAX_LEVEL 3
 
 class GameStateManager
 {
