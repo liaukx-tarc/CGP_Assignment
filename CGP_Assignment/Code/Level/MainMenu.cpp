@@ -60,7 +60,7 @@ void MainMenu::init()
 
 	//Title
 	titleRect1.top = 200;
-	titleRect1.left = 750;
+	titleRect1.left = 740;
 	titleRect1.bottom = titleRect1.top + 200;
 	titleRect1.right = titleRect1.left + 2000;
 
@@ -70,7 +70,7 @@ void MainMenu::init()
 	titleRect2.right = titleRect2.left + 2000;
 
 	titleRect3.top = 220;
-	titleRect3.left = 750;
+	titleRect3.left = 740;
 	titleRect3.bottom = titleRect3.top + 200;
 	titleRect3.right = titleRect3.left + 2000;
 
