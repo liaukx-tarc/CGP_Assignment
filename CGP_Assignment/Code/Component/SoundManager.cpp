@@ -90,16 +90,14 @@ void SoundManager::bgm()
 void SoundManager::winLoseBgm(bool isWin)
 {
 	channelBGM->stop();
-	printf("winlose\n");
+	
 	if (isWin)
 	{
-		printf("win\n");
 		system->playSound(VictoryBGM, NULL, false, &channelBGM);
 		channelBGM->setVolume(0.3f);
 	}
 	else
 	{
-		printf("lose\n");
 		system->playSound(DefeatBGM, NULL, false, &channelBGM);
 		channelBGM->setVolume(0.3f);
 	}

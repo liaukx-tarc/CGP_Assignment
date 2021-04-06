@@ -90,9 +90,6 @@ void TowerBuilding::init()
 		tower->price = price;
 
 		towerData.push_back(tower);
-
-		//Testing
-		printf("%d|%d|%d\n", damage, atkSpeed, price);
 	}
 
 	/* Close the file afterwards */
@@ -127,9 +124,6 @@ void TowerBuilding::fixUpdate()
 		}
 	}
 }
-
-//testing variable
-int count = 0;
 
 void TowerBuilding::update(int &coin)
 {

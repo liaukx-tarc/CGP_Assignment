@@ -94,7 +94,6 @@ void Tower::inRange(std::vector<Character*>enemy)
 
 				if (rangeRadius + enemy[i]->hitboxRadius > distance)
 				{
-					printf("%.2f\n", atkSpeed);
 					isFire = true;
 					fireCD = 110 - atkSpeed * 10;
 					Physics::getInstance()->projectile(objPosition, i, towerNo);
