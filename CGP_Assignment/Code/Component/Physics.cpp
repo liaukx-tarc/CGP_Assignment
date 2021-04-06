@@ -117,7 +117,6 @@ void Physics::update()
 			}
 			enemy[enemyCountList[i]]->isHit = true;
 
-			printf("%.2f\n", enemy[enemyCountList[i]]->health);
 			projectilePositionList.erase(projectilePositionList.begin() + i);
 			enemyCountList.erase(enemyCountList.begin() + i);
 			towerPositionList.erase(towerPositionList.begin() + i);

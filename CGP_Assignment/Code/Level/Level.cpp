@@ -53,7 +53,6 @@ void Level::init()
 			{
 				crystalPos.x = j * TILE_WIDTH;
 				crystalPos.y = i * TILE_HEIGHT;
-				printf("%.2f,%.2f\n", crystalPos.x, crystalPos.y);
 			}
 		}
 	}

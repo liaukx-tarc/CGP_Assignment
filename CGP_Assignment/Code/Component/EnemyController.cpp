@@ -106,13 +106,6 @@ void EnemyController::init()
 		enemy->charNo = i;
 
 		enemyData.push_back(enemy);
-
-		//Testing
-		printf("%.2f", enemyData[i]->health);
-		printf("|%.2f,%.2f", enemyData[i]->objSize.x, enemyData[i]->objSize.y);
-		printf("|%.2f", enemyData[i]->animationSpeed);
-		printf("|%.2f", enemyData[i]->charSpeed);
-		printf("|%.2f\n", enemyData[i]->coin);
 	}
 
 	/* Close the file afterwards */
@@ -180,8 +173,6 @@ void EnemyController::update(int &coin, bool &isEnd, bool &isWin, int health)
 		spawner->init();
 		spawnerList.push_back(spawner);
 		isNextWave = false;
-
-		printf("Spawner-%d\n", currentWave + 1);
 	}
 
 	for (int i = 0; i < spawnerList.size(); i++)

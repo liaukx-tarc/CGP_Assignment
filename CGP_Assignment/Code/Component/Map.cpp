@@ -151,30 +151,6 @@ void Map::loadMap(char * name, int &maxHealth, int &coin)
 	/* Close the file afterwards */
 	fclose(fp);
 
-	//Testing
-	//path map test print
-	for (int y = 0; y < MAX_MAP_Y; y++)
-	{
-		for (int x = 0; x < MAX_MAP_X; x++)
-		{
-			printf("%d,", pathMap[y][x]); //map[][] is a 2D array
-		}
-		printf("\n");
-	}
-
-	printf("\n");
-
-	//enemy wave test print
-	for (int i = 0; i < EnemyController::getInstance()->waveNum; i++)
-	{
-		for (int j = 0; j < MAX_ENEMY_ONEWAVE; j++)
-		{
-			printf("%d,", EnemyController::getInstance()->enemyWave[i][j]);
-		}
-		printf(" %d,%d", spawnPoint[i], targetPoint[i]);
-		printf("\n");
-	}
-
 	for (int y = 0; y < MAX_MAP_Y; y++)
 	{
 		for (int x = 0; x < MAX_MAP_X; x++)
